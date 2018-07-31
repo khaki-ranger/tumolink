@@ -47,6 +47,7 @@ passport.use(new FacebookStrategy({
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var logoutRouter = require('./routes/logout');
 
 var app = express();
 app.use(helmet());
@@ -67,6 +68,7 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/logout', logoutRouter);
 
 app.get('/auth/facebook',
   passport.authenticate('facebook'),

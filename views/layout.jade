@@ -1,7 +1,46 @@
 doctype html
 html
   head
+    meta(http-equiv='X-UA-Compatible', content='IE=edge7')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    header(class="clearfix")
+      .menu
+        div(id="nav-drawer")
+          input(id="nav-input", type="checkbox", class="nav-unshown")
+          label(id="nav-open",  for="nav-input")
+            span
+          label(class="nav-unshown", id="nav-close", for="nav-input")
+          div(id="nav-content")
+            if loginUser
+              .navigation
+                nav
+                  a(href="/") ホーム
+                  a(href="/users") メンバー一覧
+                  a(href="/schedule") スケジュール
+      .logo
+         a(href="/")
+           img(src="/images/logo.svg")
+      .login
+        if loginUser
+          span.login-user
+            - var fbuser = loginUser.photos
+            if fbuser
+              img.profile-img(class="profile-img", src="#{loginUser.photos[0].value}")
+              span.display-name #{loginUser.displayName}
+            else
+              span #{loginUser}
+          span.nav-logout
+            a(href="/logout") ログアウト
+        else
+          span.nav-login ログイン
+    .container
+      block content
+    .overlay
+      .modal
+        .panel
+          a(href="/auth/facebook", class="fb-login comp-ui") Facebookでログイン
+        button(type="button", class="close comp-ui") close
+    script(src="/javascripts/bundle.js")
