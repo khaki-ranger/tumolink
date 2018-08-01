@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  form(method="post", action="/spaces")
+    div
+      h5 場所の名前
+      input(type="text" name="spaceName")
+    div
+      h5 メモ
+      textarea(name="memo")
+    button(type="submit") スペースをつくる

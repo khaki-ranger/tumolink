@@ -16,11 +16,11 @@ html
           div(id="nav-content")
             .head
               label.nav-unshown(for="nav-input") MENU
-            if loginUser
-              .navigation
-                nav
-                  a(href="/") ホーム
-                  a(href="/users") メンバー一覧
+            .navigation
+              nav
+                a(href="/") ホーム
+                if loginUser
+                  a(href="/spaces/add") スペースを追加
       .logo
          a(href="/")
            img(src="/images/logo.svg")

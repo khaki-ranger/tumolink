@@ -231,7 +231,7 @@ header .nav-login {
 #nav-content nav a {
   display: block;
   padding: 1rem;
-  border-bottom: solid 1px #ddd;
+  color: #333;
 }
 #nav-content nav a:hover {
   background-color: #ddd;

@@ -3,3 +3,10 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  if loginUser
+    - var hasSpace = spaces.length > 0
+    if hasSpace
+      h3 あなたのスペース一覧
+      ul
+        each space in spaces
+          li #{space.spaceName}
