@@ -14,12 +14,13 @@ html
             span
           label(class="nav-unshown", id="nav-close", for="nav-input")
           div(id="nav-content")
+            .head
+              label.nav-unshown(for="nav-input") MENU
             if loginUser
               .navigation
                 nav
                   a(href="/") ホーム
                   a(href="/users") メンバー一覧
-                  a(href="/schedule") スケジュール
       .logo
          a(href="/")
            img(src="/images/logo.svg")

@@ -96,9 +96,9 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  /*background: rgba(250, 250, 250, .9);*/
-  background: skyblue;
-  height: 50px;
+  background: #F4511E;
+  color: white;
+  height: 60px;
   z-index: 3;
   display: table;
 }
@@ -121,7 +121,7 @@ header .login {
   width: 40%;
 }
 header .logo img {
-  height: 50px;
+  height: 60px;
   width: auto;
 }
 header .login span,
@@ -151,7 +151,7 @@ header .nav-login {
   width: 30px;
   height: 22px;
   vertical-align: middle;
-  margin: 1rem;
+  margin-left: 1rem;
 }
 /*ハンバーガーアイコンをCSSだけで表現*/
 #nav-open span, #nav-open span:before, #nav-open span:after {
@@ -159,7 +159,7 @@ header .nav-login {
   height: 3px;/*線の太さ*/
   width: 25px;/*長さ*/
   border-radius: 3px;
-  background: #555;
+  background: white;
   display: block;
   content: '';
   cursor: pointer;
@@ -208,13 +208,32 @@ header .nav-login {
   transform: translateX(0%);/*中身を表示（右へスライド）*/
   box-shadow: 6px 0 25px rgba(0,0,0,.15);
 }
-/* navigation */
-.navigation nav a {
+#nav-content .head {
+  display: table;
+  width: 100%;
+  background: #F4511E;
+}
+#nav-content .head label {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  height: 60px;
+  position: relative;
+}
+#nav-content .head label:after {
+  content: '\0d7';
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  margin-top: -20px;
+}
+#nav-content nav a {
   display: block;
   padding: 1rem;
   border-bottom: solid 1px #ddd;
 }
-.navigation nav a:hover {
+#nav-content nav a:hover {
   background-color: #ddd;
 }
 
