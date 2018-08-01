@@ -2,11 +2,15 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
   if loginUser
     - var hasSpace = spaces.length > 0
     if hasSpace
       h3 あなたのスペース一覧
-      ul
+      ul.space-list
         each space in spaces
-          li #{space.spaceName}
+          li 
+            .information 
+              .photo
+                img.responsive-img(src="images/space.jpg")
+              .name #{space.spaceName}
+            .data

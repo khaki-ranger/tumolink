@@ -1,7 +1,13 @@
-body {
-  font-family:-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI","Noto Sans Japanese","ヒラギノ角ゴ ProN W3", Meiryo, sans-serif;
-  font-size: 14px;
-  padding: 60px 1em 0 1em;
+/* reset */
+img {
+  vertical-align:bottom;
+}
+p {
+  margin: 0;
+}
+ul,dl,dd {
+  list-style: none;
+  padding: 0;
   margin: 0;
 }
 a {
@@ -12,16 +18,27 @@ table {
   border-spacing: 0;
   width: 100%;
 }
+/* common */
+body {
+  font-family:-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI","Noto Sans Japanese","ヒラギノ角ゴ ProN W3", Meiryo, sans-serif;
+  font-size: 14px;
+  padding: 60px 1em 0 1em;
+  margin: 0;
+}
 .clearfix::after{
   content: "";
   display: block;
   clear: both;
 }
-.pos-left {
+.fl-left {
   float: left;
 }
-.pos-right {
+.fl-right {
   float: right;
+}
+.responsive-img {
+  width: 100%;
+  height: auto;
 }
 @media (min-width: 768px) {
   .pc-none {
@@ -33,7 +50,6 @@ table {
     display: none !important;
   }
 }
-
 /* overlay */
 .overlay {
   position: fixed;
@@ -278,4 +294,27 @@ textarea.comp-ui {
   box-sizing: border-box;
   margin-top: .25em;
   border: solid 1px #ddd;
+}
+/* space-list */
+.space-list {
+}
+.space-list li {
+  display: table;
+  width: 100%;
+  border: solid 1px #FFCCBC;
+}
+.space-list li .information,
+.space-list li .data {
+  display: table-cell;
+}
+.space-list li .information {
+  width: 25%;
+  text-align: center;
+}
+.space-list li .information .name {
+  padding: 1rem 0;
+  background-color: #F4511E;
+  color: white;
+}
+.space-list li .data {
 }
