@@ -15,11 +15,12 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
   Space.create({
     spaceId: spaceId,
     spaceName: req.body.spaceName.slice(0, 255),
-    memo: req.body.memo,
+    imgPath: req.body.imgPath,
     createdBy: req.user.id,
     updatedAt: updatedAt
   }).then((space) => {
-    res.redirect('/spaces/' + space.spaceId);
+    res.redirect('/');
+    //res.redirect('/spaces/' + space.spaceId);
   });
 });
 

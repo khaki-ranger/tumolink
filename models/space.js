@@ -12,8 +12,8 @@ const Space = loader.database.define('spaces', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  memo: {
-    type: Sequelize.TEXT,
+  imgPath: {
+    type: Sequelize.STRING,
     allowNull: false
   },
   createdBy: {
