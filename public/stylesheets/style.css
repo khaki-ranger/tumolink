@@ -140,13 +140,13 @@ header .logo img {
   height: 60px;
   width: auto;
 }
-header .login span,
-header .login img {
-  padding-right: 1rem;
+header .login span {
+  margin-right: 1rem;
 }
 header .profile-img {
   width: 30px;
-  height: auto;
+  height: 30px;
+  border-radius: 30px;
   vertical-align: middle;
 } 
 header .nav-login {
@@ -302,6 +302,7 @@ textarea.comp-ui {
   display: table;
   width: 100%;
   border: solid 1px #FFCCBC;
+  margin-bottom: 1rem;
 }
 .space-list li .information,
 .space-list li .data {

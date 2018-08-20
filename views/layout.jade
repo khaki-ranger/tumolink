@@ -30,7 +30,6 @@ html
             - var fbuser = loginUser.photos
             if fbuser
               img.profile-img(class="profile-img", src="#{loginUser.photos[0].value}")
-              span.display-name #{loginUser.displayName}
             else
               span #{loginUser}
           span.nav-logout
