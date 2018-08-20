@@ -88,6 +88,17 @@ var overlay = (0, _jquery2.default)('.overlay');
   (0, _jquery2.default)('.overlay .panel').on('click', function (event) {
     event.stopPropagation();
   });
+  (0, _jquery2.default)('.tumoli-button').each(function (i, e) {
+    var button = (0, _jquery2.default)(e);
+    button.click(function () {
+      var args = {
+        spaceId: button.data('space-id')
+      };
+      _jquery2.default.post('/availabilities', args, function (result) {
+        console.log(result);
+      });
+    });
+  });
 });
 
 /***/ }),

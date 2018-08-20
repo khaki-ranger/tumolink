@@ -13,4 +13,15 @@ $(window).on('load', function(){
   $('.overlay .panel').on('click', function(event) {
     event.stopPropagation();
   });
+  $('.tumoli-button').each((i, e) => {
+    const button = $(e);
+    button.click(() => {
+      const args = {
+        spaceId: button.data('space-id')
+      };
+      $.post('/availabilities', args, (result) => {
+        console.log(result);
+      });
+    });
+  });
 });

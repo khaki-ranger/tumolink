@@ -1,7 +1,6 @@
 extends layout
 
 block content
-  h1= title
   if loginUser
     - var hasSpace = spaces.length > 0
     if hasSpace
@@ -14,3 +13,7 @@ block content
                 img.responsive-img(src="#{space.imgPath}")
               .name #{space.spaceName}
             .data
+            .action
+              button(data-space-id=space.spaceId).tumoli-button.comp-ui ツモリ
+  else
+    h1= title

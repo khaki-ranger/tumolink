@@ -261,6 +261,12 @@ header .nav-login {
 .form-elem {
   margin-bottom: 1.5em;
 }
+button.comp-ui {
+  width: 100%;
+  padding: .5rem;
+  font-size: 16px;
+  cursor: pointer;
+}
 label.comp-ui {
   font-weight: bold;
 }
@@ -305,10 +311,12 @@ textarea.comp-ui {
   margin-bottom: 1rem;
 }
 .space-list li .information,
-.space-list li .data {
+.space-list li .data,
+.space-list li .action {
   display: table-cell;
 }
-.space-list li .information {
+.space-list li .information,
+.space-list li .action {
   width: 25%;
   text-align: center;
 }
@@ -318,4 +326,13 @@ textarea.comp-ui {
   color: white;
 }
 .space-list li .data {
+  border-right: solid 1px #FFCCBC;
+}
+.space-list li .action {
+  padding: 1rem;
+  vertical-align: bottom;
+}
+.space-list li .action .tumoli-button {
+  background-color: #F4511E;
+  color: white;
 }
