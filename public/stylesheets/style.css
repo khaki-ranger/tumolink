@@ -320,6 +320,10 @@ textarea.comp-ui {
   width: 25%;
   text-align: center;
 }
+.space-list li .data,
+.space-list li .action {
+  padding: 1rem;
+}
 .space-list li .information .name {
   padding: 1rem 0;
   background-color: #F4511E;
@@ -327,9 +331,9 @@ textarea.comp-ui {
 }
 .space-list li .data {
   border-right: solid 1px #FFCCBC;
+  vertical-align: top;
 }
 .space-list li .action {
-  padding: 1rem;
   vertical-align: bottom;
 }
 .space-list li .action .tumoli-button {
