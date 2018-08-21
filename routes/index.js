@@ -2,6 +2,8 @@
 var express = require('express');
 var router = express.Router();
 var Space = require('../models/space');
+var User = require('../models/user');
+var Availability = require('../models/availability');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -13,10 +15,33 @@ router.get('/', function(req, res, next) {
       },
       order: [['"updatedAt"', 'DESC']]
     }).then((spaces) => {
-      res.render('index', {
-        title: title,
-        loginUser: req.user,
-        spaces: spaces
+      Availability.findAll({
+        include: [
+          {
+            model: User,
+            attributes: ['userId', 'username']
+          }
+        ]
+      }).then((availabilities) => {
+        spaces.forEach((s) => {
+          const spaceId = s.spaceId;
+          const availabilityArray = [];
+          availabilities.forEach((a) => {
+            if(spaceId === a.spaceId) {
+              const availabilityObj = {
+                userId: a.userId,
+                username: a.user.username
+              }
+              availabilityArray.push(availabilityObj);
+            }
+          });
+          s['availabilities'] = availabilityArray;
+        });
+        res.render('index', {
+          title: title,
+          loginUser: req.user,
+          spaces: spaces
+        });
       });
     });
   } else {

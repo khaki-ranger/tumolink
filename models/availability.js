@@ -3,14 +3,17 @@ const loader = require('./sequelize-loader');
 const Sequelize = loader.Sequelize;
 
 const Availability = loader.database.define('availabilities', {
-  spaceId: {
+  availabilityId: {
     type: Sequelize.UUID,
     primaryKey: true,
     allowNull: false
   },
+  spaceId: {
+    type: Sequelize.UUID,
+    allowNull: false
+  },
   userId: {
     type: Sequelize.BIGINT,
-    primaryKey: true,
     allowNull: false
   },
   createdAt: {
