@@ -14,8 +14,12 @@ if (!process.env.FACEBOOK_APP_ID) {
 
 var User = require('./models/user');
 var Space = require('./models/space');
+var Availability = require('./models/availability');
 User.sync();
-Space.sync();
+Space.sync().then(() => {
+  Availability.belongsTo(Space, {foreignKey: 'spaceId' });
+  Availability.sync();
+});
 
 var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || settings.facebook.app_id;
 var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || settings.facebook.app_secret;
