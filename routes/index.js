@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
         include: [
           {
             model: User,
-            attributes: ['userId', 'username']
+            attributes: ['userId', 'username', 'photoUrl']
           }
         ]
       }).then((availabilities) => {
@@ -30,7 +30,8 @@ router.get('/', function(req, res, next) {
             if(spaceId === a.spaceId) {
               const availabilityObj = {
                 userId: a.userId,
-                username: a.user.username
+                username: a.user.username,
+                photoUrl: a.user.photoUrl
               }
               availabilityArray.push(availabilityObj);
             }

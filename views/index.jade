@@ -14,6 +14,10 @@ block content
               .name #{space.spaceName}
             .data
               .availabilities ツモリスト #{space.availabilities.length} 人
+              each availability in space.availabilities
+                .availability
+                  img.profile-img(src="#{availability.photoUrl}")
+                  span #{availability.username}
             .action
               button(data-space-id=space.spaceId).tumoli-button.comp-ui ツモリ
   else

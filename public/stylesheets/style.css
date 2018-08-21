@@ -40,6 +40,11 @@ body {
   width: 100%;
   height: auto;
 }
+.profile-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+} 
 @media (min-width: 768px) {
   .pc-none {
     display: none !important;
@@ -144,9 +149,6 @@ header .login span {
   margin-right: 1rem;
 }
 header .profile-img {
-  width: 30px;
-  height: 30px;
-  border-radius: 30px;
   vertical-align: middle;
 } 
 header .nav-login {
@@ -339,4 +341,12 @@ textarea.comp-ui {
 .space-list li .action .tumoli-button {
   background-color: #F4511E;
   color: white;
+}
+.space-list li .data .availability {
+  vertical-align: middle;
+  line-height: 30px;
+  margin-top: .5rem;
+}
+.space-list li .data .availability .profile-img {
+  margin-right: .5rem;
 }
