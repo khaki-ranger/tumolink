@@ -13,9 +13,13 @@ const Availability = loader.database.define('availabilities', {
     primaryKey: true,
     allowNull: false
   },
-  updatedAt: {
+  createdAt: {
     type: Sequelize.DATE,
     allowNull: false
+  },
+  updatedAt: {
+    type: Sequelize.DATE,
+    allowNull: true
   }
 }, {
   freezeTableName: true,
