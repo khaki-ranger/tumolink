@@ -4,7 +4,7 @@ block content
   if loginUser
     - var hasSpace = spaces.length > 0
     if hasSpace
-      h3 あなたのスペース一覧
+      h3 #{loginUser.displayName} のスペース一覧
       ul.space-list
         each space in spaces
           li 

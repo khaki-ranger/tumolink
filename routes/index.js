@@ -23,17 +23,31 @@ router.get('/', function(req, res, next) {
           }
         ]
       }).then((availabilities) => {
+        const today = new Date();
+        const todayObj = {
+          year: today.getFullYear(),
+          month: today.getMonth(),
+          date: today.getDate()
+        }
         spaces.forEach((s) => {
           const spaceId = s.spaceId;
           const availabilityArray = [];
           availabilities.forEach((a) => {
             if(spaceId === a.spaceId) {
-              const availabilityObj = {
-                userId: a.userId,
-                username: a.user.username,
-                photoUrl: a.user.photoUrl
+              const updatedAt = a.updatedAt;
+              const updatedAtObj = {
+                year: updatedAt.getFullYear(),
+                month: updatedAt.getMonth(),
+                date: updatedAt.getDate()
               }
-              availabilityArray.push(availabilityObj);
+              if(todayObj.year === updatedAtObj.year && todayObj.month === updatedAtObj.month && todayObj.date === updatedAtObj.date) {
+                const availabilityObj = {
+                  userId: a.userId,
+                  username: a.user.username,
+                  photoUrl: a.user.photoUrl
+                }
+                availabilityArray.push(availabilityObj);
+              }
             }
           });
           s['availabilities'] = availabilityArray;
