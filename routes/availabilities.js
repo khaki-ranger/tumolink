@@ -5,7 +5,8 @@ const authenticationEnsurer = require('./authentication-ensurer');
 const uuid = require('node-uuid');
 const Availability = require('../models/availability');
 const Slack = require('node-slackr');
-const slack = new Slack('https://hooks.slack.com/services/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', {
+const slack = new Slack('https://hooks.slack.com/services/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', {
+  channel: "#test-tumolink",
   username: 'tumolink-boot'
 });
 
@@ -20,8 +21,8 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
     createdAt: createdAt,
     updatedAt: updatedAt
   }).then((availability) => {
-    const username = req.user.displayName;
     res.json({ status: 'OK' });
+    const username = req.user.displayName;
     slack.notify(username + 'がツモリンク！', function(err, result){
       console.log(err,result);
     });
