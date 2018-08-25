@@ -99,6 +99,12 @@ var overlay = (0, _jquery2.default)('.overlay');
       });
     });
   });
+  (0, _jquery2.default)('.space-list>li').each(function (i, e) {
+    var availabilities = (0, _jquery2.default)('.data .availabilities .body .availability', e);
+    if (availabilities.length >= 3) {
+      (0, _jquery2.default)('.data .availabilities button', e).addClass('visible');
+    }
+  });
 });
 
 /***/ }),

@@ -306,47 +306,61 @@ textarea.comp-ui {
 /* space-list */
 .space-list {
 }
-.space-list li {
+.space-list>li {
   display: table;
   width: 100%;
   border: solid 1px #FFCCBC;
   margin-bottom: 1rem;
 }
-.space-list li .information,
-.space-list li .data,
-.space-list li .action {
+.space-list>li .information,
+.space-list>li .data,
+.space-list>li .action {
   display: table-cell;
 }
-.space-list li .information,
-.space-list li .action {
+.space-list>li .information,
+.space-list>li .action {
   width: 25%;
   text-align: center;
 }
-.space-list li .data,
-.space-list li .action {
+.space-list>li .data,
+.space-list>li .action {
   padding: 1rem;
 }
-.space-list li .information .name {
-  padding: 1rem 0;
+.space-list>li .information {
   background-color: #F4511E;
+}
+.space-list>li .information .name {
+  padding: 1rem 0;
   color: white;
 }
-.space-list li .data {
+.space-list>li .data {
   border-right: solid 1px #FFCCBC;
   vertical-align: top;
 }
-.space-list li .action {
+.space-list>li .data .availabilities ul {
+  max-height: 120px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.space-list>li .data .availabilities button {
+  bottom: 1rem;
+  display: none;
+}
+.space-list>li .data .availabilities button.visible {
+  display: block;
+}
+.space-list>li .action {
   vertical-align: bottom;
 }
-.space-list li .action .tumoli-button {
+.space-list>li .action .tumoli-button {
   background-color: #F4511E;
   color: white;
 }
-.space-list li .data .availability {
+.space-list>li .data .availability {
   vertical-align: middle;
   line-height: 30px;
   margin-top: .5rem;
 }
-.space-list li .data .availability .profile-img {
+.space-list>li .data .availability .profile-img {
   margin-right: .5rem;
 }

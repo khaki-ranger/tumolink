@@ -13,11 +13,14 @@ block content
                 img.responsive-img(src="#{space.imgPath}")
               .name #{space.spaceName}
             .data
-              .availabilities ツモリスト #{space.availabilities.length} 人
-              each availability in space.availabilities
-                .availability
-                  img.profile-img(src="#{availability.photoUrl}")
-                  span #{availability.username}
+              .availabilities
+                .head ツモリスト #{space.availabilities.length} 人
+                ul.body
+                  each availability in space.availabilities
+                    li.availability
+                      img.profile-img(src="#{availability.photoUrl}")
+                      span #{availability.username}
+                button.more.comp-ui もっとみる
             .action
               button(data-space-id=space.spaceId).tumoli-button.comp-ui ツモリ
   else

@@ -24,4 +24,10 @@ $(window).on('load', function(){
       });
     });
   });
+  $('.space-list>li').each((i, e) => {
+    const availabilities = $('.data .availabilities .body .availability', e);
+    if (availabilities.length >= 3) {
+      $('.data .availabilities button', e).addClass('visible');
+    }
+  });
 });
