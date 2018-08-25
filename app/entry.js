@@ -20,10 +20,12 @@ $(window).on('load', function(){
         spaceId: button.data('space-id')
       };
       $.post('/availabilities', args, (result) => {
-        let currentCount = $('.' + args.spaceId + ' .data .availabilities .head span').text();
+        console.log(result);
+        const availabilitiesCount = $('.' + args.spaceId + ' .data .availabilities .head span');
+        let currentCount = availabilitiesCount.text();
         currentCount = Number(currentCount);
         currentCount++;
-        $('.' + args.spaceId + ' .data .availabilities .head span').text(currentCount);
+        availabilitiesCount.text(currentCount);
       });
     });
   });

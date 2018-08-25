@@ -21,9 +21,12 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
     createdAt: createdAt,
     updatedAt: updatedAt
   }).then((availability) => {
-    res.json({ status: 'OK' });
-    const username = req.user.displayName;
-    slack.notify(username + 'がツモリンク！', function(err, result){
+    const args = {
+      username: req.user.displayName,
+      profileImg: req.user.photos[0].value
+    };
+    res.json(args);
+    slack.notify(args.username + 'がツモリンク！', function(err, result){
       console.log(err,result);
     });
   });
