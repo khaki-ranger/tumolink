@@ -80,8 +80,6 @@ body {
   right: 0;
   bottom: 0;
   margin: auto;
-  width: 50%;
-  height: 50%;
   background: white;
 }
 .overlay.visible .modal {
@@ -109,6 +107,18 @@ body {
   right: 0;
   margin: 0 auto;
   width: 100%;
+}
+@media (max-width: 768px) {
+.modal {
+  width: 75%;
+  height: 75%;
+}
+}
+@media (min-width: 768px) {
+.modal {
+  width: 50%;
+  height: 50%;
+}
 }
 
 /* header */
@@ -268,6 +278,7 @@ button.comp-ui {
   padding: .5rem;
   font-size: 16px;
   cursor: pointer;
+  border: none;
 }
 label.comp-ui {
   font-weight: bold;
@@ -304,22 +315,12 @@ textarea.comp-ui {
   border: solid 1px #ddd;
 }
 /* space-list */
-.space-list {
-}
 .space-list>li {
-  display: table;
-  width: 100%;
   border: solid 1px #FFCCBC;
   margin-bottom: 1rem;
 }
 .space-list>li .information,
-.space-list>li .data,
 .space-list>li .action {
-  display: table-cell;
-}
-.space-list>li .information,
-.space-list>li .action {
-  width: 25%;
   text-align: center;
 }
 .space-list>li .data,
@@ -333,22 +334,18 @@ textarea.comp-ui {
   padding: 1rem 0;
   color: white;
 }
-.space-list>li .data {
-  border-right: solid 1px #FFCCBC;
-  vertical-align: top;
-}
 .space-list>li .data .availabilities ul {
   max-height: 120px;
   overflow: hidden;
-  margin-bottom: 1rem;
   transition: all 500ms ease;
 }
 .space-list>li .data .availabilities ul.all {
   max-height: 1000px;
 }
 .space-list>li .data .availabilities button {
-  bottom: 1rem;
+  margin-top: 1rem;
   display: none;
+  background-color: #FFCCBC;
 }
 .space-list>li .data .availabilities button.visible {
   display: block;
@@ -367,4 +364,28 @@ textarea.comp-ui {
 }
 .space-list>li .data .availability .profile-img {
   margin-right: .5rem;
+}
+@media (max-width: 768px) {
+.space-list>li .data {
+  border-bottom: solid 1px #FFCCBC;
+}
+}
+@media (min-width: 768px) {
+.space-list>li {
+  display: table;
+  width: 100%;
+}
+.space-list>li .information,
+.space-list>li .data,
+.space-list>li .action {
+  display: table-cell;
+}
+.space-list>li .information,
+.space-list>li .action {
+  width: 25%;
+}
+.space-list>li .data {
+  border-right: solid 1px #FFCCBC;
+  vertical-align: top;
+}
 }
