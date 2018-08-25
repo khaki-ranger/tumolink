@@ -95,7 +95,10 @@ var overlay = (0, _jquery2.default)('.overlay');
         spaceId: button.data('space-id')
       };
       _jquery2.default.post('/availabilities', args, function (result) {
-        console.log(result);
+        var currentCount = (0, _jquery2.default)('.' + args.spaceId + ' .data .availabilities .head span').text();
+        currentCount = Number(currentCount);
+        currentCount++;
+        (0, _jquery2.default)('.' + args.spaceId + ' .data .availabilities .head span').text(currentCount);
       });
     });
   });

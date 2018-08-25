@@ -20,7 +20,10 @@ $(window).on('load', function(){
         spaceId: button.data('space-id')
       };
       $.post('/availabilities', args, (result) => {
-        console.log(result);
+        let currentCount = $('.' + args.spaceId + ' .data .availabilities .head span').text();
+        currentCount = Number(currentCount);
+        currentCount++;
+        $('.' + args.spaceId + ' .data .availabilities .head span').text(currentCount);
       });
     });
   });

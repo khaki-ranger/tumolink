@@ -7,14 +7,16 @@ block content
       h3 #{loginUser.displayName} のスペース一覧
       ul.space-list
         each space in spaces
-          li 
+          li(class="#{space.spaceId}") 
             .information 
               .photo
                 img.responsive-img(src="#{space.imgPath}")
               .name #{space.spaceName}
             .data
               .availabilities
-                .head ツモリスト #{space.availabilities.length} 人
+                .head ツモリスト
+                  span #{space.availabilities.length}
+                  &nbsp;人
                 ul.body
                   each availability in space.availabilities
                     li.availability
