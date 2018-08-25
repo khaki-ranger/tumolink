@@ -100,10 +100,15 @@ var overlay = (0, _jquery2.default)('.overlay');
     });
   });
   (0, _jquery2.default)('.space-list>li').each(function (i, e) {
-    var availabilities = (0, _jquery2.default)('.data .availabilities .body .availability', e);
+    var availabilityBody = (0, _jquery2.default)('.data .availabilities .body', e);
+    var availabilities = (0, _jquery2.default)('.availability', availabilityBody);
+    var moreBtn = (0, _jquery2.default)('.data .availabilities button', e);
     if (availabilities.length >= 3) {
-      (0, _jquery2.default)('.data .availabilities button', e).addClass('visible');
+      moreBtn.addClass('visible');
     }
+    moreBtn.on('click', function () {
+      availabilityBody.toggleClass('all');
+    });
   });
 });
 

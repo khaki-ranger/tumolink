@@ -25,9 +25,14 @@ $(window).on('load', function(){
     });
   });
   $('.space-list>li').each((i, e) => {
-    const availabilities = $('.data .availabilities .body .availability', e);
+    const availabilityBody = $('.data .availabilities .body', e);
+    const availabilities = $('.availability', availabilityBody);
+    const moreBtn = $('.data .availabilities button', e);
     if (availabilities.length >= 3) {
-      $('.data .availabilities button', e).addClass('visible');
+      moreBtn.addClass('visible');
     }
+    moreBtn.on('click', function() {
+      availabilityBody.toggleClass('all');
+    });
   });
 });

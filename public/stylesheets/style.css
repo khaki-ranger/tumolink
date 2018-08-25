@@ -341,6 +341,10 @@ textarea.comp-ui {
   max-height: 120px;
   overflow: hidden;
   margin-bottom: 1rem;
+  transition: all 500ms ease;
+}
+.space-list>li .data .availabilities ul.all {
+  max-height: 1000px;
 }
 .space-list>li .data .availabilities button {
   bottom: 1rem;
