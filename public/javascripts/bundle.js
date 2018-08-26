@@ -95,12 +95,13 @@ var overlay = (0, _jquery2.default)('.overlay');
         spaceId: button.data('space-id')
       };
       _jquery2.default.post('/availabilities', args, function (result) {
-        console.log(result);
-        var availabilitiesCount = (0, _jquery2.default)('.' + args.spaceId + ' .data .availabilities .head span');
-        var currentCount = availabilitiesCount.text();
+        var availabilitiesHeadText = (0, _jquery2.default)('.' + args.spaceId + ' .data .availabilities .head span');
+        var currentCount = availabilitiesHeadText.text();
         currentCount = Number(currentCount);
         currentCount++;
-        availabilitiesCount.text(currentCount);
+        availabilitiesHeadText.text(currentCount);
+        var availabilitiesBody = (0, _jquery2.default)('.' + args.spaceId + ' .data .availabilities .body');
+        availabilitiesBody.append('<li class="availability"><img src="' + result.profileImg + '" class="profile-img"><span>' + result.username + '</span></li>');
       });
     });
   });

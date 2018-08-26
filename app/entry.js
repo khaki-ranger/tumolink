@@ -20,12 +20,13 @@ $(window).on('load', function(){
         spaceId: button.data('space-id')
       };
       $.post('/availabilities', args, (result) => {
-        console.log(result);
-        const availabilitiesCount = $('.' + args.spaceId + ' .data .availabilities .head span');
-        let currentCount = availabilitiesCount.text();
+        const availabilitiesHeadText = $('.' + args.spaceId + ' .data .availabilities .head span');
+        let currentCount = availabilitiesHeadText.text();
         currentCount = Number(currentCount);
         currentCount++;
-        availabilitiesCount.text(currentCount);
+        availabilitiesHeadText.text(currentCount);
+        const availabilitiesBody = $('.' + args.spaceId + ' .data .availabilities .body');
+        availabilitiesBody.append('<li class="availability"><img src="' + result.profileImg + '" class="profile-img"><span>' + result.username + '</span></li>');
       });
     });
   });
