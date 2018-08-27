@@ -9,8 +9,10 @@ const Slack = require('node-slackr');
 
 router.post('/', authenticationEnsurer, (req, res, next) => {
   const availabilityId = uuid.v4();
-  const createdAt = new Date();
-  const updatedAt = new Date();
+  let createdAt = new Date();
+  let updatedAt = new Date();
+  createdAt..setTime(createdAt.getTime() + 1000*60*60*9);
+  updatedAt..setTime(updatedAt.getTime() + 1000*60*60*9);
   Availability.create({
     availabilityId: availabilityId,
     spaceId: req.body.spaceId,

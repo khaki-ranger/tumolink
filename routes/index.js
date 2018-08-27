@@ -23,7 +23,8 @@ router.get('/', function(req, res, next) {
           }
         ]
       }).then((availabilities) => {
-        const today = new Date();
+        let today = new Date();
+        today.setTime(today.getTime() + 1000*60*60*9);
         const todayObj = {
           year: today.getFullYear(),
           month: today.getMonth(),
