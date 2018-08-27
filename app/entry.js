@@ -20,24 +20,30 @@ $(window).on('load', function(){
         spaceId: button.data('space-id')
       };
       $.post('/availabilities', args, (result) => {
-        const availabilitiesHeadText = $('.' + args.spaceId + ' .data .availabilities .head span');
+        const availability = $('.' + args.spaceId + ' .data .availabilities');
+        const availabilitiesHeadText = $('.head span', availability);
         let currentCount = availabilitiesHeadText.text();
         currentCount = Number(currentCount);
         currentCount++;
         availabilitiesHeadText.text(currentCount);
-        const availabilitiesBody = $('.' + args.spaceId + ' .data .availabilities .body');
+        const availabilitiesBody = $('.body', availability);
         availabilitiesBody.append('<li class="availability"><img src="' + result.profileImg + '" class="profile-img"><span>' + result.username + '</span></li>');
+        const btnMore = $('.btn-more', availability);
+        const availabilities = $('.body .availability', availability);
+        if (availabilities.length >= 4) {
+          btnMore.addClass('visible');
+        }
       });
     });
   });
   $('.space-list>li').each((i, e) => {
     const availabilityBody = $('.data .availabilities .body', e);
     const availabilities = $('.availability', availabilityBody);
-    const moreBtn = $('.data .availabilities button', e);
-    if (availabilities.length >= 3) {
-      moreBtn.addClass('visible');
+    const btnMore = $('.data .availabilities .btn-more', e);
+    if (availabilities.length >= 4) {
+      btnMore.addClass('visible');
     }
-    moreBtn.on('click', function() {
+    btnMore.on('click', function() {
       availabilityBody.toggleClass('all');
     });
   });

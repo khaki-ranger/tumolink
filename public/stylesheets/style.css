@@ -336,19 +336,19 @@ textarea.comp-ui {
   color: white;
 }
 .space-list>li .data .availabilities ul {
-  max-height: 120px;
+  max-height: 130px;
   overflow: hidden;
   transition: all 500ms ease;
 }
 .space-list>li .data .availabilities ul.all {
   max-height: 1000px;
 }
-.space-list>li .data .availabilities button {
-  margin-top: 1rem;
+.space-list>li .data .availabilities .btn-more {
+  padding: 1rem 0;
+  text-align: center;
   display: none;
-  background-color: #FFCCBC;
 }
-.space-list>li .data .availabilities button.visible {
+.space-list>li .data .availabilities .btn-more.visible {
   display: block;
 }
 .space-list>li .action {
