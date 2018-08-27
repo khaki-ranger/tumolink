@@ -13,14 +13,13 @@ $(window).on('load', function(){
   $('.overlay .panel').on('click', function(event) {
     event.stopPropagation();
   });
-  $('.tumoli-button').each((i, e) => {
-    const button = $(e);
-    button.click(() => {
-      const args = {
-        spaceId: button.data('space-id')
-      };
-      $.post('/availabilities', args, (result) => {
-        const availability = $('.' + args.spaceId + ' .data .availabilities');
+  $('.space-list .action form').each((i, e) => {
+    const form = $(e);
+    form.submit((event) => {
+      event.preventDefault();
+      const data = form.serialize();
+      $.post('/availabilities', data, (result) => {
+        const availability = $('.' + result.spaceId + ' .data .availabilities');
         const availabilitiesHeadText = $('.head span', availability);
         let currentCount = availabilitiesHeadText.text();
         currentCount = Number(currentCount);

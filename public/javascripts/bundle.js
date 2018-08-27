@@ -88,14 +88,13 @@ var overlay = (0, _jquery2.default)('.overlay');
   (0, _jquery2.default)('.overlay .panel').on('click', function (event) {
     event.stopPropagation();
   });
-  (0, _jquery2.default)('.tumoli-button').each(function (i, e) {
-    var button = (0, _jquery2.default)(e);
-    button.click(function () {
-      var args = {
-        spaceId: button.data('space-id')
-      };
-      _jquery2.default.post('/availabilities', args, function (result) {
-        var availability = (0, _jquery2.default)('.' + args.spaceId + ' .data .availabilities');
+  (0, _jquery2.default)('.space-list .action form').each(function (i, e) {
+    var form = (0, _jquery2.default)(e);
+    form.submit(function (event) {
+      event.preventDefault();
+      var data = form.serialize();
+      _jquery2.default.post('/availabilities', data, function (result) {
+        var availability = (0, _jquery2.default)('.' + result.spaceId + ' .data .availabilities');
         var availabilitiesHeadText = (0, _jquery2.default)('.head span', availability);
         var currentCount = availabilitiesHeadText.text();
         currentCount = Number(currentCount);
