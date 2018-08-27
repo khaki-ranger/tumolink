@@ -45,6 +45,8 @@ $(window).on('load', function(){
     }
     btnMore.on('click', function() {
       availabilityBody.toggleClass('all');
+      btnMore.toggleClass('fa-chevron-down');
+      btnMore.toggleClass('fa-chevron-up');
     });
   });
 });

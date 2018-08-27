@@ -105,7 +105,7 @@ var overlay = (0, _jquery2.default)('.overlay');
         availabilitiesBody.append('<li class="availability"><img src="' + result.profileImg + '" class="profile-img"><span>' + result.username + '</span></li>');
         var btnMore = (0, _jquery2.default)('.btn-more', availability);
         var availabilities = (0, _jquery2.default)('.body .availability', availability);
-        if (availabilities.length >= 6) {
+        if (availabilities.length >= 4) {
           btnMore.addClass('visible');
         }
       });
@@ -115,11 +115,13 @@ var overlay = (0, _jquery2.default)('.overlay');
     var availabilityBody = (0, _jquery2.default)('.data .availabilities .body', e);
     var availabilities = (0, _jquery2.default)('.availability', availabilityBody);
     var btnMore = (0, _jquery2.default)('.data .availabilities .btn-more', e);
-    if (availabilities.length >= 6) {
+    if (availabilities.length >= 4) {
       btnMore.addClass('visible');
     }
     btnMore.on('click', function () {
       availabilityBody.toggleClass('all');
+      btnMore.toggleClass('fa-chevron-down');
+      btnMore.toggleClass('fa-chevron-up');
     });
   });
 });
