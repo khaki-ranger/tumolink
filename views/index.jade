@@ -14,7 +14,7 @@ block content
               .name #{space.spaceName}
             .data
               .availabilities
-                .head ツモリスト
+                .head 今日のツモリスト
                   span #{space.availabilities.length}
                   &nbsp;人
                 ul.body
@@ -29,29 +29,14 @@ block content
                 .plans.hour
                   .value
                     select.comp-ui(name="hour")
-                      option(value="0") 0
-                      option(value="1") 1
-                      option(value="2") 2
-                      option(value="3") 3
-                      option(value="4") 4
-                      option(value="5") 5
-                      option(value="6") 6
-                      option(value="7") 7
-                      option(value="8") 8
-                      option(value="9") 9
-                      option(value="10") 10
-                      option(value="11") 11
-                      option(value="12") 12
+                      each value in hours
+                        option(value="#{value}") #{value}
                   .unit 時間
                 .plans.minute
                   .value
                     select.comp-ui(name="minute")
-                      option(value="00") 00
-                      option(value="10") 10
-                      option(value="20") 20
-                      option(value="30") 30
-                      option(value="40") 40
-                      option(value="50") 50
+                      each value in minutes
+                        option(value="#{value}") #{value}
                   .unit 分後
                 button.tumoli-button.comp-ui 行くツモリ
   else

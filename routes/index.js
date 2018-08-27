@@ -53,10 +53,14 @@ router.get('/', function(req, res, next) {
           });
           s['availabilities'] = availabilityArray;
         });
+        const hours = [0, 1, 2, 3, 4, 5, 6];
+        const minutes = ['00', '10', '20', '30', '40', '50'];
         res.render('index', {
           title: title,
           loginUser: req.user,
-          spaces: spaces
+          spaces: spaces,
+          hours : hours,
+          minutes: minutes
         });
       });
     });
