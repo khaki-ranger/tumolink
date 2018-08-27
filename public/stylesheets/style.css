@@ -400,6 +400,7 @@ textarea.comp-ui {
 }
 .space-list>li .data {
   border-right: solid 1px #FFCCBC;
+  border-left: solid 1px #FFCCBC;
   vertical-align: top;
 }
 }
