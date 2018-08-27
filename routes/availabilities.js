@@ -4,11 +4,8 @@ const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
 const uuid = require('node-uuid');
 const Availability = require('../models/availability');
+const Space = require('../models/space');
 const Slack = require('node-slackr');
-const slack = new Slack('https://hooks.slack.com/services/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', {
-  channel: "#test-tumolink",
-  username: 'tumolink-boot'
-});
 
 router.post('/', authenticationEnsurer, (req, res, next) => {
   const availabilityId = uuid.v4();
@@ -26,8 +23,27 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
       profileImg: req.user.photos[0].value
     };
     res.json(args);
-    slack.notify(args.username + 'がツモリンク！', function(err, result){
-      console.log(err,result);
+    // Slack 通知
+    Space.findOne({
+      where: {
+        spaceId: req.body.spaceId
+      }
+    }).then((space) => {
+      const webhookURL = 'https://hooks.slack.com/services/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';
+      const slack = new Slack(webhookURL);
+      const slackMessage = {
+        text: space.spaceName + 'に行くツモリンク！',
+        channel: "#test-tumolink",
+        username: args.username,
+        icon_url: args.profileImg
+      };
+      slack.notify(slackMessage, function(err, result){
+        if (err) {
+          console.log('error... ' + err);
+        } else {
+          console.log('success! ' + result);
+        }
+      });
     });
   });
 });
