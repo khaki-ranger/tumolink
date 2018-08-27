@@ -312,7 +312,6 @@ textarea.comp-ui {
   padding: .5em;
   font-size: 16px;
   box-sizing: border-box;
-  margin-top: .25em;
   border: solid 1px #ddd;
 }
 /* space-list */
@@ -365,6 +364,20 @@ textarea.comp-ui {
 }
 .space-list>li .data .availability .profile-img {
   margin-right: .5rem;
+}
+.space-list>li .action .plans {
+  display: table;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+.space-list>li .action .plans .value,
+.space-list>li .action .plans .unit {
+  display: table-cell;
+}
+.space-list>li .action .plans .unit {
+  width: 2.5rem;
+  vertical-align: middle;
+  text-align: right;
 }
 @media (max-width: 768px) {
 .space-list>li .data {
