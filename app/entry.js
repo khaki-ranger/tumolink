@@ -13,28 +13,6 @@ $(window).on('load', function(){
   $('.overlay .panel').on('click', function(event) {
     event.stopPropagation();
   });
-  $('.space-list .action form').each((i, e) => {
-    const form = $(e);
-    form.submit((event) => {
-      event.preventDefault();
-      const data = form.serialize();
-      $.post('/availabilities', data, (result) => {
-        const availability = $('.' + result.spaceId + ' .data .availabilities');
-        const availabilitiesHeadText = $('.head span', availability);
-        let currentCount = availabilitiesHeadText.text();
-        currentCount = Number(currentCount);
-        currentCount++;
-        availabilitiesHeadText.text(currentCount);
-        const availabilitiesBody = $('.body', availability);
-        availabilitiesBody.append('<li class="availability"><img src="' + result.profileImg + '" class="profile-img"><span>' + result.username + '</span></li>');
-        const btnMore = $('.btn-more', availability);
-        const availabilities = $('.body .availability', availability);
-        if (availabilities.length >= 4) {
-          btnMore.addClass('visible');
-        }
-      });
-    });
-  });
   $('.space-list>li').each((i, e) => {
     const availabilityBody = $('.data .availabilities .body', e);
     const availabilities = $('.availability', availabilityBody);

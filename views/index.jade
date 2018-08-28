@@ -24,7 +24,7 @@ block content
                       span #{availability.username}
                 i.fas.fa-chevron-down.btn-more
             .action
-              form
+              form(method="post" action="/availabilities")
                 input(type="hidden" name="spaceId" value="#{space.spaceId}")
                 .plans
                   .value.hour

@@ -30,7 +30,6 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
       username: req.user.displayName,
       profileImg: req.user.photos[0].value
     };
-    res.json(args);
     // Slack 通知
     Space.findOne({
       where: {
@@ -61,6 +60,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
         } else {
           console.log('success! ' + result);
         }
+        res.redirect('/');
       });
     });
   });

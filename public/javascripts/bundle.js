@@ -88,28 +88,6 @@ var overlay = (0, _jquery2.default)('.overlay');
   (0, _jquery2.default)('.overlay .panel').on('click', function (event) {
     event.stopPropagation();
   });
-  (0, _jquery2.default)('.space-list .action form').each(function (i, e) {
-    var form = (0, _jquery2.default)(e);
-    form.submit(function (event) {
-      event.preventDefault();
-      var data = form.serialize();
-      _jquery2.default.post('/availabilities', data, function (result) {
-        var availability = (0, _jquery2.default)('.' + result.spaceId + ' .data .availabilities');
-        var availabilitiesHeadText = (0, _jquery2.default)('.head span', availability);
-        var currentCount = availabilitiesHeadText.text();
-        currentCount = Number(currentCount);
-        currentCount++;
-        availabilitiesHeadText.text(currentCount);
-        var availabilitiesBody = (0, _jquery2.default)('.body', availability);
-        availabilitiesBody.append('<li class="availability"><img src="' + result.profileImg + '" class="profile-img"><span>' + result.username + '</span></li>');
-        var btnMore = (0, _jquery2.default)('.btn-more', availability);
-        var availabilities = (0, _jquery2.default)('.body .availability', availability);
-        if (availabilities.length >= 4) {
-          btnMore.addClass('visible');
-        }
-      });
-    });
-  });
   (0, _jquery2.default)('.space-list>li').each(function (i, e) {
     var availabilityBody = (0, _jquery2.default)('.data .availabilities .body', e);
     var availabilities = (0, _jquery2.default)('.availability', availabilityBody);
