@@ -374,14 +374,28 @@ textarea.comp-ui {
 .space-list>li .action .plans .unit {
   display: table-cell;
 }
+.space-list>li .action .plans .value.minute {
+  padding: .5rem;
+}
 .space-list>li .action .plans .unit {
-  width: 2.5rem;
   vertical-align: middle;
   text-align: right;
 }
 @media (max-width: 768px) {
 .space-list>li .data {
   border-bottom: solid 1px #FFCCBC;
+}
+.space-list>li .action .plans .value.hour {
+  width: 35%;
+}
+.space-list>li .action .plans .value.minute {
+  width: 38%;
+}
+.space-list>li .action .plans .unit.hour {
+  width: 15%;
+}
+.space-list>li .action .plans .unit.minute {
+  width: 12%;
 }
 }
 @media (min-width: 768px) {
@@ -394,13 +408,27 @@ textarea.comp-ui {
 .space-list>li .action {
   display: table-cell;
 }
-.space-list>li .information,
-.space-list>li .action {
+.space-list>li .information {
   width: 25%;
+}
+.space-list>li .action {
+  width: 11rem;
 }
 .space-list>li .data {
   border-right: solid 1px #FFCCBC;
   border-left: solid 1px #FFCCBC;
   vertical-align: top;
+}
+.space-list>li .action .plans .value.hour {
+  width: 28%;
+}
+.space-list>li .action .plans .value.minute {
+  width: 34%;
+}
+.space-list>li .action .plans .unit.hour {
+  width: 20%;
+}
+.space-list>li .action .plans .unit.minute {
+  width: 18%;
 }
 }
