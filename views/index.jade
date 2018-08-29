@@ -20,9 +20,10 @@ block content
                 ul.body
                   each availability in space.availabilities
                     li.availability
-                      img.profile-img(src="#{availability.photoUrl}")
-                      span #{availability.username}
-                      span #{availability.arrivingAt}
+                      .photo
+                        img.profile-img(src="#{availability.photoUrl}")
+                      .name #{availability.username}
+                      .arriving #{availability.arrivingAt}
                 i.fas.fa-chevron-down.btn-more
             .action
               form(method="post" action="/availabilities")
