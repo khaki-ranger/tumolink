@@ -1,6 +1,7 @@
 'use strict';
 var express = require('express');
 var router = express.Router();
+var moment = require('moment');
 var Space = require('../models/space');
 var User = require('../models/user');
 var Availability = require('../models/availability');
@@ -42,11 +43,13 @@ router.get('/', function(req, res, next) {
                 date: updatedAt.getDate()
               }
               if(todayObj.year === updatedAtObj.year && todayObj.month === updatedAtObj.month && todayObj.date === updatedAtObj.date) {
+                let arrivingAt = moment(a.arrivingAt);
+                moment.locale('ja');
                 const availabilityObj = {
                   userId: a.userId,
                   username: a.user.username,
                   photoUrl: a.user.photoUrl,
-                  arrivingAt: a.arrivingAt
+                  arrivingAt: arrivingAt.toNow()
                 }
                 availabilityArray.push(availabilityObj);
               }
