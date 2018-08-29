@@ -45,7 +45,8 @@ router.get('/', function(req, res, next) {
                 const availabilityObj = {
                   userId: a.userId,
                   username: a.user.username,
-                  photoUrl: a.user.photoUrl
+                  photoUrl: a.user.photoUrl,
+                  arrivingAt: a.arrivingAt
                 }
                 availabilityArray.push(availabilityObj);
               }
