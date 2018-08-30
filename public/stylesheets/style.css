@@ -24,6 +24,10 @@ body {
   font-size: 14px;
   padding: 60px 1em 0 1em;
   margin: 0;
+  background-color: #FBE9E7;
+}
+.space-list>li {
+  background-color: white;
 }
 .clearfix::after{
   content: "";
