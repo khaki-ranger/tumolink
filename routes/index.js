@@ -1,7 +1,7 @@
 'use strict';
 var express = require('express');
 var router = express.Router();
-var moment = require('moment');
+var moment = require('moment-timezone-jp');
 var Space = require('../models/space');
 var User = require('../models/user');
 var Availability = require('../models/availability');
@@ -22,7 +22,8 @@ router.get('/', function(req, res, next) {
             model: User,
             attributes: ['userId', 'username', 'photoUrl']
           }
-        ]
+        ],
+        order: [['"arrivingAt"', 'ASC']]
       }).then((availabilities) => {
         let today = new Date();
         today.setTime(today.getTime() + 1000*60*60*9);
@@ -36,20 +37,20 @@ router.get('/', function(req, res, next) {
           const availabilityArray = [];
           availabilities.forEach((a) => {
             if(spaceId === a.spaceId) {
-              const updatedAt = a.updatedAt;
-              const updatedAtObj = {
-                year: updatedAt.getFullYear(),
-                month: updatedAt.getMonth(),
-                date: updatedAt.getDate()
+              let arrivingAt = a.arrivingAt;
+              arrivingAt.setTime(arrivingAt.getTime() + 1000*60*60*9);
+              const arrivingAtObj = {
+                year: arrivingAt.getFullYear(),
+                month: arrivingAt.getMonth(),
+                date: arrivingAt.getDate()
               }
-              if(todayObj.year === updatedAtObj.year && todayObj.month === updatedAtObj.month && todayObj.date === updatedAtObj.date) {
-                let arrivingAt = moment(a.arrivingAt);
-                moment.locale('ja');
+              if(todayObj.year === arrivingAtObj.year && todayObj.month === arrivingAtObj.month && todayObj.date === arrivingAtObj.date) {
+                const momentArrivingAt = moment(a.arrivingAt);
                 const availabilityObj = {
                   userId: a.userId,
                   username: a.user.username,
                   photoUrl: a.user.photoUrl,
-                  arrivingAt: arrivingAt.toNow()
+                  arrivingAt: momentArrivingAt.fromNow()
                 }
                 availabilityArray.push(availabilityObj);
               }

@@ -15,7 +15,6 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
   const addMinute = Number(req.body.minute);
   const addTotalMinute = addMinute + addHour * 60;
   let arrivingAt  = new Date();
-  arrivingAt.setTime(arrivingAt.getTime() + 1000*60*60*9);
   arrivingAt.setMinutes(arrivingAt.getMinutes() + addTotalMinute);
   Availability.create({
     availabilityId: availabilityId,
