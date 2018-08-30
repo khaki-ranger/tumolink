@@ -1,0 +1,7 @@
+{
+  "name": "tumolink",
+  "description": "ツモリンク",
+  "logo": "",
+  "keywords": ["node"],
+  "image": "heroku/nodejs"
+}
