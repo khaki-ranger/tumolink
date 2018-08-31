@@ -7,10 +7,6 @@ var helmet = require('helmet');
 var session = require('express-session');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
-var settings = undefined;
-if (!process.env.FACEBOOK_APP_ID) {
-  settings = require('./settings');
-}
 
 var User = require('./models/user');
 var Space = require('./models/space');
@@ -21,8 +17,8 @@ User.sync().then(() => {
 });
 Space.sync();
 
-var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || settings.facebook.app_id;
-var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || settings.facebook.app_secret;
+var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || '283457335747265';
+var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || 'b5fed3e32295230e9f35a17d7b6d8d8e'
 
 passport.serializeUser(function (user, done) {
   done(null, user);
