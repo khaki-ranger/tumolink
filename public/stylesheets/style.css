@@ -133,8 +133,9 @@ header {
   left: 0;
   width: 100%;
   background: #F4511E;
+  border: solid 1px #FBE9E7;
   color: white;
-  height: 60px;
+  height: 59px;
   z-index: 3;
   display: table;
 }
