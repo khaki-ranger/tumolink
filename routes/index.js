@@ -11,9 +11,6 @@ router.get('/', function(req, res, next) {
   const title = 'ツモリンク';
   if (req.user) {
     Space.findAll({
-      where: {
-        createdBy: req.user.id
-      },
       order: [['"updatedAt"', 'DESC']]
     }).then((spaces) => {
       Availability.findAll({
