@@ -48,13 +48,17 @@ router.get('/', function(req, res, next) {
                 let arrivingAtText = '';
                 let diffMinutes = arrivingAtObj.minutes - nowObj.minutes;
                 const diffHours = arrivingAtObj.hours - nowObj.hours;
-                if (diffHours >= 1) {
-                  diffMinutes += diffHours * 60;
-                }
-                if (diffMinutes >= 60) {
+                diffMinutes += diffHours * 60;
+                if (diffHours !== 0) {
                   arrivingAtText += diffHours + ' 時間 ';
                 }
-                arrivingAtText += Math.ceil(diffMinutes % 60) + ' 分後';
+                arrivingAtText += Math.ceil(diffMinutes % 60) + ' 分';
+                if (diffMinutes >= 0) {
+                  arrivingAtText += '後';
+                } else {
+                  arrivingAtText = arrivingAtText.replace(/-/g, '');
+                  arrivingAtText += '前';
+                }
                 const availabilityObj = {
                   userId: a.userId,
                   username: a.user.username,
