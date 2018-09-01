@@ -1,7 +1,6 @@
 'use strict';
 var express = require('express');
 var router = express.Router();
-var moment = require('moment-timezone-jp');
 var Space = require('../models/space');
 var User = require('../models/user');
 var Availability = require('../models/availability');
@@ -22,12 +21,14 @@ router.get('/', function(req, res, next) {
         ],
         order: [['"arrivingAt"', 'ASC']]
       }).then((availabilities) => {
-        let today = new Date();
-        today.setTime(today.getTime() + 1000*60*60*9);
-        const todayObj = {
-          year: today.getFullYear(),
-          month: today.getMonth(),
-          date: today.getDate()
+        let now = new Date();
+        now.setTime(now.getTime() + 1000*60*60*9);
+        const nowObj = {
+          year: now.getFullYear(),
+          month: now.getMonth(),
+          date: now.getDate(),
+          hours: now.getHours(),
+          minutes: now.getMinutes()
         }
         spaces.forEach((s) => {
           const spaceId = s.spaceId;
@@ -39,15 +40,26 @@ router.get('/', function(req, res, next) {
               const arrivingAtObj = {
                 year: arrivingAt.getFullYear(),
                 month: arrivingAt.getMonth(),
-                date: arrivingAt.getDate()
+                date: arrivingAt.getDate(),
+                hours: arrivingAt.getHours(),
+                minutes: arrivingAt.getMinutes()
               }
-              if(todayObj.year === arrivingAtObj.year && todayObj.month === arrivingAtObj.month && todayObj.date === arrivingAtObj.date) {
-                const momentArrivingAt = moment(a.arrivingAt);
+              if(nowObj.year === arrivingAtObj.year && nowObj.month === arrivingAtObj.month && nowObj.date === arrivingAtObj.date) {
+                let arrivingAtText = '';
+                let diffMinutes = arrivingAtObj.minutes - nowObj.minutes;
+                const diffHours = arrivingAtObj.hours - nowObj.hours;
+                if (diffHours >= 1) {
+                  diffMinutes += diffHours * 60;
+                }
+                if (diffMinutes >= 60) {
+                  arrivingAtText += diffHours + ' 時間 ';
+                }
+                arrivingAtText += Math.ceil(diffMinutes % 60) + ' 分後';
                 const availabilityObj = {
                   userId: a.userId,
                   username: a.user.username,
                   photoUrl: a.user.photoUrl,
-                  arrivingAt: momentArrivingAt.fromNow()
+                  arrivingAt: arrivingAtText
                 }
                 availabilityArray.push(availabilityObj);
               }
