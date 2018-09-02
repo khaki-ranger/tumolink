@@ -52,6 +52,7 @@ var usersRouter = require('./routes/users');
 var logoutRouter = require('./routes/logout');
 var spacesRouter = require('./routes/spaces');
 var availabilitiesRouter = require('./routes/availabilities');
+var privacyRouter = require('./routes/privacy');
 
 var app = express();
 app.use(helmet());
@@ -75,6 +76,7 @@ app.use('/users', usersRouter);
 app.use('/logout', logoutRouter);
 app.use('/spaces', spacesRouter);
 app.use('/availabilities', availabilitiesRouter);
+app.use('/privacy', privacyRouter);
 
 app.get('/auth/facebook',
   passport.authenticate('facebook'),
