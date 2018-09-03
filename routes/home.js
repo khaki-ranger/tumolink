@@ -32,6 +32,8 @@ router.get('/', function(req, res, next) {
         spaces.forEach((s) => {
           const spaceId = s.spaceId;
           const availabilityArray = [];
+          let rightNowFlag = false;
+          let beforeLine = '';
           availabilities.forEach((a) => {
             if(spaceId === a.spaceId) {
               let arrivingAt = a.arrivingAt;
@@ -44,25 +46,35 @@ router.get('/', function(req, res, next) {
                 minutes: arrivingAt.getMinutes()
               }
               if(nowObj.year === arrivingAtObj.year && nowObj.month === arrivingAtObj.month && nowObj.date === arrivingAtObj.date) {
+                let rightNow = false;
                 let arrivingAtText = '';
                 let diffMinutes = arrivingAtObj.minutes - nowObj.minutes;
                 const diffHours = arrivingAtObj.hours - nowObj.hours;
                 diffMinutes += diffHours * 60;
-                if (diffHours !== 0) {
-                  arrivingAtText += diffHours + ' 時間 ';
-                }
-                arrivingAtText += Math.ceil(diffMinutes % 60) + ' 分';
-                if (diffMinutes >= 0) {
-                  arrivingAtText += '後';
+                if (diffMinutes <= 0) {
+                  arrivingAtText = arrivingAtObj.hours + ' 時 ' + arrivingAtObj.minutes + ' 分頃';
                 } else {
-                  arrivingAtText = arrivingAtText.replace(/-/g, '');
-                  arrivingAtText += '前';
+                  rightNow = true;
+                  if (diffHours !== 0) {
+                    arrivingAtText += diffHours + ' 時間';
+                  }
+                  if (Math.ceil(diffMinutes % 60) !== 0) {
+                    arrivingAtText += ' ' + Math.ceil(diffMinutes % 60) + ' 分';
+                  }
+                  arrivingAtText += '後';
+                }
+                if (rightNow !== rightNowFlag) {
+                  beforeLine = 'beforeLine';
+                  rightNowFlag = true;
+                } else {
+                  beforeLine = '';
                 }
                 const availabilityObj = {
                   userId: a.userId,
                   username: a.user.username,
                   photoUrl: a.user.photoUrl,
-                  arrivingAt: arrivingAtText
+                  arrivingAt: arrivingAtText,
+                  beforeLine: beforeLine
                 }
                 availabilityArray.push(availabilityObj);
               }

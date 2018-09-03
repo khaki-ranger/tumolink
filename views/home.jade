@@ -19,7 +19,7 @@ block content
                   &nbsp;人
                 ul.body
                   each availability in space.availabilities
-                    li.availability
+                    li.availability(class="#{availability.beforeLine}")
                       .photo
                         img.profile-img(src="#{availability.photoUrl}")
                       .name #{availability.username}

@@ -341,7 +341,7 @@ textarea.comp-ui {
   color: white;
 }
 .space-list>li .data .availabilities ul {
-  max-height: 130px;
+  max-height: 134px;
   overflow: hidden;
   transition: all 500ms ease;
 }
@@ -374,6 +374,10 @@ textarea.comp-ui {
 .space-list>li .data .availability>div {
   display: table-cell;
   vertical-align: middle;
+}
+.space-list>li .data .availability.beforeLine {
+  border-top: solid 1px #FFCCBC;
+  padding-top: .5rem;
 }
 .space-list>li .data .availability .photo {
   width: 2.6rem;

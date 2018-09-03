@@ -59,7 +59,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
         } else {
           console.log('success! ' + result);
         }
-        res.redirect('/');
+        res.redirect('/home');
       });
     });
   });
