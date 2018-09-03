@@ -24,6 +24,8 @@ block content
                         img.profile-img(src="#{availability.photoUrl}")
                       .name #{availability.username}
                       .arriving #{availability.arrivingAt}
+                      if availability.beforeLine
+                        span.now Now
                 i.fas.fa-chevron-down.btn-more
             .action
               form(method="post" action="/availabilities")

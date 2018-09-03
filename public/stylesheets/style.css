@@ -378,6 +378,21 @@ textarea.comp-ui {
 .space-list>li .data .availability.beforeLine {
   border-top: solid 1px #FFCCBC;
   padding-top: .5rem;
+  position: relative;
+}
+.space-list>li .data .availability.beforeLine .now {
+  position: absolute;
+  top: -.6rem;
+  left: 0;
+  right: 0;
+  width: 3rem;
+  margin: 0 auto;
+  line-height: .9;
+  padding: .2rem 0;
+  border: solid 1px #FFCCBC;
+  border-radius: 10px;
+  background-color: white;
+  text-align: center;
 }
 .space-list>li .data .availability .photo {
   width: 2.6rem;
