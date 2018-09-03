@@ -48,6 +48,7 @@ passport.use(new FacebookStrategy({
 ));
 
 var indexRouter = require('./routes/index');
+var homeRouter = require('./routes/home');
 var usersRouter = require('./routes/users');
 var logoutRouter = require('./routes/logout');
 var spacesRouter = require('./routes/spaces');
@@ -72,6 +73,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', indexRouter);
+app.use('/home', homeRouter);
 app.use('/users', usersRouter);
 app.use('/logout', logoutRouter);
 app.use('/spaces', spacesRouter);
@@ -86,7 +88,7 @@ app.get('/auth/facebook',
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/' }),
   function (req, res) {
-    res.redirect('/');
+    res.redirect('/home');
 });
 
 // catch 404 and forward to error handler

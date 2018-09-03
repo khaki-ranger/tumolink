@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  if loginUser
+    - var hasSpace = spaces.length > 0
+    if hasSpace
+      h3 #{loginUser.displayName} のスペース一覧
+      ul.space-list
+        each space in spaces
+          li(class="#{space.spaceId}") 
+            .information 
+              .photo
+                img.responsive-img(src="#{space.imgPath}")
+              .name #{space.spaceName}
+            .data
+              .availabilities
+                .head 今日のツモリスト
+                  span #{space.availabilities.length}
+                  &nbsp;人
+                ul.body
+                  each availability in space.availabilities
+                    li.availability
+                      .photo
+                        img.profile-img(src="#{availability.photoUrl}")
+                      .name #{availability.username}
+                      .arriving #{availability.arrivingAt}
+                i.fas.fa-chevron-down.btn-more
+            .action
+              form(method="post" action="/availabilities")
+                input(type="hidden" name="spaceId" value="#{space.spaceId}")
+                .plans
+                  .value.hour
+                    select.comp-ui(name="hour")
+                      each value in hours
+                        option(value="#{value}") #{value}
+                  .unit.hour 時間
+                  .value.minute
+                    select.comp-ui(name="minute")
+                      each value in minutes
+                        option(value="#{value}") #{value}
+                  .unit.minute 分後
+                button.tumoli-button.comp-ui 行くツモリ
