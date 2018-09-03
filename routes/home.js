@@ -37,7 +37,6 @@ router.get('/', function(req, res, next) {
           availabilities.forEach((a) => {
             if(spaceId === a.spaceId) {
               let arrivingAt = a.arrivingAt;
-              arrivingAt.setTime(arrivingAt.getTime() + 1000*60*60*9);
               const arrivingAtObj = {
                 year: arrivingAt.getFullYear(),
                 month: arrivingAt.getMonth(),
