@@ -41,4 +41,7 @@ block content
                       each value in minutes
                         option(value="#{value}") #{value}
                   .unit.minute 分後
-                button.tumoli-button.comp-ui 行くツモリ
+                if space.availabilityUserFlag 
+                  button.tumoli-button.comp-ui 行くツモリに変更
+                else
+                  button.tumoli-button.comp-ui 行くツモリ

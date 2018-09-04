@@ -32,6 +32,7 @@ router.get('/', function(req, res, next) {
         spaces.forEach((s) => {
           const spaceId = s.spaceId;
           const availabilityArray = [];
+          let availabilityUserFlag = false;
           let rightNowFlag = false;
           let beforeLine = '';
           availabilities.forEach((a) => {
@@ -47,14 +48,12 @@ router.get('/', function(req, res, next) {
               if(nowObj.year === arrivingAtObj.year && nowObj.month === arrivingAtObj.month && nowObj.date === arrivingAtObj.date) {
                 let rightNow = false;
                 let arrivingAtText = '';
+                arrivingAtText = arrivingAtObj.hours + ' 時 ' + arrivingAtObj.minutes + ' 分頃';
                 let diffMinutes = arrivingAtObj.minutes - nowObj.minutes;
                 const diffHours = arrivingAtObj.hours - nowObj.hours;
                 diffMinutes += diffHours * 60;
-                if (diffMinutes <= 0) {
-                  arrivingAtText = arrivingAtObj.hours + ' 時 ' + arrivingAtObj.minutes + ' 分頃';
-                } else {
+                if (diffMinutes > 0) {
                   rightNow = true;
-                  arrivingAtText = arrivingAtObj.hours + ' 時 ' + arrivingAtObj.minutes + ' 分頃';
                 }
                 if (rightNow !== rightNowFlag) {
                   beforeLine = 'beforeLine';
@@ -70,10 +69,14 @@ router.get('/', function(req, res, next) {
                   beforeLine: beforeLine
                 }
                 availabilityArray.push(availabilityObj);
+                if (req.user.id === availabilityObj.userId) {
+                  availabilityUserFlag = true;
+                }
               }
             }
           });
           s['availabilities'] = availabilityArray;
+          s['availabilityUserFlag'] = availabilityUserFlag; 
         });
         const hours = [0, 1, 2, 3, 4, 5, 6];
         const minutes = ['00', '10', '20', '30', '40', '50'];
