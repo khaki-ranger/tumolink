@@ -38,18 +38,9 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
     }).then((space) => {
       const webhookURL = 'https://hooks.slack.com/services/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';
       const slack = new Slack(webhookURL);
-      let message = '';
-      if (addHour > 0) {
-        message += addHour + '時間'; 
-      }
-      if (addMinute > 0) {
-        message += addMinute + '分'; 
-      }
-      if (addHour > 0 || addMinute > 0) {
-        message += '後に、'; 
-      }
+      const message = arrivingAt.getHours() + '時' + arrivingAt.getMinutes() + '分頃に、' + space.spaceName + 'に行くツモリンク！';
       const slackMessage = {
-        text: message += space.spaceName + 'に行くツモリンク！',
+        text: message,
         channel: "#test-tumolink",
         username: args.username,
         icon_url: args.profileImg

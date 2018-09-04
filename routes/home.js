@@ -54,13 +54,17 @@ router.get('/', function(req, res, next) {
                   arrivingAtText = arrivingAtObj.hours + ' 時 ' + arrivingAtObj.minutes + ' 分頃';
                 } else {
                   rightNow = true;
-                  if (diffHours !== 0) {
-                    arrivingAtText += diffHours + ' 時間';
+                  if (diffMinutes >= 60) {
+                    arrivingAtText = arrivingAtObj.hours + ' 時 ' + arrivingAtObj.minutes + ' 分頃';
+                  } else {
+                    if (diffHours !== 0) {
+                      arrivingAtText += diffHours + ' 時間';
+                    }
+                    if (Math.ceil(diffMinutes % 60) !== 0) {
+                      arrivingAtText += ' ' + Math.ceil(diffMinutes % 60) + ' 分';
+                    }
+                    arrivingAtText += '後';
                   }
-                  if (Math.ceil(diffMinutes % 60) !== 0) {
-                    arrivingAtText += ' ' + Math.ceil(diffMinutes % 60) + ' 分';
-                  }
-                  arrivingAtText += '後';
                 }
                 if (rightNow !== rightNowFlag) {
                   beforeLine = 'beforeLine';
