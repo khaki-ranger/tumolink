@@ -32,6 +32,7 @@ block content
             .action
               form(method="post" action="/availabilities")
                 input(type="hidden" name="spaceId" value="#{space.spaceId}")
+                input(type="hidden" name="availabilityUserFlag" value="#{space.availabilityUserFlag}")
                 .plans
                   .value.hour
                     select.comp-ui(name="hour")
