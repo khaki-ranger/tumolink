@@ -48,12 +48,15 @@ router.get('/', function(req, res, next) {
               if(nowObj.year === arrivingAtObj.year && nowObj.month === arrivingAtObj.month && nowObj.date === arrivingAtObj.date) {
                 let rightNow = false;
                 let arrivingAtText = '';
+                let userStatus = undefined;
                 arrivingAtText = arrivingAtObj.hours + ' 時 ' + arrivingAtObj.minutes + ' 分頃';
                 let diffMinutes = arrivingAtObj.minutes - nowObj.minutes;
                 const diffHours = arrivingAtObj.hours - nowObj.hours;
                 diffMinutes += diffHours * 60;
                 if (diffMinutes > 0) {
                   rightNow = true;
+                } else {
+                  userStatus = '在籍未確認';
                 }
                 if (rightNow !== rightNowFlag) {
                   beforeLine = 'beforeLine';
@@ -66,6 +69,7 @@ router.get('/', function(req, res, next) {
                   username: a.user.username,
                   photoUrl: a.user.photoUrl,
                   arrivingAt: arrivingAtText,
+                  userStatus: userStatus,
                   beforeLine: beforeLine
                 }
                 availabilityArray.push(availabilityObj);

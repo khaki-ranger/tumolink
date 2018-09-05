@@ -23,6 +23,8 @@ block content
                       .photo
                         img.profile-img(src="#{availability.photoUrl}")
                       .name #{availability.username}
+                        if availability.userStatus
+                          span.userstatus #{availability.userStatus}
                       .arriving #{availability.arrivingAt}
                       if availability.beforeLine
                         span.now Now

@@ -375,6 +375,13 @@ textarea.comp-ui {
   display: table-cell;
   vertical-align: middle;
 }
+.space-list>li .data .availability .name .userstatus {
+  font-size: .75rem;
+  background-color: lightsteelblue;
+  padding: .2rem .5rem;
+  margin-left: .5rem;
+  border-radius: 1rem;
+}
 .space-list>li .data .availability.beforeLine {
   border-top: solid 1px #FFCCBC;
   padding-top: .5rem;
