@@ -69,10 +69,20 @@ router.get('/', function(req, res, next) {
                   username: a.user.username,
                   photoUrl: a.user.photoUrl,
                   arrivingAt: arrivingAtText,
+                  updatedAt: a.updatedAt,
                   userStatus: userStatus,
                   beforeLine: beforeLine
                 }
                 availabilityArray.push(availabilityObj);
+                for (let i = 0; i < availabilityArray.length; i++) {
+                  if (availabilityArray[i].userId === a.userId) {
+                    if (a.updatedAt.getTime() > availabilityArray[i].updatedAt.getTime()) {
+                      availabilityArray.splice(i, 1);
+                    } else if (a.updatedAt.getTime() < availabilityArray[i].updatedAt.getTime()) {
+                      availabilityArray.pop();
+                    }
+                  }
+                }
                 if (req.user.id === availabilityObj.userId) {
                   availabilityUserFlag = true;
                 }
