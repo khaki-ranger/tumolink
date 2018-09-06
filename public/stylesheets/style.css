@@ -341,7 +341,7 @@ textarea.comp-ui {
   color: white;
 }
 .space-list>li .data .availabilities ul {
-  max-height: 140px;
+  max-height: 150px;
   overflow: hidden;
   transition: all 500ms ease;
 }
@@ -349,7 +349,7 @@ textarea.comp-ui {
   max-height: 1000px;
 }
 .space-list>li .data .availabilities .btn-more {
-  padding: 1rem 0;
+  padding: 1rem 0 0 0;
   text-align: center;
   display: none;
 }
@@ -388,13 +388,13 @@ textarea.comp-ui {
 }
 .space-list>li .data .availability.beforeEnd {
   border-bottom: solid 1px #FFCCBC;
-  padding-bottom: .5rem;
-  margin-bottom: .6rem;
+  padding-bottom: .8rem;
+  margin-bottom: .8rem;
 }
 .space-list>li .data .availability.afterBegin {
   border-top: solid 1px #FFCCBC;
-  padding-top: .5rem;
-  margin-top: .6rem;
+  padding-top: .8rem;
+  margin-top: .8rem;
 }
 .space-list>li .data .availability.beforeEnd .now,
 .space-list>li .data .availability.afterBegin .now {
