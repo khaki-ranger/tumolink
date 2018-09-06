@@ -16,6 +16,8 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
     spaceId: spaceId,
     spaceName: req.body.spaceName.slice(0, 255),
     imgPath: req.body.imgPath,
+    slackWebhookURL: req.body.slackWebhookURL,
+    slackChannel: req.body.slackChannel,
     createdBy: req.user.id,
     updatedAt: updatedAt
   }).then((space) => {

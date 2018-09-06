@@ -16,6 +16,14 @@ const Space = loader.database.define('spaces', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  slackWebhookURL : {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  slackChannel : {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
   createdBy: {
     type: Sequelize.BIGINT,
     allowNull: false
