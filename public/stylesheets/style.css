@@ -341,7 +341,7 @@ textarea.comp-ui {
   color: white;
 }
 .space-list>li .data .availabilities ul {
-  max-height: 150px;
+  max-height: 152px;
   overflow: hidden;
   transition: all 500ms ease;
 }
@@ -388,12 +388,12 @@ textarea.comp-ui {
 }
 .space-list>li .data .availability.beforeEnd {
   border-bottom: solid 1px #FFCCBC;
-  padding-bottom: 1rem;
+  padding-bottom: .8rem;
   margin-bottom: .8rem;
 }
 .space-list>li .data .availability.afterBegin {
   border-top: solid 1px #FFCCBC;
-  padding-top: 1rem;
+  padding-top: .8rem;
   margin-top: .8rem;
 }
 .space-list>li .data .availability.beforeEnd .now,
