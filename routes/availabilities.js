@@ -36,27 +36,31 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
         spaceId: req.body.spaceId
       }
     }).then((space) => {
-      const webhookURL = space.slackWebhookURL;
-      const slack = new Slack(webhookURL);
-      let message = '';
-      if (req.body.availabilityUserFlag) {
-        message += 'やっぱり';
-      }
-      message += arrivingAt.getHours() + '時' + arrivingAt.getMinutes() + '分頃に、' + space.spaceName + 'に行くツモリンク！';
-      const slackMessage = {
-        text: message,
-        channel: space.slackChannel,
-        username: args.username,
-        icon_url: args.profileImg
-      };
-      slack.notify(slackMessage, function(err, result){
-        if (err) {
-          console.log('error... ' + err);
-        } else {
-          console.log('success! ' + result);
+      if (space.slackWebhookURL) {
+        const webhookURL = space.slackWebhookURL;
+        const slack = new Slack(webhookURL);
+        let message = '';
+        if (req.body.availabilityUserFlag) {
+          message += 'やっぱり';
         }
+        message += arrivingAt.getHours() + '時' + arrivingAt.getMinutes() + '分頃に、' + space.spaceName + 'に行くツモリンク！';
+        const slackMessage = {
+          text: message,
+          channel: space.slackChannel,
+          username: args.username,
+          icon_url: args.profileImg
+        };
+        slack.notify(slackMessage, function(err, result){
+          if (err) {
+            console.log('error... ' + err);
+          } else {
+            console.log('success! ' + result);
+          }
+          res.redirect('/home');
+        });
+      } else {
         res.redirect('/home');
-      });
+      }
     });
   });
 });
