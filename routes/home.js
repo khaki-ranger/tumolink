@@ -56,7 +56,7 @@ router.get('/', function(req, res, next) {
                 if (diffMinutes > 0) {
                   rightNow = true;
                 } else {
-                  userStatus = '在籍未確認';
+                  userStatus = '未確認';
                 }
                 if (rightNow !== rightNowFlag) {
                   beforeLine = 'beforeLine';
