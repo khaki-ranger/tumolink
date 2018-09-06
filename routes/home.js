@@ -89,7 +89,7 @@ router.get('/', function(req, res, next) {
               }
             }
           });
-          if (rightNowFlag === false) {
+          if (availabilityArray.length > 0 && rightNowFlag === false) {
             availabilityArray[availabilityArray.length - 1].branchPoint = 'beforeEnd';
           }
           s['availabilities'] = availabilityArray;
