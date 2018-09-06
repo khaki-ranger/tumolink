@@ -341,7 +341,7 @@ textarea.comp-ui {
   color: white;
 }
 .space-list>li .data .availabilities ul {
-  max-height: 134px;
+  max-height: 140px;
   overflow: hidden;
   transition: all 500ms ease;
 }
@@ -382,14 +382,23 @@ textarea.comp-ui {
   margin-left: .5rem;
   border-radius: 1rem;
 }
-.space-list>li .data .availability.beforeLine {
-  border-top: solid 1px #FFCCBC;
-  padding-top: .5rem;
+.space-list>li .data .availability.beforeEnd,
+.space-list>li .data .availability.afterBegin {
   position: relative;
 }
-.space-list>li .data .availability.beforeLine .now {
+.space-list>li .data .availability.beforeEnd {
+  border-bottom: solid 1px #FFCCBC;
+  padding-bottom: .5rem;
+  margin-bottom: .6rem;
+}
+.space-list>li .data .availability.afterBegin {
+  border-top: solid 1px #FFCCBC;
+  padding-top: .5rem;
+  margin-top: .6rem;
+}
+.space-list>li .data .availability.beforeEnd .now,
+.space-list>li .data .availability.afterBegin .now {
   position: absolute;
-  top: -.6rem;
   left: 0;
   right: 0;
   width: 3rem;
@@ -400,6 +409,12 @@ textarea.comp-ui {
   border-radius: 10px;
   background-color: white;
   text-align: center;
+}
+.space-list>li .data .availability.beforeEnd .now {
+  bottom: -.6rem;
+}
+.space-list>li .data .availability.afterBegin .now {
+  top: -.6rem;
 }
 .space-list>li .data .availability .photo {
   width: 2.6rem;

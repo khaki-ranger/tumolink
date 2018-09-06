@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
           const availabilityArray = [];
           let availabilityUserFlag = false;
           let rightNowFlag = false;
-          let beforeLine = '';
+          let branchPoint = '';
           availabilities.forEach((a) => {
             if(spaceId === a.spaceId) {
               let arrivingAt = a.arrivingAt;
@@ -59,10 +59,10 @@ router.get('/', function(req, res, next) {
                   userStatus = '未確認';
                 }
                 if (rightNow !== rightNowFlag) {
-                  beforeLine = 'beforeLine';
+                  branchPoint = 'afterBegin';
                   rightNowFlag = true;
                 } else {
-                  beforeLine = '';
+                  branchPoint = '';
                 }
                 const availabilityObj = {
                   userId: a.userId,
@@ -71,7 +71,7 @@ router.get('/', function(req, res, next) {
                   arrivingAt: arrivingAtText,
                   updatedAt: a.updatedAt,
                   userStatus: userStatus,
-                  beforeLine: beforeLine
+                  branchPoint: branchPoint
                 }
                 availabilityArray.push(availabilityObj);
                 for (let i = 0; i < availabilityArray.length; i++) {
@@ -89,6 +89,9 @@ router.get('/', function(req, res, next) {
               }
             }
           });
+          if (rightNowFlag === false) {
+            availabilityArray[availabilityArray.length - 1].branchPoint = 'beforeEnd';
+          }
           s['availabilities'] = availabilityArray;
           s['availabilityUserFlag'] = availabilityUserFlag; 
         });

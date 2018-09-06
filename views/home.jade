@@ -19,14 +19,14 @@ block content
                   &nbsp;人
                 ul.body
                   each availability in space.availabilities
-                    li.availability(class="#{availability.beforeLine}")
+                    li.availability(class="#{availability.branchPoint}")
                       .photo
                         img.profile-img(src="#{availability.photoUrl}")
                       .name #{availability.username}
                         if availability.userStatus
                           span.userstatus #{availability.userStatus}
                       .arriving #{availability.arrivingAt}
-                      if availability.beforeLine
+                      if availability.branchPoint
                         span.now Now
                 i.fas.fa-chevron-down.btn-more
             .action
