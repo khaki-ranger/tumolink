@@ -39,11 +39,11 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
       if (space.slackWebhookURL) {
         const webhookURL = space.slackWebhookURL;
         const slack = new Slack(webhookURL);
-        let message = '';
-        if (req.body.availabilityUserFlag) {
+        let message = args.username + '「';
+        if (req.body.availabilityUserFlag !== 'false') {
           message += 'やっぱり';
         }
-        message += arrivingAt.getHours() + '時' + arrivingAt.getMinutes() + '分頃に、' + space.spaceName + 'に行くツモリンク！';
+        message += arrivingAt.getHours() + '時' + arrivingAt.getMinutes() + '分頃に、' + space.spaceName + 'に行くツモリンク！」';
         const slackMessage = {
           text: message,
           channel: space.slackChannel,
