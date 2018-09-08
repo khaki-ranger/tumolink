@@ -5,8 +5,21 @@ const authenticationEnsurer = require('./authentication-ensurer');
 const uuid = require('node-uuid');
 const Space = require('../models/space');
 
+router.get('/list', authenticationEnsurer, (req, res, next) => {
+  Space.findAll({
+      order: [['"updatedAt"', 'DESC']]
+    }).then((spaces) => {
+    res.render('spacelist', {
+      loginUser: req.user,
+      spaces: spaces
+    });
+  });
+});
+
 router.get('/create', authenticationEnsurer, (req, res, next) => {
-  res.render('createspace', { loginUser: req.user });
+  res.render('spacecreate', {
+    loginUser: req.user
+  });
 });
 
 router.post('/create', authenticationEnsurer, (req, res, next) => {
@@ -32,7 +45,7 @@ router.get('/update/:spaceId', authenticationEnsurer, (req, res, next) => {
       spaceId: req.params.spaceId
     }
   }).then((space) => {
-    res.render('updatespace', {
+    res.render('spaceupdate', {
       loginUser: req.user,
       space: space
     });

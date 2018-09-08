@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  - var hasSpace = spaces.length > 0 
+  if hasSpace
+    h3 登録スペース一覧
+    ul.space-list
+      each space in spaces
+        li(class="#{space.spaceId}") 
+          .information 
+            .photo
+              img.responsive-img(src="#{space.imgPath}")
+            .name #{space.spaceName}
+          .data
+          .action
