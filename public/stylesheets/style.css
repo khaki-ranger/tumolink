@@ -489,3 +489,12 @@ textarea.comp-ui {
   width: 18%;
 }
 }
+/* form-spaces */
+.form-spaces {
+  margin-top: 1.5rem;
+}
+.form-spaces button {
+  background-color: #F4511E;
+  color: white;
+}
+

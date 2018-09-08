@@ -5,11 +5,11 @@ const authenticationEnsurer = require('./authentication-ensurer');
 const uuid = require('node-uuid');
 const Space = require('../models/space');
 
-router.get('/add', authenticationEnsurer, (req, res, next) => {
-  res.render('addspace', { loginUser: req.user });
+router.get('/create', authenticationEnsurer, (req, res, next) => {
+  res.render('createspace', { loginUser: req.user });
 });
 
-router.post('/', authenticationEnsurer, (req, res, next) => {
+router.post('/create', authenticationEnsurer, (req, res, next) => {
   const spaceId = uuid.v4();
   const updatedAt = new Date();
   Space.create({
