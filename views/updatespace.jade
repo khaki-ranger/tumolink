@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  form(method="post", action="/spaces/update/#{space.spaceId}")
+    .form-spaces
+      .form-elem
+        label.comp-ui 場所の名前
+          input.comp-ui(type="text" name="spaceName" value="#{space.spaceName}")
+      .form-elem
+        label.comp-ui 画像パス
+          input.comp-ui(type="text" name="imgPath" value="#{space.imgPath}")
+      .form-elem
+        label.comp-ui Slack webhookURL
+          input.comp-ui(type="text" name="slackWebhookURL" value="#{space.slackWebhookURL}")
+      .form-elem
+        label.comp-ui Slack channel
+          input.comp-ui(type="text" name="slackChannel" value="#{space.slackChannel}")
+      button.comp-ui(type="submit") 更新

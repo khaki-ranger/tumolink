@@ -26,4 +26,37 @@ router.post('/create', authenticationEnsurer, (req, res, next) => {
   });
 });
 
+router.get('/update/:spaceId', authenticationEnsurer, (req, res, next) => {
+  Space.findOne({
+    where: {
+      spaceId: req.params.spaceId
+    }
+  }).then((space) => {
+    res.render('updatespace', {
+      loginUser: req.user,
+      space: space
+    });
+  });
+});
+
+router.post('/update/:spaceId', authenticationEnsurer, (req, res, next) => {
+  const updatedAt = new Date();
+  const param = {
+    spaceName: req.body.spaceName.slice(0, 255),
+    imgPath: req.body.imgPath,
+    slackWebhookURL: req.body.slackWebhookURL,
+    slackChannel: req.body.slackChannel,
+    updatedAt: updatedAt
+  };
+  const filter = {
+    where: {
+      spaceId: req.params.spaceId,
+    }
+  }
+  Space.update(param, filter)
+  .then((space) => {
+    res.redirect('/');
+  });
+});
+
 module.exports = router;
