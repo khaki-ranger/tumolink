@@ -34,7 +34,7 @@ router.post('/create', authenticationEnsurer, (req, res, next) => {
     createdBy: req.user.id,
     updatedAt: updatedAt
   }).then((space) => {
-    res.redirect('/');
+    res.redirect('/spaces/list');
     //res.redirect('/spaces/' + space.spaceId);
   });
 });
@@ -68,7 +68,17 @@ router.post('/update/:spaceId', authenticationEnsurer, (req, res, next) => {
   }
   Space.update(param, filter)
   .then((space) => {
-    res.redirect('/');
+    res.redirect('/spaces/list');
+  });
+});
+
+router.get('/delete/:spaceId', authenticationEnsurer, (req, res, next) => {
+  Space.destroy({
+    where: {
+      spaceId: req.params.spaceId,
+    }
+  }).then((space) => {
+    res.redirect('/spaces/list');
   });
 });
 

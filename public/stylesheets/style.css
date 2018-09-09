@@ -94,13 +94,6 @@ body {
 .modal .panel {
   padding: 1em;
 }
-.modal .panel a {
-  text-align: center;
-  border: solid 1px #ddd;
-  display: block;
-  padding: .5em;
-  text-decoration: none;
-}
 .modal .fb-login {
   background-color: #4267b2;
   border: 1px solid #29487d;
@@ -280,13 +273,6 @@ header .nav-login {
 .form-elem {
   margin-bottom: 1.5em;
 }
-button.comp-ui {
-  width: 100%;
-  padding: .5rem;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-}
 label.comp-ui {
   font-weight: bold;
 }
@@ -304,12 +290,21 @@ select.comp-ui {
   color: inherit;
   box-sizing: content-box;
 }
+a.comp-ui {
+  display: block;
+  text-align: center;
+  background-color: #F4511E;
+  color: white;
+}
+button.comp-ui {
+  background: none;
+  cursor: pointer;
+}
+a.comp-ui,
 button.comp-ui {
   width: 100%;
-  padding: .5em;
+  padding: .5em 0;
   font-size: 16px;
-  cursor: pointer;
-  background: none;
 }
 input.comp-ui,
 select.comp-ui,
@@ -437,6 +432,12 @@ textarea.comp-ui {
 .space-list>li .action .plans .unit {
   vertical-align: middle;
   text-align: right;
+}
+.space-list>li .action a {
+  margin-bottom: 1rem;
+}
+.space-list>li .action a:last-child {
+  margin-bottom: 0;
 }
 @media (max-width: 768px) {
 .space-list>li .data {
