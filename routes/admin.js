@@ -5,6 +5,12 @@ const authenticationEnsurer = require('./authentication-ensurer');
 const uuid = require('node-uuid');
 const Space = require('../models/space');
 
+router.get('/', authenticationEnsurer, (req, res, next) => {
+  res.render('admin', {
+    loginUser: req.user
+  });
+});
+
 router.get('/spaces/list', authenticationEnsurer, (req, res, next) => {
   Space.findAll({
       order: [['"updatedAt"', 'DESC']]

@@ -3,7 +3,7 @@ extends layout
 block content
   - var hasSpace = spaces.length > 0 
   if hasSpace
-    h3 登録スペース一覧
+    h3 スペース管理
     ul.space-list
       each space in spaces
         li(class="#{space.spaceId}") 
@@ -13,6 +13,6 @@ block content
             .name #{space.spaceName}
           .data
           .action
-            a.comp-ui(href="/spaces/update/#{space.spaceId}") 編集
-            a.comp-ui(href="/spaces/delete/#{space.spaceId}") 削除
-  a.comp-ui(href="admin/spaces/create") 新規スペース作成
+            a.comp-ui(href="/admin/spaces/update/#{space.spaceId}") 編集
+            a.comp-ui(href="/admin/spaces/delete/#{space.spaceId}") 削除
+  a.comp-ui(href="/admin/spaces/create") 新規スペース作成
