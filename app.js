@@ -49,6 +49,7 @@ passport.use(new FacebookStrategy({
 
 var indexRouter = require('./routes/index');
 var homeRouter = require('./routes/home');
+var adminRouter = require('./routes/admin');
 var usersRouter = require('./routes/users');
 var logoutRouter = require('./routes/logout');
 var spacesRouter = require('./routes/spaces');
@@ -74,6 +75,7 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/home', homeRouter);
+app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
 app.use('/logout', logoutRouter);
 app.use('/spaces', spacesRouter);
