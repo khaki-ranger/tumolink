@@ -1,11 +1,17 @@
 'use strict';
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const Space = require('../models/space');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  const title = 'ツモリンク';
-  res.render('index', { title: title, loginUser: req.user });
+router.get('/', (req, res, next) => {
+  Space.findAll({
+      order: [['"updatedAt"', 'DESC']]
+    }).then((spaces) => {
+    res.render('index', {
+      loginUser: req.user,
+      spaces: spaces
+    });
+  });
 });
 
 module.exports = router;

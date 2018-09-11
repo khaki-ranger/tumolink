@@ -498,4 +498,41 @@ textarea.comp-ui {
   background-color: #F4511E;
   color: white;
 }
+/* comp-space-list */
+.comp-space-list {
+}
+.comp-space-list li {
+  float: left;
+}
+.comp-space-list li .name {
+  text-align: center;
+  background-color: #F4511E;
+  color: white;
+}
+@media (max-width: 768px) {
+.comp-space-list li {
+  width: 49%;
+  margin-right: 2%;
+  margin-bottom: .5rem;
+}
+.comp-space-list li:nth-child(2n) {
+  margin-right: 0;
+}
+.comp-space-list li .name {
+  padding: .5rem 0;
+  font-size: .8rem;
+}
+}
+@media (min-width: 768px) {
+.comp-space-list li {
+  width: 24%;
+  margin-right: 1.25%;
+  margin-bottom: 1rem;
+}
+.comp-space-list li:nth-child(4n) {
+  margin-right: 0;
+}
+.comp-space-list li .name {
+  padding: 1rem 0;
+}
 
