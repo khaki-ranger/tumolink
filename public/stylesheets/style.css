@@ -61,6 +61,26 @@ body {
     display: none !important;
   }
 }
+/* comp-head-middle */
+.comp-head-middle {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+.comp-head-middle span {
+  border: solid 1px #999;
+  border-radius: 1rem;
+  padding: .5rem 1rem;
+  background-color: white;
+}
+.comp-head-middle:before, .comp-head-middle:after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background: #999;
+  display: block;
+}
 /* overlay */
 .overlay {
   position: fixed;
