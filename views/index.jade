@@ -1,13 +1,15 @@
 extends layout
 
 block content
-  - var hasSpace = spaces.length > 0 
-  if hasSpace
-    h3.comp-head-middle
-      span スペース一覧
-    ul.comp-space-list.clearfix
-      each space in spaces
-        li(class="#{space.spaceId}") 
-          .photo
-            img.responsive-img(src="#{space.imgPath}")
-          .name #{space.spaceName}
+  .opening(style="background-image: url(images/bg_index.jpg);")
+  .container
+    - var hasSpace = spaces.length > 0 
+    if hasSpace
+      h3.comp-head-middle
+        span スペース一覧
+      ul.comp-space-list.clearfix
+        each space in spaces
+          li(class="#{space.spaceId}") 
+            .photo
+              img.responsive-img(src="#{space.imgPath}")
+            .name #{space.spaceName}

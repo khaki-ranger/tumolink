@@ -1,18 +1,19 @@
 extends layout
 
 block content
-  - var hasSpace = spaces.length > 0 
-  if hasSpace
-    h3 スペース管理
-    ul.space-list
-      each space in spaces
-        li(class="#{space.spaceId}") 
-          .information 
-            .photo
-              img.responsive-img(src="#{space.imgPath}")
-            .name #{space.spaceName}
-          .data
-          .action
-            a.comp-ui(href="/admin/spaces/update/#{space.spaceId}") 編集
-            a.comp-ui(href="/admin/spaces/delete/#{space.spaceId}") 削除
-  a.comp-ui(href="/admin/spaces/create") 新規スペース作成
+  .container
+    - var hasSpace = spaces.length > 0 
+    if hasSpace
+      h3 スペース管理
+      ul.space-list
+        each space in spaces
+          li(class="#{space.spaceId}") 
+            .information 
+              .photo
+                img.responsive-img(src="#{space.imgPath}")
+              .name #{space.spaceName}
+            .data
+            .action
+              a.comp-ui(href="/admin/spaces/update/#{space.spaceId}") 編集
+              a.comp-ui(href="/admin/spaces/delete/#{space.spaceId}") 削除
+    a.comp-ui(href="/admin/spaces/create") 新規スペース作成
