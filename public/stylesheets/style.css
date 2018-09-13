@@ -295,6 +295,27 @@ header .nav-login {
   background-repeat: no-repeat;
   background-position: center;
   margin-bottom: 1.5rem;
+  position: relative;
+}
+.opening .catch {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+@media (max-width: 768px) {
+.opening .catch {
+  width: 200px;
+  height: 200px;
+}
+}
+@media (min-width: 768px) {
+.opening .catch {
+  width: 300px;
+  height: 300px;
+}
 }
 /* comp-ui */
 .form-elem {
