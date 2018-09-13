@@ -35,9 +35,11 @@ html
             else
               span #{loginUser}
           span.nav-logout
-            a(href="/logout") ログアウト
+            a(href="/logout")
+              i.fas.fa-sign-out-alt
         else
-          span.nav-login ログイン
+          span.nav-login
+            i.fas.fa-sign-in-alt
     block content
     .overlay
       .modal

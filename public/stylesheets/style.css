@@ -121,14 +121,29 @@ body {
   background-color: #4267b2;
   border: 1px solid #29487d;
   color: white;
+  position: relative;
+}
+.modal .fb-login:before {
+  font-family: "Font Awesome 5 Brands";
+  content: '\f39e';
+  font-size: 1.25rem;
+  position: absolute;
+  left: .75rem;
+  height: 1.25rem;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 }
 .modal .close {
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
   width: 100%;
+  border: none;
+}
+.modal .close:before {
+  font-family: "Font Awesome 5 Free";
+  content: '\f057';
+  padding-right: .5rem;
 }
 @media (max-width: 768px) {
 .modal {
@@ -180,6 +195,20 @@ header .logo img {
 }
 header .login span {
   margin-right: 1rem;
+}
+header .login span i {
+  font-size: 1.75rem;
+}
+header .login .nav-logout a {
+  position: relative;
+}
+header .login .nav-logout a i {
+  position: absolute;
+  top: -3px;
+  right: 0;
+}
+header .login-user {
+  padding-right: 1.5rem;
 }
 header .profile-img {
   vertical-align: middle;
@@ -278,6 +307,9 @@ header .nav-login {
   top: 50%;
   right: 1rem;
   margin-top: -20px;
+}
+#nav-content nav a:first-child {
+  margin-top: 1rem;
 }
 #nav-content nav a {
   display: block;
