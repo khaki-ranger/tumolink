@@ -300,13 +300,12 @@ header .nav-login {
   height: 60px;
   position: relative;
 }
-#nav-content .head label:after {
+#nav-content .head label:before {
   content: '\0d7';
   font-size: 2rem;
   position: absolute;
-  top: 50%;
-  right: 1rem;
-  margin-top: -20px;
+  top: 14%;
+  left: 1rem;
 }
 #nav-content nav a:first-child {
   margin-top: 1rem;
