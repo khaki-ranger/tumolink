@@ -377,6 +377,7 @@ a.comp-ui {
 }
 button.comp-ui {
   background: none;
+  border: none;
   cursor: pointer;
 }
 a.comp-ui,
