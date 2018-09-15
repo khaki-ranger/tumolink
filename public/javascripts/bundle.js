@@ -79,6 +79,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var overlay = (0, _jquery2.default)('.overlay');
 
 (0, _jquery2.default)(window).on('load', function () {
+  (0, _jquery2.default)('header .login').on('click', function () {
+    (0, _jquery2.default)('.pulldown-menu:not(:animated)', this).slideToggle('fast');
+  });
   (0, _jquery2.default)('.nav-login').on('click', function () {
     overlay.addClass('visible');
   });

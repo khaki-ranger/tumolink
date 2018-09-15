@@ -4,6 +4,9 @@ import $ from 'jquery';
 const overlay = $('.overlay');
 
 $(window).on('load', function(){
+  $('header .login').on('click', function() {
+    $('.pulldown-menu:not(:animated)', this).slideToggle('fast');
+  });
   $('.nav-login').on('click', function() {
     overlay.addClass('visible');
   });

@@ -188,6 +188,7 @@ header .logo {
 header .login {
   text-align: right;
   width: 40%;
+  position: relative;
 }
 header .logo img {
   height: 40px;
@@ -199,16 +200,25 @@ header .login span {
 header .login span i {
   font-size: 1.75rem;
 }
-header .login .nav-logout a {
-  position: relative;
-}
-header .login .nav-logout a i {
+header .login .pulldown-menu {
   position: absolute;
-  top: -3px;
-  right: 0;
+  top: 59px;
+  right: 13px;
+  background-color: white;
+  color: #333;
+  border-left: solid 1px #BF360C;
+  border-right: solid 1px #BF360C;
+  border-bottom: solid 1px #BF360C;
+  text-align: center;
+  display: none;
 }
-header .login-user {
-  padding-right: 1.5rem;
+header .login .pulldown-menu p,
+header .login .pulldown-menu a {
+  padding: .75rem 1rem;
+  display: block;
+}
+header .login .pulldown-menu p {
+  border-bottom: solid 1px #FFCCBC;
 }
 header .profile-img {
   vertical-align: middle;
