@@ -3,11 +3,22 @@ const express = require('express');
 const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
 const uuid = require('node-uuid');
+const User = require('../models/user');
 const Space = require('../models/space');
 
 router.get('/', authenticationEnsurer, (req, res, next) => {
   res.render('admin', {
     loginUser: req.user
+  });
+});
+
+router.get('/users/list', authenticationEnsurer, (req, res, next) => {
+  User.findAll({
+    }).then((users) => {
+    res.render('userlist', {
+      loginUser: req.user,
+      users: users
+    });
   });
 });
 

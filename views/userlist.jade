@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .container
+    - var hasUser = users.length > 0 
+    if hasUser
+      h3 スペース管理
+      ul.user-list
+        each user in users
+          li(class="#{user.spaceId}") 
+            .thum
+              img(src="#{user.photoUrl}")
+            .name #{user.username}
+            .action
+              a.comp-ui(href="/admin/users/update/#{user.spaceId}") 編集
+              a.comp-ui(href="/admin/users/delete/#{user.spaceId}") 削除

@@ -1,9 +1,18 @@
-var express = require('express');
-var router = express.Router();
+'use strict';
+const express = require('express');
+const router = express.Router();
+const authenticationEnsurer = require('./authentication-ensurer');
+const User = require('../models/user');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/users', authenticationEnsurer, (req, res, next) => {
+  User.findAll({
+      order: [['"updatedAt"', 'DESC']]
+    }).then((spaces) => {
+    res.render('spacelist', {
+      loginUser: req.user,
+      users: users
+    });
+  });
 });
 
 module.exports = router;
