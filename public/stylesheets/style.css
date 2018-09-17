@@ -625,4 +625,44 @@ textarea.comp-ui {
 .comp-space-list li .name {
   padding: 1rem 0;
 }
-
+}
+/* admin-menu */
+.admin-menu>a {
+  display: block;
+  margin-bottom: 1rem;
+}
+/* admin-list */
+.admin-list {
+  background: white;
+  padding: 1rem;
+}
+.admin-list>li {
+  display: table;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.admin-list>li:last-child {
+  margin-bottom: 0;
+}
+.admin-list>li .photo,
+.admin-list>li .information,
+.admin-list>li .action {
+  display: table-cell;
+  vertical-align: middle;
+}
+.admin-list>li .photo {
+  width: 3rem;
+}
+.admin-list>li .information {
+  padding-left: 1rem;
+}
+.admin-list>li .action {
+  width: 13rem;
+}
+.admin-list>li .action a.comp-ui {
+  display: inline-block;
+  width: 6rem;
+}
+.admin-list>li .action a.comp-ui:last-child {
+  margin-left: 1rem;
+}

@@ -4,13 +4,13 @@ block content
   .container
     - var hasUser = users.length > 0 
     if hasUser
-      h3 スペース管理
-      ul.user-list
+      h3 ユーザー管理
+      ul.admin-list
         each user in users
-          li(class="#{user.spaceId}") 
-            .thum
+          li(class="#{user.userId}") 
+            .photo
               img(src="#{user.photoUrl}")
-            .name #{user.username}
+            .information #{user.username}
             .action
               a.comp-ui(href="/admin/users/update/#{user.spaceId}") 編集
               a.comp-ui(href="/admin/users/delete/#{user.spaceId}") 削除
