@@ -7,7 +7,7 @@ const User = require('../models/user');
 const Space = require('../models/space');
 
 router.get('/', authenticationEnsurer, (req, res, next) => {
-  res.render('admin', {
+  res.render('admin/index', {
     loginUser: req.user
   });
 });
@@ -15,7 +15,7 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
 router.get('/users/list', authenticationEnsurer, (req, res, next) => {
   User.findAll({
     }).then((users) => {
-    res.render('userlist', {
+    res.render('admin/userlist', {
       loginUser: req.user,
       users: users
     });
@@ -26,7 +26,7 @@ router.get('/spaces/list', authenticationEnsurer, (req, res, next) => {
   Space.findAll({
       order: [['"updatedAt"', 'DESC']]
     }).then((spaces) => {
-    res.render('spacelist', {
+    res.render('admin/spacelist', {
       loginUser: req.user,
       spaces: spaces
     });
@@ -34,7 +34,7 @@ router.get('/spaces/list', authenticationEnsurer, (req, res, next) => {
 });
 
 router.get('/spaces/create', authenticationEnsurer, (req, res, next) => {
-  res.render('spacecreate', {
+  res.render('admin/spacecreate', {
     loginUser: req.user
   });
 });
@@ -62,7 +62,7 @@ router.get('/spaces/update/:spaceId', authenticationEnsurer, (req, res, next) =>
       spaceId: req.params.spaceId
     }
   }).then((space) => {
-    res.render('spaceupdate', {
+    res.render('admin/spaceupdate', {
       loginUser: req.user,
       space: space
     });
