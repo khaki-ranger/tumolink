@@ -22,6 +22,19 @@ router.get('/users/list', authenticationEnsurer, (req, res, next) => {
   });
 });
 
+router.get('/users/update/:userId', authenticationEnsurer, (req, res, next) => {
+  User.findOne({
+    where: {
+      userId: req.params.userId
+    }
+  }).then((user) => {
+    res.render('admin/userupdate', {
+      loginUser: req.user,
+      user: user
+    });
+  });
+});
+
 router.get('/spaces/list', authenticationEnsurer, (req, res, next) => {
   Space.findAll({
       order: [['"updatedAt"', 'DESC']]
