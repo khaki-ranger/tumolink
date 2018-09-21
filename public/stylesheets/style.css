@@ -346,6 +346,16 @@ header .nav-login {
   right: 0;
   margin: auto;
 }
+.description {
+  text-align: justify;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+.description span {
+  color: #F4511E;
+  font-weight: bold;
+}
 @media (max-width: 768px) {
 .opening .catch {
   width: 200px;
