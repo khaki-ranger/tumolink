@@ -8,7 +8,7 @@ block content
         span スペース一覧
       ul.comp-space-list.clearfix
         each space in spaces
-          li(class="#{space.spaceId}") 
+          li.registration(class="#{space.spaceId} registered-#{space.registration}") 
             .photo
               img.responsive-img(src="#{space.imgPath}")
             .name #{space.spaceName}

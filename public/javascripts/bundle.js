@@ -104,6 +104,18 @@ var overlay = (0, _jquery2.default)('.overlay');
       btnMore.toggleClass('fa-chevron-up');
     });
   });
+  (0, _jquery2.default)('.comp-space-list>.registration').each(function (i, e) {
+    (0, _jquery2.default)(e).on('click', function () {
+      var classList = (0, _jquery2.default)(e).attr('class').split(/\s+/);
+      var registered = classList[2].split(/-/);
+      var add = registered[1] === 'false' ? true : false;
+      var args = {
+        spaceId: classList[1],
+        add: add
+      };
+      console.log(args);
+    });
+  });
 });
 
 /***/ }),
