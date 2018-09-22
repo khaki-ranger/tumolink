@@ -9,11 +9,11 @@ block content
           span マイスペース
         ul.space-list
           each space in spaces
-            li(class="#{space.spaceId}") 
+            li(class="#{space.space.spaceId}") 
               .information 
                 .photo
-                  img.responsive-img(src="#{space.imgPath}")
-                .name #{space.spaceName}
+                  img.responsive-img(src="#{space.space.imgPath}")
+                .name #{space.space.spaceName}
               .data
                 .availabilities
                   .head 今日のツモリスト

@@ -1,16 +1,26 @@
 'use strict';
-var express = require('express');
-var router = express.Router();
-var Space = require('../models/space');
-var User = require('../models/user');
-var Availability = require('../models/availability');
+const express = require('express');
+const router = express.Router();
+const Space = require('../models/space');
+const User = require('../models/user');
+const Availability = require('../models/availability');
+const UserSpace = require('../models/userspace');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if (req.user) {
-    Space.findAll({
+    UserSpace.findAll({
+      include: [
+        {
+          model: Space,
+          attributes: ['spaceId', 'spaceName', 'imgPath']
+        }
+      ],
+      where: {
+        userId: req.user.id
+      },
       order: [['"updatedAt"', 'DESC']]
-    }).then((spaces) => {
+    }).then((userspaces) => {
       Availability.findAll({
         include: [
           {
@@ -29,7 +39,7 @@ router.get('/', function(req, res, next) {
           hours: now.getHours(),
           minutes: now.getMinutes()
         }
-        spaces.forEach((s) => {
+        userspaces.forEach((s) => {
           const spaceId = s.spaceId;
           const availabilityArray = [];
           let availabilityUserFlag = false;
@@ -99,7 +109,7 @@ router.get('/', function(req, res, next) {
         const minutes = ['00', '10', '20', '30', '40', '50'];
         res.render('home', {
           loginUser: req.user,
-          spaces: spaces,
+          spaces: userspaces,
           hours : hours,
           minutes: minutes
         });
