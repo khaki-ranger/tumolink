@@ -51,7 +51,14 @@ router.post('/userspace/update', authenticationEnsurer, (req, res, next) => {
       res.json({status: add});
     });
   } else {
-    res.json({status: add});
+    UserSpace.destroy({
+      where: {
+        userId: req.user.id,
+        spaceId: req.body.spaceId
+      }
+    }).then(() => {
+      res.json({status: add});
+    });
   }
 });
 
