@@ -76,9 +76,9 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var overlay = (0, _jquery2.default)('.overlay');
-
 (0, _jquery2.default)(window).on('load', function () {
+  var overlay = (0, _jquery2.default)('.overlay');
+
   (0, _jquery2.default)('header .login').on('click', function () {
     (0, _jquery2.default)('.pulldown-menu:not(:animated)', this).slideToggle('fast');
   });

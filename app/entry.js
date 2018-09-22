@@ -1,9 +1,9 @@
 'use strict';
 import $ from 'jquery';
 
-const overlay = $('.overlay');
-
 $(window).on('load', function(){
+  const overlay = $('.overlay');
+
   $('header .login').on('click', function() {
     $('.pulldown-menu:not(:animated)', this).slideToggle('fast');
   });
