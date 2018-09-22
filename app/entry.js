@@ -33,12 +33,13 @@ $(window).on('load', function(){
     $(e).on('click', function() {
       const classList = $(e).attr('class').split(/\s+/);
       const registered = classList[2].split(/-/);
-      const add = registered[1] === 'false' ? true : false;
       const args = {
         spaceId: classList[1],
-        add: add
+        registered: registered[1]
       };
-      console.log(args);
+      $.post('/spaces/userspace/update', args, (result) => {
+        console.log(result);
+      });
     });
   });
 });

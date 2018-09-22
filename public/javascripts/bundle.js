@@ -108,12 +108,13 @@ var overlay = (0, _jquery2.default)('.overlay');
     (0, _jquery2.default)(e).on('click', function () {
       var classList = (0, _jquery2.default)(e).attr('class').split(/\s+/);
       var registered = classList[2].split(/-/);
-      var add = registered[1] === 'false' ? true : false;
       var args = {
         spaceId: classList[1],
-        add: add
+        registered: registered[1]
       };
-      console.log(args);
+      _jquery2.default.post('/spaces/userspace/update', args, function (result) {
+        console.log(result);
+      });
     });
   });
 });

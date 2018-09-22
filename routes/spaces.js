@@ -41,4 +41,18 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
   });
 });
 
+router.post('/userspace/update', authenticationEnsurer, (req, res, next) => {
+  const add = req.body.registered === 'false' ? true : false;
+  if (add) {
+    UserSpace.create({
+      userId: req.user.id,
+      spaceId: req.body.spaceId
+    }).then(() => {
+      res.json({status: add});
+    });
+  } else {
+    res.json({status: add});
+  }
+});
+
 module.exports = router;
