@@ -31,6 +31,7 @@ $(window).on('load', function(){
   });
   $('.comp-space-list>.registration').each((i, e) => {
     $(e).on('click', function() {
+      const registrationIcon = $('.registration i', e);
       const classList = $(e).attr('class').split(/\s+/);
       const registered = classList[2].split(/-/);
       const args = {
@@ -38,7 +39,17 @@ $(window).on('load', function(){
         registered: registered[1]
       };
       $.post('/spaces/userspace/update', args, (result) => {
-        console.log(result);
+        if (result.action === 'add') {
+          $(e).removeClass('registered-false');
+          $(e).addClass('registered-true');
+          registrationIcon.removeClass('fa-circle'); 
+          registrationIcon.addClass('fa-check-circle'); 
+        } else {
+          $(e).removeClass('registered-true');
+          $(e).addClass('registered-false');
+          registrationIcon.removeClass('fa-check-circle'); 
+          registrationIcon.addClass('fa-circle'); 
+        }
       });
     });
   });

@@ -106,6 +106,7 @@ var overlay = (0, _jquery2.default)('.overlay');
   });
   (0, _jquery2.default)('.comp-space-list>.registration').each(function (i, e) {
     (0, _jquery2.default)(e).on('click', function () {
+      var registrationIcon = (0, _jquery2.default)('.registration i', e);
       var classList = (0, _jquery2.default)(e).attr('class').split(/\s+/);
       var registered = classList[2].split(/-/);
       var args = {
@@ -113,7 +114,17 @@ var overlay = (0, _jquery2.default)('.overlay');
         registered: registered[1]
       };
       _jquery2.default.post('/spaces/userspace/update', args, function (result) {
-        console.log(result);
+        if (result.action === 'add') {
+          (0, _jquery2.default)(e).removeClass('registered-false');
+          (0, _jquery2.default)(e).addClass('registered-true');
+          registrationIcon.removeClass('fa-circle');
+          registrationIcon.addClass('fa-check-circle');
+        } else {
+          (0, _jquery2.default)(e).removeClass('registered-true');
+          (0, _jquery2.default)(e).addClass('registered-false');
+          registrationIcon.removeClass('fa-check-circle');
+          registrationIcon.addClass('fa-circle');
+        }
       });
     });
   });
