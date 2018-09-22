@@ -7,7 +7,7 @@ const UserSpace = require('../models/userspace');
 
 router.get('/', authenticationEnsurer, (req, res, next) => {
   Space.findAll({
-      order: [['"updatedAt"', 'DESC']]
+      order: [['"updatedAt"', 'ASC']]
   }).then((spaces) => {
     UserSpace.findAll({
       where: {
