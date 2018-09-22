@@ -5,6 +5,7 @@ const authenticationEnsurer = require('./authentication-ensurer');
 const uuid = require('node-uuid');
 const User = require('../models/user');
 const Space = require('../models/space');
+const UserSpace = require('../models/userspace');
 
 router.get('/', authenticationEnsurer, (req, res, next) => {
   res.render('admin/index', {
@@ -109,6 +110,21 @@ router.get('/spaces/delete/:spaceId', authenticationEnsurer, (req, res, next) =>
     }
   }).then((space) => {
     res.redirect('/spaces/list');
+  });
+});
+
+router.get('/userspace/create', authenticationEnsurer, (req, res, next) => {
+  res.render('admin/userspacecreate', {
+    loginUser: req.user
+  });
+});
+
+router.post('/userspace/create', authenticationEnsurer, (req, res, next) => {
+  UserSpace.create({
+    userId: req.body.userId,
+    spaceId: req.body.spaceId
+  }).then((space) => {
+    res.redirect('/admin');
   });
 });
 

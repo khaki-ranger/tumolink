@@ -8,9 +8,6 @@ const Space = require('../models/space');
 const Slack = require('node-slackr');
 
 router.post('/', authenticationEnsurer, (req, res, next) => {
-  const availabilityId = uuid.v4();
-  let nowDate = new Date();
-  nowDate.setTime(nowDate.getTime() + 1000*60*60*9);
   const addHour = Number(req.body.hour);
   const addMinute = Number(req.body.minute);
   const addTotalMinute = addMinute + addHour * 60;
@@ -18,11 +15,8 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
   arrivingAt.setTime(arrivingAt.getTime() + 1000*60*60*9);
   arrivingAt.setMinutes(arrivingAt.getMinutes() + addTotalMinute);
   Availability.create({
-    availabilityId: availabilityId,
     spaceId: req.body.spaceId,
     userId: req.user.id,
-    createdAt: nowDate,
-    updatedAt: nowDate,
     arrivingAt: arrivingAt
   }).then((availability) => {
     const args = {
