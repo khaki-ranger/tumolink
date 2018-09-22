@@ -3,14 +3,40 @@ const express = require('express');
 const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
 const Space = require('../models/space');
+const UserSpace = require('../models/userspace');
 
-router.get('/list', authenticationEnsurer, (req, res, next) => {
+router.get('/', authenticationEnsurer, (req, res, next) => {
   Space.findAll({
       order: [['"updatedAt"', 'DESC']]
-    }).then((spaces) => {
-    res.render('spacelist', {
-      loginUser: req.user,
-      spaces: spaces
+  }).then((spaces) => {
+    UserSpace.findAll({
+      where: {
+        userId: req.user.id
+      }
+    }).then((userspaces) => {
+      let userSpaceArray = [];
+      userspaces.forEach((u) => {
+        userSpaceArray.push(u.spaceId);
+      });
+      let spaceArray = [];
+      spaces.forEach((s) => {
+        const spaceId = s.spaceId;
+        let registration = false;
+        if (userSpaceArray.indexOf(spaceId) >= 0) {
+          registration = !registration;
+        }
+        const obj = {
+          spaceId: spaceId,
+          spaceName: s.spaceName,
+          imgPath: s.imgPath,
+          registration: registration
+        };
+        spaceArray.push(obj);
+      });
+      res.render('spaces', {
+        loginUser: req.user,
+        spaces: spaceArray
+      });
     });
   });
 });

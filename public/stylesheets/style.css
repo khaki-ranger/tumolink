@@ -603,11 +603,23 @@ textarea.comp-ui {
 }
 .comp-space-list li {
   float: left;
+  position: relative;
 }
 .comp-space-list li .name {
   text-align: center;
   background-color: #F4511E;
   color: white;
+}
+.comp-space-list li .registration {
+  position: absolute;
+  left: .5rem;
+  top: .5rem;
+}
+.comp-space-list li .registration i {
+  color: #BF360C;
+  border: solid 5px white;
+  border-radius: 3rem;
+  background-color: white;
 }
 @media (max-width: 768px) {
 .comp-space-list li {
@@ -622,6 +634,9 @@ textarea.comp-ui {
   padding: .5rem 0;
   font-size: .8rem;
 }
+.comp-space-list li .registration i {
+  font-size: 2rem;
+}
 }
 @media (min-width: 768px) {
 .comp-space-list li {
@@ -634,6 +649,9 @@ textarea.comp-ui {
 }
 .comp-space-list li .name {
   padding: 1rem 0;
+}
+.comp-space-list li .registration i {
+  font-size: 2.5rem;
 }
 }
 /* admin-menu */
