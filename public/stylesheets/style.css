@@ -616,10 +616,10 @@ textarea.comp-ui {
   top: .5rem;
 }
 .comp-space-list li .registration i {
-  color: #BF360C;
-  border: solid 5px white;
+  color: white;
+  border: solid 5px #F4511E;
   border-radius: 3rem;
-  background-color: white;
+  background-color: #F4511E;
 }
 @media (max-width: 768px) {
 .comp-space-list li {
