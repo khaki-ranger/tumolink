@@ -48,7 +48,10 @@ router.post('/userspace/update', authenticationEnsurer, (req, res, next) => {
       userId: req.user.id,
       spaceId: req.body.spaceId
     }).then(() => {
-      res.json({action: 'add'});
+      const resFunc = function() {
+        res.json({action: 'add'})
+      };
+      setTimeout(resFunc, 1000);
     });
   } else {
     UserSpace.destroy({
@@ -57,7 +60,10 @@ router.post('/userspace/update', authenticationEnsurer, (req, res, next) => {
         spaceId: req.body.spaceId
       }
     }).then(() => {
-      res.json({action: 'remove'});
+      const resFunc = function() {
+        res.json({action: 'remove'})
+      };
+      setTimeout(resFunc, 1000);
     });
   }
 });

@@ -91,7 +91,7 @@ body {
   top: 0;
   width: 0;
   height: 0;
-  transition: background-color 500ms ease;
+  transition: background-color .5s ease;
   background-color: rgba(0, 0, 0, 0);
   z-index: -1;
 }
@@ -101,7 +101,7 @@ body {
   height: 100%;
   z-index: 100;
 }
-.modal {
+.overlay .modal {
   display: none;
   position: absolute;
   top: 0;
@@ -111,19 +111,19 @@ body {
   margin: auto;
   background: white;
 }
-.overlay.visible .modal {
+.overlay .modal.visible {
   display: block;
 }
-.modal .panel {
+.overlay .modal .panel {
   padding: 1em;
 }
-.modal .fb-login {
+.overlay .modal .fb-login {
   background-color: #4267b2;
   border: 1px solid #29487d;
   color: white;
   position: relative;
 }
-.modal .fb-login:before {
+.overlay .modal .fb-login:before {
   font-family: "Font Awesome 5 Brands";
   content: '\f39e';
   font-size: 1.25rem;
@@ -134,30 +134,29 @@ body {
   bottom: 0;
   margin: auto;
 }
-.modal .close {
+.overlay .modal .close {
   position: absolute;
   bottom: 0;
   width: 100%;
   border: none;
 }
-.modal .close:before {
+.overlay .modal .close:before {
   font-family: "Font Awesome 5 Free";
   content: '\f057';
   padding-right: .5rem;
 }
 @media (max-width: 768px) {
-.modal {
+.overlay .modal {
   width: 75%;
   height: 75%;
 }
 }
 @media (min-width: 768px) {
-.modal {
+.overlay .modal {
   width: 50%;
   height: 50%;
 }
 }
-
 /* header */
 header {
   position: fixed;

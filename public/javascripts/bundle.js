@@ -78,15 +78,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 (0, _jquery2.default)(window).on('load', function () {
   var overlay = (0, _jquery2.default)('.overlay');
+  var modal = (0, _jquery2.default)('.modal');
 
   (0, _jquery2.default)('header .login').on('click', function () {
     (0, _jquery2.default)('.pulldown-menu:not(:animated)', this).slideToggle('fast');
   });
   (0, _jquery2.default)('.nav-login').on('click', function () {
     overlay.addClass('visible');
+    modal.addClass('visible');
   });
   (0, _jquery2.default)('.overlay').on('click', function () {
     overlay.removeClass('visible');
+    modal.removeClass('visible');
   });
   (0, _jquery2.default)('.overlay .panel').on('click', function (event) {
     event.stopPropagation();
@@ -106,6 +109,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
   });
   (0, _jquery2.default)('.comp-space-list>.registration').each(function (i, e) {
     (0, _jquery2.default)(e).on('click', function () {
+      overlay.addClass('visible');
       var registrationIcon = (0, _jquery2.default)('.registration i', e);
       var classList = (0, _jquery2.default)(e).attr('class').split(/\s+/);
       var registered = classList[2].split(/-/);
@@ -125,6 +129,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
           registrationIcon.removeClass('fa-check-circle');
           registrationIcon.addClass('fa-circle');
         }
+        overlay.removeClass('visible');
       });
     });
   });

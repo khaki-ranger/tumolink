@@ -3,15 +3,18 @@ import $ from 'jquery';
 
 $(window).on('load', function(){
   const overlay = $('.overlay');
+  const modal = $('.modal');
 
   $('header .login').on('click', function() {
     $('.pulldown-menu:not(:animated)', this).slideToggle('fast');
   });
   $('.nav-login').on('click', function() {
     overlay.addClass('visible');
+    modal.addClass('visible');
   });
   $('.overlay').on('click', function() {
     overlay.removeClass('visible');
+    modal.removeClass('visible');
   });
   $('.overlay .panel').on('click', function(event) {
     event.stopPropagation();
@@ -31,6 +34,7 @@ $(window).on('load', function(){
   });
   $('.comp-space-list>.registration').each((i, e) => {
     $(e).on('click', function() {
+      overlay.addClass('visible');
       const registrationIcon = $('.registration i', e);
       const classList = $(e).attr('class').split(/\s+/);
       const registered = classList[2].split(/-/);
@@ -50,6 +54,7 @@ $(window).on('load', function(){
           registrationIcon.removeClass('fa-check-circle'); 
           registrationIcon.addClass('fa-circle'); 
         }
+        overlay.removeClass('visible');
       });
     });
   });
