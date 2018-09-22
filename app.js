@@ -29,7 +29,7 @@ var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || '283457335747265';
 var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || 'b5fed3e32295230e9f35a17d7b6d8d8e'
 
 passport.serializeUser(function (user, done) {
-  done(null, user.id);
+  done(null, user);
 });
 
 passport.deserializeUser(function (obj, done) {
