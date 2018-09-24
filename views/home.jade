@@ -3,10 +3,10 @@ extends layout
 block content
   if loginUser
     .container
+      h3.comp-head-middle
+        span マイスペース
       - var hasSpace = spaces.length > 0
       if hasSpace
-        h3.comp-head-middle
-          span マイスペース
         ul.space-list
           each space in spaces
             li(class="#{space.space.spaceId}") 
