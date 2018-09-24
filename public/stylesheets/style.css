@@ -414,6 +414,9 @@ textarea.comp-ui {
   box-sizing: border-box;
   border: solid 1px #ddd;
 }
+.comp-btn-navigate {
+  margin-bottom: 1rem;
+}
 /* space-list */
 .space-list>li {
   border: solid 1px #FFCCBC;
@@ -687,7 +690,4 @@ textarea.comp-ui {
 }
 .admin-list>li .action a.comp-ui:last-child {
   margin-left: 1rem;
-}
-.add-myspace {
-  margin-bottom: 1rem;
 }
