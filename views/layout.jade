@@ -21,7 +21,8 @@ html
               label.nav-unshown(for="nav-input") MENU
             .navigation
               nav
-                a(href="/home/") ホーム
+                if loginUser
+                  a(href="/home/") ホーム
                 a(href="/privacy/") プライバシーポリシー
                 a(href="https://www.livelynk.jp/" target="_blank") Livelynk
       .logo
