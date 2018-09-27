@@ -443,7 +443,8 @@ textarea.comp-ui {
 }
 .space-list>li .data,
 .space-list>li .action {
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
+  vertical-align: bottom;
 }
 .space-list>li .information {
   background-color: #F4511E;
@@ -468,12 +469,11 @@ textarea.comp-ui {
 .space-list>li .data .availabilities .btn-more.visible {
   display: block;
 }
-.space-list>li .action {
-  vertical-align: bottom;
-}
-.space-list>li .action .tumoli-button {
+.space-list>li .action .tumoli-button,
+.space-list>li .action .remove-button {
   background-color: #F4511E;
   color: white;
+  margin-bottom: 1rem;
 }
 .space-list>li .data .availabilities .head span {
   padding-left: .25rem;
@@ -536,8 +536,11 @@ textarea.comp-ui {
 }
 .space-list>li .action .plans {
   display: table;
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
   width: 100%;
+}
+.space-list>li .action .behavior {
+  margin-bottom: 1rem;
 }
 .space-list>li .action .plans .value,
 .space-list>li .action .plans .unit {
