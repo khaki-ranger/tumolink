@@ -17,7 +17,8 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
   Availability.create({
     spaceId: req.body.spaceId,
     userId: req.user.id,
-    arrivingAt: arrivingAt
+    arrivingAt: arrivingAt,
+    visibility: true
   }).then((availability) => {
     const args = {
       spaceId: req.body.spaceId,

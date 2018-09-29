@@ -20,6 +20,10 @@ const Availability = loader.database.define('availabilities', {
   arrivingAt: {
     type: Sequelize.DATE,
     allowNull: true
+  },
+  visibility: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false
   }
 }, {
   freezeTableName: true,
