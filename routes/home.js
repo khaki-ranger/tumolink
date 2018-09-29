@@ -28,6 +28,9 @@ router.get('/', function(req, res, next) {
             attributes: ['userId', 'username', 'photoUrl']
           }
         ],
+        where: {
+          visibility: true
+        },
         order: [['"arrivingAt"', 'ASC']]
       }).then((availabilities) => {
         let now = new Date();
@@ -84,15 +87,6 @@ router.get('/', function(req, res, next) {
                   branchPoint: branchPoint
                 }
                 availabilityArray.push(availabilityObj);
-                for (let i = 0; i < availabilityArray.length; i++) {
-                  if (availabilityArray[i].userId === a.userId) {
-                    if (a.updatedAt.getTime() > availabilityArray[i].updatedAt.getTime()) {
-                      availabilityArray.splice(i, 1);
-                    } else if (a.updatedAt.getTime() < availabilityArray[i].updatedAt.getTime()) {
-                      availabilityArray.pop();
-                    }
-                  }
-                }
                 if (req.user.id === availabilityObj.userId) {
                   availabilityUserFlag = true;
                 }
@@ -111,7 +105,6 @@ router.get('/', function(req, res, next) {
         res.render('home', {
           loginUser: req.user,
           spaces: userspaces,
-          hours : hours,
           hours : hours,
           minutes: minutes,
           behavior: behavior
