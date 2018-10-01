@@ -45,4 +45,6 @@ block content
                           option(value="#{value}") #{value}
                     .unit.minute 分後
                   button.tumoli-button.comp-ui(type="submit", name="action", value="tumoli") ツモリ
+                  if space.availabilityUserFlag
+                    button.tumoli-button.bel-button.comp-ui(type="submit", name="action", value="del") 取り消し
       a.comp-ui.comp-btn-navigate(href="/spaces/") マイスペースを追加
