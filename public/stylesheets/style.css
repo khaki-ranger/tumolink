@@ -223,8 +223,8 @@ header .profile-img {
 } 
 header .nav-login {
   cursor: pointer;
+  font-weight: bold;
 }
-
 /* nav-drawer */
 #nav-drawer {
   position: relative;
