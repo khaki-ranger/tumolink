@@ -8,6 +8,7 @@ const UserSpace = require('../models/userspace');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  const title = 'ホーム | ツモリンク';
   if (req.user) {
     UserSpace.findAll({
       include: [
@@ -103,6 +104,7 @@ router.get('/', function(req, res, next) {
         const minutes = ['00', '10', '20', '30', '40', '50'];
         const behavior = ['行く'];
         res.render('home', {
+          title: title,
           loginUser: req.user,
           spaces: userspaces,
           hours : hours,

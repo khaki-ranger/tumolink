@@ -6,6 +6,7 @@ const Space = require('../models/space');
 const UserSpace = require('../models/userspace');
 
 router.get('/', authenticationEnsurer, (req, res, next) => {
+  const title = 'マイスペースを追加 | ツモリンク';
   Space.findAll({
       order: [['"updatedAt"', 'ASC']]
   }).then((spaces) => {
@@ -34,6 +35,7 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
         spaceArray.push(obj);
       });
       res.render('spaces', {
+        title: title,
         loginUser: req.user,
         spaces: spaceArray
       });
