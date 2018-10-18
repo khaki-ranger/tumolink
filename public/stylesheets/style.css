@@ -460,13 +460,13 @@ textarea.comp-ui {
 }
 .space-list>li .information .livelynk {
   position: absolute;
-  left: .5rem;
-  top: .5rem;
   display: inline-block;
   background-color: #558B2F;
   color: white;
   border-radius: 1rem;
-  padding: .25rem .5rem;
+}
+.space-list>li .information .livelynk i {
+  padding-left: .5rem;
 }
 .space-list>li .data .availabilities ul {
   max-height: 152px;
@@ -590,6 +590,12 @@ textarea.comp-ui {
 .space-list>li .action .plans .unit.minute {
   width: 12%;
 }
+.space-list>li .information .livelynk {
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  left: 1rem;
+  top: 1rem;
+}
 }
 @media (min-width: 768px) {
 .space-list>li {
@@ -623,6 +629,11 @@ textarea.comp-ui {
 }
 .space-list>li .action .plans .unit.minute {
   width: 18%;
+}
+.space-list>li .information .livelynk {
+  left: .5rem;
+  top: .5rem;
+  padding: .25rem .5rem;
 }
 }
 /* form-spaces */
