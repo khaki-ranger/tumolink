@@ -24,6 +24,10 @@ const Space = loader.database.define('spaces', {
     type: Sequelize.STRING,
     allowNull: true
   },
+  livelynkUrl : {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
   createdBy: {
     type: Sequelize.BIGINT,
     allowNull: false

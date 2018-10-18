@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
       include: [
         {
           model: Space,
-          attributes: ['spaceId', 'spaceName', 'imgPath']
+          attributes: ['spaceId', 'spaceName', 'imgPath', 'livelynkUrl']
         }
       ],
       where: {

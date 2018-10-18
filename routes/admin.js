@@ -90,6 +90,7 @@ router.post('/spaces/update/:spaceId', authenticationEnsurer, (req, res, next) =
     imgPath: req.body.imgPath,
     slackWebhookURL: req.body.slackWebhookURL,
     slackChannel: req.body.slackChannel,
+    livelynkUrl: req.body.livelynkUrl,
     updatedAt: updatedAt
   };
   const filter = {
