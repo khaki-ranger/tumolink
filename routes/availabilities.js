@@ -50,7 +50,8 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
             if (req.body.availabilityUserFlag !== 'false') {
               message += 'やっぱり';
             }
-            message += arrivingAt.getHours() + '時' + arrivingAt.getMinutes() + '分頃に、' + space.spaceName + 'に行くツモリンク！」';
+            const minutes = arrivingAt.getMinutes() === 0 ? '00' : arrivingAt.getMinutes(); 
+            message += arrivingAt.getHours() + ':' + minutes + '頃に、' + space.spaceName + 'に行くツモリンク！」';
             const slackMessage = {
               text: message,
               channel: space.slackChannel,

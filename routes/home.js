@@ -61,9 +61,9 @@ router.get('/', function(req, res, next) {
               }
               if(nowObj.year === arrivingAtObj.year && nowObj.month === arrivingAtObj.month && nowObj.date === arrivingAtObj.date) {
                 let rightNow = false;
-                let arrivingAtText = '';
                 let userStatus = undefined;
-                arrivingAtText = arrivingAtObj.hours + ' 時 ' + arrivingAtObj.minutes + ' 分頃';
+                const minutes = arrivingAtObj.minutes === 0 ? '00' : arrivingAtObj.minutes; 
+                const arrivingAtText = arrivingAtObj.hours + ':' + minutes + ' -';
                 let diffMinutes = arrivingAtObj.minutes - nowObj.minutes;
                 const diffHours = arrivingAtObj.hours - nowObj.hours;
                 diffMinutes += diffHours * 60;
