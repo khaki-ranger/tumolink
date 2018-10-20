@@ -178,6 +178,7 @@ header .login {
 header .menu {
   text-align: left;
   width: 40%;
+  padding-top: 5px;
 }
 header .logo {
   text-align: center;
@@ -187,6 +188,7 @@ header .login {
   text-align: right;
   width: 40%;
   position: relative;
+  padding-top: 4px;
 }
 header .logo img {
   height: 40px;
