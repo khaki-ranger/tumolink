@@ -62,7 +62,7 @@ router.get('/', function(req, res, next) {
               if(nowObj.year === arrivingAtObj.year && nowObj.month === arrivingAtObj.month && nowObj.date === arrivingAtObj.date) {
                 let rightNow = false;
                 let userStatus = undefined;
-                const minutes = arrivingAtObj.minutes === 0 ? '00' : arrivingAtObj.minutes; 
+                const minutes = ('0' + arrivingAtObj.minutes).slice(-2); 
                 const arrivingAtText = arrivingAtObj.hours + ':' + minutes + ' -';
                 let diffMinutes = arrivingAtObj.minutes - nowObj.minutes;
                 const diffHours = arrivingAtObj.hours - nowObj.hours;
