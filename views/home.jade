@@ -8,7 +8,7 @@ block content
       - var hasSpace = spaces.length > 0
       if hasSpace
         ul.space-list
-          each space in spaces
+          each space, index in spaces
             li(class="#{space.space.spaceId}") 
               .information 
                 .photo
@@ -20,15 +20,14 @@ block content
               .data
                 .availabilities
                   .head 今日のツモリスト
-                    span #{space.availabilities.length}
-                    &nbsp;人
+                    span #{space.availabilities.length} 人
                   ul.body
                     each availability in space.availabilities
                       li.availability(class="#{availability.branchPoint}")
                         .photo
                           img.profile-img(src="#{availability.photoUrl}")
                         .name #{availability.username}
-                        .arriving #{availability.arrivingAt}
+                        .arriving #{availability.arrivingAt} #{availability.leavingAt}
                         if availability.branchPoint
                           span.now Now
                   i.fas.fa-chevron-down.btn-more
@@ -47,6 +46,12 @@ block content
                         each value in minutes
                           option(value="#{value}") #{value}
                     .unit.minute 分後
+                  if space.availabilityUserFlag
+                    .redio-block
+                      input(type="radio", name="direction", value="arriving", id="direction_arriving_#{index}", checked="checked")
+                      label(for="direction_arriving_#{index}") 行く
+                      input(type="radio", name="direction", value="leaving", id="direction_leaving_#{index}")
+                      label(for="direction_leaving_#{index}") 帰る
                   button.tumoli-button.comp-ui(type="submit", name="action", value="tumoli") ツモリ
                   if space.availabilityUserFlag
                     button.tumoli-button.bel-button.comp-ui(type="submit", name="action", value="del") 取り消し

@@ -62,8 +62,8 @@ router.get('/', function(req, res, next) {
               if(nowObj.year === arrivingAtObj.year && nowObj.month === arrivingAtObj.month && nowObj.date === arrivingAtObj.date) {
                 let rightNow = false;
                 let userStatus = undefined;
-                const minutes = ('0' + arrivingAtObj.minutes).slice(-2); 
-                const arrivingAtText = arrivingAtObj.hours + ':' + minutes + ' -';
+                const arrivingAtMinutes = ('0' + arrivingAtObj.minutes).slice(-2); 
+                const arrivingAtText = arrivingAtObj.hours + ':' + arrivingAtMinutes + ' -';
                 let diffMinutes = arrivingAtObj.minutes - nowObj.minutes;
                 const diffHours = arrivingAtObj.hours - nowObj.hours;
                 diffMinutes += diffHours * 60;
@@ -78,11 +78,22 @@ router.get('/', function(req, res, next) {
                 } else {
                   branchPoint = '';
                 }
+                const leavingAt = a.leavingAt;
+                let leavingAtText = undefined;
+                if (leavingAt) {
+                  const leavingAtObj = {
+                    hours: leavingAt.getHours(),
+                    minutes: leavingAt.getMinutes()
+                  }
+                  const leavingAtMinutes = ('0' + leavingAtObj.minutes).slice(-2); 
+                  leavingAtText = leavingAtObj.hours + ':' + leavingAtMinutes;
+                }
                 const availabilityObj = {
                   userId: a.userId,
                   username: a.user.username,
                   photoUrl: a.user.photoUrl,
                   arrivingAt: arrivingAtText,
+                  leavingAt: leavingAtText,
                   updatedAt: a.updatedAt,
                   userStatus: userStatus,
                   branchPoint: branchPoint

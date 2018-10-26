@@ -21,6 +21,10 @@ const Availability = loader.database.define('availabilities', {
     type: Sequelize.DATE,
     allowNull: true
   },
+  leavingAt: {
+    type: Sequelize.DATE,
+    allowNull: true
+  },
   visibility: {
     type: Sequelize.BOOLEAN,
     allowNull: false

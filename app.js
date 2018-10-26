@@ -21,7 +21,10 @@ User.sync().then(() => {
     UserSpace.belongsTo(Space, {foreignKey: 'spaceId' });
     UserSpace.sync();
     Availability.belongsTo(User, {foreignKey: 'userId' });
-    Availability.sync();
+    Availability.sync({
+      force: false,
+      alter:true
+    });
   });
 });
 
