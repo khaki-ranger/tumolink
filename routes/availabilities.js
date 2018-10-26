@@ -18,15 +18,9 @@ function setTime(args) {
 }
 
 router.post('/', authenticationEnsurer, (req, res, next) => {
+  const action = req.body.action;
   const direction = req.body.direction;
-  if (direction === 'leaving') { // 「帰るツモリ」の場合
-    const args = {
-      hour: req.body.hour,
-      minute: req.body.minute,
-    };
-    const param = {
-      leavingAt: setTime(args)
-    };
+  if (action !== 'del' && direction) {
     const filter = {
       where: {
         visibility: true,
@@ -34,11 +28,43 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
         userId: req.user.id
       }
     };
-    Availability.update(param, filter).then(() => {
-      res.redirect('/home');
+    Availability.findOne(filter).then((availability) => {
+      const availabilityId = availability.availabilityId;
+      const dateObj = {
+        arrivingAt: availability.arrivingAt,
+        leavingAt: availability.leavingAt
+      };
+      const param = {
+        visibility: false
+      };
+      const filter = {
+        where: {
+          availabilityId: availabilityId 
+        }
+      };
+      Availability.update(param, filter).then(() => {
+        const args = {
+          hour: req.body.hour,
+          minute: req.body.minute,
+        };
+        if (direction === 'arriving') {
+          dateObj.arrivingAt = setTime(args);
+        } else {
+          dateObj.leavingAt = setTime(args);
+        }
+        const arrivingAt = setTime(args);
+        Availability.create({
+          spaceId: req.body.spaceId,
+          userId: req.user.id,
+          arrivingAt: dateObj.arrivingAt,
+          leavingAt: dateObj.leavingAt,
+          visibility: true
+        }).then((availability) => {
+          res.redirect('/home');
+        });
+      });
     });
-  } else { // 「行くツモリ」の場合
-    const action = req.body.action;
+  } else {
     const param = {
       visibility: false
     };
