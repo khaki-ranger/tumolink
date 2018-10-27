@@ -16,7 +16,7 @@ function postSlack(args, callback) {
     if (space.slackWebhookURL) {
       const webhookURL = space.slackWebhookURL;
       const slack = new Slack(webhookURL);
-      const prefix = args.availabilityUserFlag !== 'false' ? 'やっぱり' : '';
+      const prefix = args.direction === 'arriving' || args.leavingAtPrev ? 'やっぱり': '';
       const time = args.direction === 'leaving' ? args.leavingAt : args.arrivingAt;
       const minutes = ('0' + time.getMinutes()).slice(-2); 
       const direction = args.direction === 'leaving' ? 'から帰る' : 'に行く';
@@ -67,6 +67,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
         arrivingAt: availability.arrivingAt,
         leavingAt: availability.leavingAt
       };
+      const leavingAtPrev = dateObj.leavingAt;
       const param = {
         visibility: false
       };
@@ -100,7 +101,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
             direction: direction,
             arrivingAt: dateObj.arrivingAt,
             leavingAt: dateObj.leavingAt,
-            availabilityUserFlag: req.body.availabilityUserFlag
+            leavingAtPrev : leavingAtPrev
           };
           postSlack(params, (error, result) => {
             if(error) {
