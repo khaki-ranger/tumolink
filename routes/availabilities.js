@@ -7,6 +7,39 @@ const Availability = require('../models/availability');
 const Space = require('../models/space');
 const Slack = require('node-slackr');
 
+function postSlack(args, callback) {
+  Space.findOne({
+    where: {
+      spaceId: args.spaceId
+    }
+  }).then((space) => {
+    if (space.slackWebhookURL) {
+      const webhookURL = space.slackWebhookURL;
+      const slack = new Slack(webhookURL);
+      const prefix = args.availabilityUserFlag !== 'false' ? 'やっぱり' : '';
+      const time = args.direction === 'leaving' ? args.leavingAt : args.arrivingAt;
+      const minutes = ('0' + time.getMinutes()).slice(-2); 
+      const direction = args.direction === 'leaving' ? 'から帰る' : 'に行く';
+      const message = args.username + '「' + prefix + time.getHours() + ':' + minutes + '頃に、' + space.spaceName + direction + 'ツモリンク！」';
+      const slackMessage = {
+        text: message,
+        channel: space.slackChannel,
+        username: args.username,
+        icon_url: args.profileImg
+      };
+      slack.notify(slackMessage, function(error, result){
+        if (error) {
+          callback(error);
+        } else {
+          callback(null, result);
+        }
+      });
+    } else {
+      callback();
+    }
+  });
+}
+
 function setTime(args) {
   const addHour = Number(args.hour);
   const addMinute = Number(args.minute);
@@ -59,8 +92,22 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
           arrivingAt: dateObj.arrivingAt,
           leavingAt: dateObj.leavingAt,
           visibility: true
-        }).then((availability) => {
-          res.redirect('/home');
+        }).then(() => {
+          const params = {
+            spaceId: req.body.spaceId,
+            username: req.user.displayName,
+            profileImg: req.user.photos[0].value,
+            direction: direction,
+            arrivingAt: dateObj.arrivingAt,
+            leavingAt: dateObj.leavingAt,
+            availabilityUserFlag: req.body.availabilityUserFlag
+          };
+          postSlack(params, (error, result) => {
+            if(error) {
+              console.log('error: ' + error);
+            }
+            res.redirect('/home');
+          });
         });
       });
     });
@@ -87,43 +134,20 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
           arrivingAt: arrivingAt,
           visibility: true
         }).then((availability) => {
-          const args = {
+          const params = {
             spaceId: req.body.spaceId,
             username: req.user.displayName,
-            profileImg: req.user.photos[0].value
+            profileImg: req.user.photos[0].value,
+            direction: direction,
+            arrivingAt: arrivingAt,
+            leavingAt: undefined,
+            availabilityUserFlag: req.body.availabilityUserFlag
           };
-          // Slack 通知
-          Space.findOne({
-            where: {
-              spaceId: req.body.spaceId
+          postSlack(params, (error, result) => {
+            if(error) {
+              console.log('error: ' + error);
             }
-          }).then((space) => {
-            if (space.slackWebhookURL) {
-              const webhookURL = space.slackWebhookURL;
-              const slack = new Slack(webhookURL);
-              let message = args.username + '「';
-              if (req.body.availabilityUserFlag !== 'false') {
-                message += 'やっぱり';
-              }
-              const minutes = ('0' + arrivingAt.getMinutes()).slice(-2); 
-              message += arrivingAt.getHours() + ':' + minutes + '頃に、' + space.spaceName + 'に行くツモリンク！」';
-              const slackMessage = {
-                text: message,
-                channel: space.slackChannel,
-                username: args.username,
-                icon_url: args.profileImg
-              };
-              slack.notify(slackMessage, function(err, result){
-                if (err) {
-                  console.log('error... ' + err);
-                } else {
-                  console.log('success! ' + result);
-                }
-                res.redirect('/home');
-              });
-            } else {
-              res.redirect('/home');
-            }
+            res.redirect('/home');
           });
         });
       } else {
