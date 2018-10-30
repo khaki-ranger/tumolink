@@ -390,6 +390,7 @@ header .nav-login {
 }
 .radio-block label:first-of-type {
   border-radius: 3px 0 0 3px / 3px 0 0 3px;
+  border-right: none;
 }
 .radio-block label:last-of-type {
   border-radius: 0 3px 3px 0 / 0 3px 3px 0;
