@@ -447,6 +447,7 @@ textarea.comp-ui {
   margin-bottom: 1rem;
 }
 @media (max-width: 768px) {
+.radio-block label,
 a.comp-ui,
 button.comp-ui,
 input.comp-ui,
@@ -456,6 +457,7 @@ textarea.comp-ui {
 }
 }
 @media (min-width: 768px) {
+.radio-block label,
 a.comp-ui,
 button.comp-ui,
 input.comp-ui,
