@@ -372,17 +372,33 @@ header .nav-login {
 .form-elem {
   margin-bottom: 1.5em;
 }
-.redio-block {
+.radio-block {
   display: table;
   width: 100%;
   margin-bottom: 1rem;
 }
-.redio-block input[type="radio"],
-.redio-block label {
+.radio-block input[type="radio"],
+.radio-block label {
   display: table-cell;
 }
-.redio-block input[type="radio"] {
-  margin: 0;
+.radio-block input[type="radio"] {
+  display: none;
+}
+.radio-block label {
+  border: solid 1px #FFCCBC;
+  padding: .25rem 0;
+}
+.radio-block label:first-of-type {
+  border-radius: 3px 0 0 3px / 3px 0 0 3px;
+}
+.radio-block label:last-of-type {
+  border-radius: 0 3px 3px 0 / 0 3px 3px 0;
+  border-left: none;
+}
+.radio-block input[type="radio"]:checked + label {
+  border-color: #F4511E;
+  background-color: #F4511E;
+  color: #ffffff;
 }
 label.comp-ui {
   font-weight: bold;
