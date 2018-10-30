@@ -7,7 +7,7 @@ const Availability = require('../models/availability');
 const Space = require('../models/space');
 const Slack = require('node-slackr');
 
-function postSlack(args, callback) {
+function postSlack(args) {
   Space.findOne({
     where: {
       spaceId: args.spaceId
@@ -29,13 +29,11 @@ function postSlack(args, callback) {
       };
       slack.notify(slackMessage, function(error, result){
         if (error) {
-          callback(error);
+          console.log(error);
         } else {
-          callback(null, result);
+          console.log(result);
         }
       });
-    } else {
-      callback();
     }
   });
 }
@@ -103,12 +101,8 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
             leavingAt: dateObj.leavingAt,
             leavingAtPrev : leavingAtPrev
           };
-          postSlack(params, (error, result) => {
-            if(error) {
-              console.log('error: ' + error);
-            }
-            res.redirect('/home');
-          });
+          res.redirect('/home');
+          postSlack(params);
         });
       });
     });
@@ -144,12 +138,8 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
             leavingAt: undefined,
             availabilityUserFlag: req.body.availabilityUserFlag
           };
-          postSlack(params, (error, result) => {
-            if(error) {
-              console.log('error: ' + error);
-            }
-            res.redirect('/home');
-          });
+          res.redirect('/home');
+          postSlack(params);
         });
       } else {
         res.redirect('/home');
