@@ -12,7 +12,7 @@ const User = loader.database.define('users', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  displayName: {
+  nickname: {
     type: Sequelize.STRING,
     allowNull: true
   },

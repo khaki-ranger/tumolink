@@ -26,8 +26,8 @@ block content
                       li.availability(class="#{availability.branchPoint}")
                         .photo
                           img.profile-img(src="#{availability.photoUrl}")
-                        if availability.displayName
-                          .name #{availability.displayName}
+                        if availability.nickname
+                          .name #{availability.nickname}
                         else
                           .name #{availability.username}
                         .arriving #{availability.arrivingAt} #{availability.leavingAt}

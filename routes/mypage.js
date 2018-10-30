@@ -34,7 +34,7 @@ router.get('/edit', authenticationEnsurer, (req, res, next) => {
 
 router.post('/edit/:userId', authenticationEnsurer, (req, res, next) => {
   const param = {
-    displayName: req.body.displayName
+    nickname: req.body.nickname
   };
   const filter = {
     where: {

@@ -14,7 +14,7 @@ function postSlack(args) {
       userId: args.userId
     }
   }).then((user) => {
-    const username = user.displayName ? user.displayName : user.username;
+    const username = user.nickname ? user.nickname : user.username;
     Space.findOne({
       where: {
         spaceId: args.spaceId
