@@ -4,42 +4,50 @@ const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
 const uuid = require('node-uuid');
 const Availability = require('../models/availability');
+const User = require('../models/user');
 const Space = require('../models/space');
 const Slack = require('node-slackr');
 
 function postSlack(args) {
-  Space.findOne({
+  User.findOne({
     where: {
-      spaceId: args.spaceId
+      userId: args.userId
     }
-  }).then((space) => {
-    if (space.slackWebhookURL) {
-      const webhookURL = space.slackWebhookURL;
-      const slack = new Slack(webhookURL);
-      let message = '';
-      if (args.action === 'del') {
-        message = args.username + '「やっぱり' + space.spaceName  + 'に行くのをやめる」';
-      } else {
-        const prefix = args.direction === 'arriving' || args.leavingAtPrev ? 'やっぱり': '';
-        const time = args.direction === 'leaving' ? args.leavingAt : args.arrivingAt;
-        const minutes = ('0' + time.getMinutes()).slice(-2); 
-        const direction = args.direction === 'leaving' ? 'から帰る' : 'に行く';
-        message = args.username + '「' + prefix + time.getHours() + ':' + minutes + '頃に、' + space.spaceName + direction + 'ツモリンク！」';
+  }).then((user) => {
+    const username = user.displayName ? user.displayName : user.username;
+    Space.findOne({
+      where: {
+        spaceId: args.spaceId
       }
-      const slackMessage = {
-        text: message,
-        channel: space.slackChannel,
-        username: args.username,
-        icon_url: args.profileImg
-      };
-      slack.notify(slackMessage, function(error, result){
-        if (error) {
-          console.log(error);
+    }).then((space) => {
+      if (space.slackWebhookURL) {
+        const webhookURL = space.slackWebhookURL;
+        const slack = new Slack(webhookURL);
+        let message = '';
+        if (args.action === 'del') {
+          message = username + '「やっぱり' + space.spaceName  + 'に行くのをやめる」';
         } else {
-          console.log(result);
+          const prefix = args.direction === 'arriving' || args.leavingAtPrev ? 'やっぱり': '';
+          const time = args.direction === 'leaving' ? args.leavingAt : args.arrivingAt;
+          const minutes = ('0' + time.getMinutes()).slice(-2); 
+          const direction = args.direction === 'leaving' ? 'から帰る' : 'に行く';
+          message = username + '「' + prefix + time.getHours() + ':' + minutes + '頃に、' + space.spaceName + direction + 'ツモリンク！」';
         }
-      });
-    }
+        const slackMessage = {
+          text: message,
+          channel: space.slackChannel,
+          username: username,
+          icon_url: args.profileImg
+        };
+        slack.notify(slackMessage, function(error, result){
+          if (error) {
+            console.log(error);
+          } else {
+            console.log(result);
+          }
+        });
+      }
+    });
   });
 }
 
@@ -99,7 +107,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
         }).then(() => {
           const params = {
             spaceId: req.body.spaceId,
-            username: req.user.displayName,
+            userId: req.user.id,
             profileImg: req.user.photos[0].value,
             action: action,
             direction: direction,
@@ -137,7 +145,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
         }).then((availability) => {
           const params = {
             spaceId: req.body.spaceId,
-            username: req.user.displayName,
+            userId: req.user.id,
             profileImg: req.user.photos[0].value,
             action: action,
             direction: direction,
@@ -150,7 +158,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
       } else {
         const params = {
           spaceId: req.body.spaceId,
-          username: req.user.displayName,
+          userId: req.user.id,
           profileImg: req.user.photos[0].value,
           action: action,
           direction: direction,

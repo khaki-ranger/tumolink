@@ -12,20 +12,23 @@ var User = require('./models/user');
 var Space = require('./models/space');
 var UserSpace = require('./models/userspace');
 var Availability = require('./models/availability');
-User.sync().then(() => {
-  Space.sync({
+User.sync({
     force: false,
     alter:true
   }).then(() => {
-    UserSpace.belongsTo(User, {foreignKey: 'userId' });
-    UserSpace.belongsTo(Space, {foreignKey: 'spaceId' });
-    UserSpace.sync();
-    Availability.belongsTo(User, {foreignKey: 'userId' });
-    Availability.sync({
+    Space.sync({
       force: false,
       alter:true
+    }).then(() => {
+      UserSpace.belongsTo(User, {foreignKey: 'userId' });
+      UserSpace.belongsTo(Space, {foreignKey: 'spaceId' });
+      UserSpace.sync();
+      Availability.belongsTo(User, {foreignKey: 'userId' });
+      Availability.sync({
+        force: false,
+        alter:true
+      });
     });
-  });
 });
 
 var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || '283457335747265';

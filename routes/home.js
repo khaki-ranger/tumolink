@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
         include: [
           {
             model: User,
-            attributes: ['userId', 'username', 'photoUrl']
+            attributes: ['userId', 'username', 'displayName', 'photoUrl']
           }
         ],
         where: {
@@ -91,6 +91,7 @@ router.get('/', function(req, res, next) {
                 const availabilityObj = {
                   userId: a.userId,
                   username: a.user.username,
+                  displayName: a.user.displayName,
                   photoUrl: a.user.photoUrl,
                   arrivingAt: arrivingAtText,
                   leavingAt: leavingAtText,

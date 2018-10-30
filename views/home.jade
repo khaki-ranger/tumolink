@@ -26,7 +26,10 @@ block content
                       li.availability(class="#{availability.branchPoint}")
                         .photo
                           img.profile-img(src="#{availability.photoUrl}")
-                        .name #{availability.username}
+                        if availability.displayName
+                          .name #{availability.displayName}
+                        else
+                          .name #{availability.username}
                         .arriving #{availability.arrivingAt} #{availability.leavingAt}
                         if availability.branchPoint
                           span.now Now

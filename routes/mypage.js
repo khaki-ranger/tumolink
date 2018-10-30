@@ -18,4 +18,33 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
   });
 });
 
+router.get('/edit', authenticationEnsurer, (req, res, next) => {
+  const title = 'ユーザー情報編集 | ツモリンク';
+  User.findOne({
+    where: {
+      userId: req.user.id
+    }
+  }).then((user) => {
+    res.render('mypage/edit', {
+      loginUser: req.user,
+      user: user
+    });
+  });
+});
+
+router.post('/edit/:userId', authenticationEnsurer, (req, res, next) => {
+  const param = {
+    displayName: req.body.displayName
+  };
+  const filter = {
+    where: {
+      userId: req.params.userId,
+    }
+  }
+  User.update(param, filter)
+  .then(() => {
+    res.redirect('/home');
+  });
+});
+
 module.exports = router;

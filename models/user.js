@@ -12,6 +12,10 @@ const User = loader.database.define('users', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  displayName: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
   profileUrl: {
     type: Sequelize.STRING,
     allowNull: true
