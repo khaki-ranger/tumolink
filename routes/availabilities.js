@@ -16,11 +16,16 @@ function postSlack(args) {
     if (space.slackWebhookURL) {
       const webhookURL = space.slackWebhookURL;
       const slack = new Slack(webhookURL);
-      const prefix = args.direction === 'arriving' || args.leavingAtPrev ? 'やっぱり': '';
-      const time = args.direction === 'leaving' ? args.leavingAt : args.arrivingAt;
-      const minutes = ('0' + time.getMinutes()).slice(-2); 
-      const direction = args.direction === 'leaving' ? 'から帰る' : 'に行く';
-      const message = args.username + '「' + prefix + time.getHours() + ':' + minutes + '頃に、' + space.spaceName + direction + 'ツモリンク！」';
+      let message = '';
+      if (args.action === 'del') {
+        message = args.username + '「やっぱり' + space.spaceName  + 'に行くのをやめる」';
+      } else {
+        const prefix = args.direction === 'arriving' || args.leavingAtPrev ? 'やっぱり': '';
+        const time = args.direction === 'leaving' ? args.leavingAt : args.arrivingAt;
+        const minutes = ('0' + time.getMinutes()).slice(-2); 
+        const direction = args.direction === 'leaving' ? 'から帰る' : 'に行く';
+        message = args.username + '「' + prefix + time.getHours() + ':' + minutes + '頃に、' + space.spaceName + direction + 'ツモリンク！」';
+      }
       const slackMessage = {
         text: message,
         channel: space.slackChannel,
@@ -96,6 +101,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
             spaceId: req.body.spaceId,
             username: req.user.displayName,
             profileImg: req.user.photos[0].value,
+            action: action,
             direction: direction,
             arrivingAt: dateObj.arrivingAt,
             leavingAt: dateObj.leavingAt,
@@ -133,16 +139,26 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
             spaceId: req.body.spaceId,
             username: req.user.displayName,
             profileImg: req.user.photos[0].value,
+            action: action,
             direction: direction,
             arrivingAt: arrivingAt,
-            leavingAt: undefined,
-            availabilityUserFlag: req.body.availabilityUserFlag
+            leavingAt: undefined
           };
           res.redirect('/home');
           postSlack(params);
         });
       } else {
+        const params = {
+          spaceId: req.body.spaceId,
+          username: req.user.displayName,
+          profileImg: req.user.photos[0].value,
+          action: action,
+          direction: direction,
+          arrivingAt: undefined,
+          leavingAt: undefined
+        };
         res.redirect('/home');
+        postSlack(params);
       }
     });
   }
