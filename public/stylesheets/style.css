@@ -386,7 +386,7 @@ header .nav-login {
 }
 .radio-block label {
   border: solid 1px #FFCCBC;
-  padding: .25rem 0;
+  padding: .5rem 0;
 }
 .radio-block label:first-of-type {
   border-radius: 3px 0 0 3px / 3px 0 0 3px;
