@@ -227,6 +227,12 @@ header .nav-login {
   cursor: pointer;
   font-weight: bold;
 }
+@media (max-width: 768px) {
+header .login .pulldown-menu {
+  width: 115%;
+  right: 1rem;
+}
+}
 /* nav-drawer */
 #nav-drawer {
   position: relative;

@@ -5,13 +5,13 @@ block content
     form(method="post", action="/mypage/edit/#{user.userId}")
       .form-spaces
         .form-elem
-          label.comp-ui ユーザー名
+          label.comp-ui ユーザーネーム
           p #{user.username}
-        .form-elem
-          label.comp-ui Photo
-          p
-            img(src="#{user.photoUrl}")
         .form-elem
           label.comp-ui(id="nickname") ニックネーム
             input.comp-ui(type="text", name="nickname", value="#{user.nickname}", id="nickname")
+        .form-elem
+          label.comp-ui 画像
+          p
+            img(src="#{user.photoUrl}")
         button.comp-ui(type="submit") 更新
