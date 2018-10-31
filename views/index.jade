@@ -9,12 +9,12 @@ block content
     if hasSpace
       h3.comp-head-middle
         span スペース一覧
-      ul.comp-space-list.clearfix
-        each space in spaces
-          li(class="#{space.spaceId}") 
+      #app
+        ul.comp-space-list.clearfix
+          li(v-for="space in spaces", v-bind:key="space.spaceId")
             .photo
-              img.responsive-img(src="#{space.imgPath}")
-            .name #{space.spaceName}
+              img.responsive-img(v-bind:src="space.imgPath")
+            .name {{space.spaceName}}
     h3.comp-head-middle
       span ツモリンクとは
     .description

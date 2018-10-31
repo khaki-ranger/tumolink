@@ -43,6 +43,14 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
   });
 });
 
+router.get('/list', (req, res, next) => {
+  Space.findAll({
+      order: [['"updatedAt"', 'ASC']]
+  }).then((spaces) => {
+    res.json(spaces);
+  });
+});
+
 router.post('/userspace/update', authenticationEnsurer, (req, res, next) => {
   const add = req.body.registered === 'false' ? true : false;
   if (add) {
