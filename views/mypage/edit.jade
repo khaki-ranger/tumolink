@@ -12,7 +12,11 @@ block content
             input.comp-ui(type="text", name="nickname", value="#{user.nickname}", id="nickname")
         .form-elem
           label.comp-ui アイコン画像
+            if user.thumbnailPath
+              p.thumb
+                img.responsive-img(src="#{user.thumbnailPath}")
+            else
+              p.thumb
+                img.responsive-img(src="#{user.photoUrl}")
             input.comp-ui(type="file", name="thumbnail", id="thumbnail")
-            p
-              img(src="#{user.thumbnailPath}")
         button.comp-ui(type="submit") 更新

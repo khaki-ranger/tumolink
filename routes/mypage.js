@@ -46,8 +46,10 @@ router.post('/edit/:userId', authenticationEnsurer, (req, res, next) => {
     } else {
       const param = {
         nickname: req.body.nickname,
-        thumbnailPath: thumbnailPath + req.file.filename
       };
+      if (req.file) {
+        param.thumbnailPath = thumbnailPath + req.file.filename
+      }
       const filter = {
         where: {
           userId: req.params.userId,

@@ -378,6 +378,9 @@ header .login .pulldown-menu {
 .form-elem {
   margin-bottom: 1.5em;
 }
+.form-elem .thumb {
+  width: 200px;
+}
 .radio-block {
   display: table;
   width: 100%;
@@ -410,6 +413,12 @@ header .login .pulldown-menu {
 label.comp-ui {
   font-weight: bold;
 }
+label>input[type="text"].comp-ui,
+label>select.comp-ui,
+label>textarea.comp-ui,
+.form-elem .thumb {
+  margin-top: .25rem;
+}
 select.comp-ui {
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -440,6 +449,10 @@ button.comp-ui {
   width: 100%;
   padding: .5rem 0;
   border-radius: 3rem;
+}
+input[type="file"].comp-ui {
+  width: 100%;
+  margin-top: 1rem;
 }
 input[type="text"].comp-ui,
 select.comp-ui,
