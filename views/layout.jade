@@ -45,7 +45,7 @@ html
             if loginUser.thumbnailPath
               img.profile-img(class="profile-img", src="#{loginUser.thumbnailPath}")
             else if loginUser.photoUrl 
-              span #{loginUser.photoUrl}
+              img.profile-img(class="profile-img", src="#{loginUser.photoUrl}")
             else
               span #{loginUser.username}
             .pulldown-menu
