@@ -2,42 +2,45 @@
 const express = require('express');
 const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
+const loginUser = require('./login-user');
 const Space = require('../models/space');
 const UserSpace = require('../models/userspace');
 
 router.get('/', authenticationEnsurer, (req, res, next) => {
   const title = 'マイスペースを追加 | ツモリンク';
-  Space.findAll({
-      order: [['"updatedAt"', 'ASC']]
-  }).then((spaces) => {
-    UserSpace.findAll({
-      where: {
-        userId: req.user.id
-      }
-    }).then((userspaces) => {
-      let userSpaceArray = [];
-      userspaces.forEach((u) => {
-        userSpaceArray.push(u.spaceId);
-      });
-      let spaceArray = [];
-      spaces.forEach((s) => {
-        const spaceId = s.spaceId;
-        let registration = false;
-        if (userSpaceArray.indexOf(spaceId) >= 0) {
-          registration = !registration;
+  loginUser(req.user, (result) => {
+    Space.findAll({
+        order: [['"updatedAt"', 'ASC']]
+    }).then((spaces) => {
+      UserSpace.findAll({
+        where: {
+          userId: req.user.id
         }
-        const obj = {
-          spaceId: spaceId,
-          spaceName: s.spaceName,
-          imgPath: s.imgPath,
-          registration: registration
-        };
-        spaceArray.push(obj);
-      });
-      res.render('spaces', {
-        title: title,
-        loginUser: req.user,
-        spaces: spaceArray
+      }).then((userspaces) => {
+        let userSpaceArray = [];
+        userspaces.forEach((u) => {
+          userSpaceArray.push(u.spaceId);
+        });
+        let spaceArray = [];
+        spaces.forEach((s) => {
+          const spaceId = s.spaceId;
+          let registration = false;
+          if (userSpaceArray.indexOf(spaceId) >= 0) {
+            registration = !registration;
+          }
+          const obj = {
+            spaceId: spaceId,
+            spaceName: s.spaceName,
+            imgPath: s.imgPath,
+            registration: registration
+          };
+          spaceArray.push(obj);
+        });
+        res.render('spaces', {
+          title: title,
+          loginUser: result,
+          spaces: spaceArray
+        });
       });
     });
   });

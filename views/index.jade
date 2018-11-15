@@ -5,16 +5,14 @@ block content
     .catch
       img.responsive-img(src="/images/common/txt_index.svg")
   .container
-    - var hasSpace = spaces.length > 0 
-    if hasSpace
-      h3.comp-head-middle
-        span スペース一覧
-      #app
-        ul.comp-space-list.clearfix
-          li(v-for="space in spaces", v-bind:key="space.spaceId")
-            .photo
-              img.responsive-img(v-bind:src="space.imgPath")
-            .name {{space.spaceName}}
+    h3.comp-head-middle
+      span スペース一覧
+    #app
+      ul.comp-space-list.clearfix
+        li(v-for="space in spaces", v-bind:key="space.spaceId")
+          .photo
+            img.responsive-img(v-bind:src="space.imgPath")
+          .name {{space.spaceName}}
     h3.comp-head-middle
       span ツモリンクとは
     .description

@@ -2,23 +2,28 @@
 const express = require('express');
 const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
+const loginUser = require('./login-user');
 const uuid = require('node-uuid');
 const User = require('../models/user');
 const Space = require('../models/space');
 const UserSpace = require('../models/userspace');
 
 router.get('/', authenticationEnsurer, (req, res, next) => {
-  res.render('admin/index', {
-    loginUser: req.user
+  loginUser(req.user, (result) => {
+    res.render('admin/index', {
+      loginUser: result
+    });
   });
 });
 
 router.get('/users/list', authenticationEnsurer, (req, res, next) => {
-  User.findAll({
-    }).then((users) => {
-    res.render('admin/userlist', {
-      loginUser: req.user,
-      users: users
+  loginUser(req.user, (result) => {
+    User.findAll({
+      }).then((users) => {
+      res.render('admin/userlist', {
+        loginUser: result,
+        users: users
+      });
     });
   });
 });
@@ -30,26 +35,30 @@ router.get('/users/update/:userId', authenticationEnsurer, (req, res, next) => {
     }
   }).then((user) => {
     res.render('admin/userupdate', {
-      loginUser: req.user,
+      loginUser: user,
       user: user
     });
   });
 });
 
 router.get('/spaces/list', authenticationEnsurer, (req, res, next) => {
-  Space.findAll({
-      order: [['"updatedAt"', 'DESC']]
-    }).then((spaces) => {
-    res.render('admin/spacelist', {
-      loginUser: req.user,
-      spaces: spaces
+  loginUser(req.user, (result) => {
+    Space.findAll({
+        order: [['"updatedAt"', 'DESC']]
+      }).then((spaces) => {
+      res.render('admin/spacelist', {
+        loginUser: result,
+        spaces: spaces
+      });
     });
   });
 });
 
 router.get('/spaces/create', authenticationEnsurer, (req, res, next) => {
-  res.render('admin/spacecreate', {
-    loginUser: req.user
+  loginUser(req.user, (result) => {
+    res.render('admin/spacecreate', {
+      loginUser: result
+    });
   });
 });
 
@@ -66,19 +75,20 @@ router.post('/spaces/create', authenticationEnsurer, (req, res, next) => {
     updatedAt: updatedAt
   }).then((space) => {
     res.redirect('/admin/spaces/list');
-    //res.redirect('/spaces/' + space.spaceId);
   });
 });
 
 router.get('/spaces/update/:spaceId', authenticationEnsurer, (req, res, next) => {
-  Space.findOne({
-    where: {
-      spaceId: req.params.spaceId
-    }
-  }).then((space) => {
-    res.render('admin/spaceupdate', {
-      loginUser: req.user,
-      space: space
+  loginUser(req.user, (result) => {
+    Space.findOne({
+      where: {
+        spaceId: req.params.spaceId
+      }
+    }).then((space) => {
+      res.render('admin/spaceupdate', {
+        loginUser: result,
+        space: space
+      });
     });
   });
 });

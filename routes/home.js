@@ -1,15 +1,16 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
+const authenticationEnsurer = require('./authentication-ensurer');
+const loginUser = require('./login-user');
 const Space = require('../models/space');
 const User = require('../models/user');
 const Availability = require('../models/availability');
 const UserSpace = require('../models/userspace');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', authenticationEnsurer, function(req, res, next) {
   const title = 'ホーム | ツモリンク';
-  if (req.user) {
+  loginUser(req.user, (result) => {
     UserSpace.findAll({
       include: [
         {
@@ -117,16 +118,14 @@ router.get('/', function(req, res, next) {
         const minutes = ['00', '10', '20', '30', '40', '50'];
         res.render('home', {
           title: title,
-          loginUser: req.user,
+          loginUser: result,
           spaces: userspaces,
           hours : hours,
           minutes: minutes
         });
       });
     });
-  } else {
-    res.redirect('/');
-  }
+  });
 });
 
 module.exports = router;

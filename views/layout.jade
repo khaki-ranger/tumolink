@@ -42,13 +42,15 @@ html
       .login
         if loginUser
           span.login-user
-            - var fbuser = loginUser.photos
-            if fbuser
-              img.profile-img(class="profile-img", src="#{loginUser.photos[0].value}")
+            if loginUser.thumbnailPath
+              img.profile-img(class="profile-img", src="#{loginUser.thumbnailPath}")
             else
-              span #{loginUser}
+              span #{loginUser.username}
             .pulldown-menu
-              p #{loginUser.displayName}
+              if loginUser.nickname
+                p #{loginUser.nickname}
+              else
+                p #{loginUser.username}
               a(href="/logout") ログアウト
               a(href="/mypage/edit") ユーザー情報編集
         else

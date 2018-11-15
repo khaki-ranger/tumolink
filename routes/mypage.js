@@ -17,7 +17,8 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
     }
   }).then((user) => {
     res.render('mypage', {
-      loginUser: req.user,
+      title: title,
+      loginUser: user,
       user: user
     });
   });
@@ -31,7 +32,8 @@ router.get('/edit', authenticationEnsurer, (req, res, next) => {
     }
   }).then((user) => {
     res.render('mypage/edit', {
-      loginUser: req.user,
+      title: title,
+      loginUser: user,
       user: user
     });
   });
