@@ -25,7 +25,10 @@ block content
                     each availability in space.availabilities
                       li.availability(class="#{availability.branchPoint}")
                         .photo
-                          img.profile-img(src="#{availability.photoUrl}")
+                          if availability.thumbnailPath
+                            img.profile-img(src="#{availability.thumbnailPath}")
+                          else
+                            img.profile-img(src="#{availability.photoUrl}")
                         if availability.nickname
                           .name #{availability.nickname}
                         else

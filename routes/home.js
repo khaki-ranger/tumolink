@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
         include: [
           {
             model: User,
-            attributes: ['userId', 'username', 'nickname', 'photoUrl']
+            attributes: ['userId', 'username', 'nickname', 'photoUrl', 'thumbnailPath']
           }
         ],
         where: {
@@ -93,6 +93,7 @@ router.get('/', function(req, res, next) {
                   username: a.user.username,
                   nickname: a.user.nickname,
                   photoUrl: a.user.photoUrl,
+                  thumbnailPath: a.user.thumbnailPath,
                   arrivingAt: arrivingAtText,
                   leavingAt: leavingAtText,
                   updatedAt: a.updatedAt,

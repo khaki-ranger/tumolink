@@ -23,6 +23,10 @@ const User = loader.database.define('users', {
   photoUrl: {
     type: Sequelize.STRING,
     allowNull: true
+  },
+  thumbnailPath: {
+    type: Sequelize.STRING,
+    allowNull: true
   }
 }, {
     freezeTableName: true,

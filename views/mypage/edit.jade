@@ -2,7 +2,7 @@ extends ../layout
 
 block content
   .container
-    form(method="post", action="/mypage/edit/#{user.userId}")
+    form(method="post", action="/mypage/edit/#{user.userId}", enctype="multipart/form-data")
       .form-spaces
         .form-elem
           label.comp-ui ユーザーネーム
@@ -11,7 +11,8 @@ block content
           label.comp-ui(id="nickname") ニックネーム
             input.comp-ui(type="text", name="nickname", value="#{user.nickname}", id="nickname")
         .form-elem
-          label.comp-ui 画像
-          p
-            img(src="#{user.photoUrl}")
+          label.comp-ui アイコン画像
+            input.comp-ui(type="file", name="thumbnail", id="thumbnail")
+            p
+              img(src="#{user.thumbnailPath}")
         button.comp-ui(type="submit") 更新
