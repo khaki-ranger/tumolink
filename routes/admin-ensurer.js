@@ -14,11 +14,13 @@ if (!process.env.ADMIN_ID && !process.env.ADMIN_NAME) {
 
 function ensure(req, res, next) {
   if (req.isAuthenticated()){
+    console.log(admin.id);
+    console.log(admin.name);
     if (req.user.id === admin.id && req.user.displayName === admin.name) {
-       console.log(admin.name + ' is Admin user!');
+       console.log(req.user.displayName + ' is Admin user!');
        return next(); 
     } else {
-      console.log(admin.name + ' is not Admin user!');
+      console.log(req.user.displayName + ' is not Admin user!');
       res.redirect('/');
     }
   } else {
