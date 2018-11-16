@@ -787,3 +787,54 @@ textarea.comp-ui {
 .admin-list>li .action a.comp-ui:last-child {
   margin-left: 1rem;
 }
+/* popup-message */
+.popup-message {
+  height: 180px;
+  position: relative;
+}
+.popup-message>.flame{
+  display: table;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 140px;
+}
+.popup-message>.flame>.balloon {
+  display: table-cell;
+  vertical-align: middle;
+  position: relative;
+  height: 140px;
+  line-height: 1.5rem;
+  background: #FFCCBC;
+  text-align: center;
+  border-radius: 50%;
+}
+.popup-message>.flame>.balloon:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  right: 60px;
+  bottom: -16px;
+  border-style: solid;
+  border-color: transparent transparent transparent #FFCCBC;
+  border-width: 10px 0 10px 17.32px;
+  transform: rotate(90deg);
+}
+@keyframes bounce {
+  from {
+    bottom: 20px;
+  }
+  to {
+    bottom: 40px;
+  }
+}
+.popup-message>.flame {
+  animation-name: bounce;
+  animation-duration: .25s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
