@@ -61,10 +61,7 @@ router.post('/userspace/update', authenticationEnsurer, (req, res, next) => {
       userId: req.user.id,
       spaceId: req.body.spaceId
     }).then(() => {
-      const resFunc = function() {
-        res.json({action: 'add'})
-      };
-      setTimeout(resFunc, 1000);
+      res.json({action: 'add'})
     });
   } else {
     UserSpace.destroy({
