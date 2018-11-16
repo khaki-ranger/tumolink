@@ -14,8 +14,6 @@ if (!process.env.ADMIN_ID && !process.env.ADMIN_NAME) {
 
 function ensure(req, res, next) {
   if (req.isAuthenticated()){
-    console.log(admin.id + ' : ' + req.user.id);
-    console.log(admin.name + ' : ' + req.user.displayName);
     if (req.user.id === admin.id && req.user.displayName === admin.name) {
        console.log(req.user.displayName + ' is Admin user!');
        return next(); 
