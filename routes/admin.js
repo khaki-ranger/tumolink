@@ -1,14 +1,14 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-const authenticationEnsurer = require('./authentication-ensurer');
+const adminEnsurer = require('./admin-ensurer');
 const loginUser = require('./login-user');
 const uuid = require('node-uuid');
 const User = require('../models/user');
 const Space = require('../models/space');
 const UserSpace = require('../models/userspace');
 
-router.get('/', authenticationEnsurer, (req, res, next) => {
+router.get('/', adminEnsurer, (req, res, next) => {
   loginUser(req.user, (result) => {
     res.render('admin/index', {
       loginUser: result
@@ -16,7 +16,7 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
   });
 });
 
-router.get('/users/list', authenticationEnsurer, (req, res, next) => {
+router.get('/users/list', adminEnsurer, (req, res, next) => {
   loginUser(req.user, (result) => {
     User.findAll({
       }).then((users) => {
@@ -28,7 +28,7 @@ router.get('/users/list', authenticationEnsurer, (req, res, next) => {
   });
 });
 
-router.get('/users/update/:userId', authenticationEnsurer, (req, res, next) => {
+router.get('/users/update/:userId', adminEnsurer, (req, res, next) => {
   User.findOne({
     where: {
       userId: req.params.userId
@@ -41,7 +41,7 @@ router.get('/users/update/:userId', authenticationEnsurer, (req, res, next) => {
   });
 });
 
-router.get('/spaces/list', authenticationEnsurer, (req, res, next) => {
+router.get('/spaces/list', adminEnsurer, (req, res, next) => {
   loginUser(req.user, (result) => {
     Space.findAll({
         order: [['"updatedAt"', 'DESC']]
@@ -54,7 +54,7 @@ router.get('/spaces/list', authenticationEnsurer, (req, res, next) => {
   });
 });
 
-router.get('/spaces/create', authenticationEnsurer, (req, res, next) => {
+router.get('/spaces/create', adminEnsurer, (req, res, next) => {
   loginUser(req.user, (result) => {
     res.render('admin/spacecreate', {
       loginUser: result
@@ -62,7 +62,7 @@ router.get('/spaces/create', authenticationEnsurer, (req, res, next) => {
   });
 });
 
-router.post('/spaces/create', authenticationEnsurer, (req, res, next) => {
+router.post('/spaces/create', adminEnsurer, (req, res, next) => {
   const spaceId = uuid.v4();
   const updatedAt = new Date();
   Space.create({
@@ -78,7 +78,7 @@ router.post('/spaces/create', authenticationEnsurer, (req, res, next) => {
   });
 });
 
-router.get('/spaces/update/:spaceId', authenticationEnsurer, (req, res, next) => {
+router.get('/spaces/update/:spaceId', adminEnsurer, (req, res, next) => {
   loginUser(req.user, (result) => {
     Space.findOne({
       where: {
@@ -93,7 +93,7 @@ router.get('/spaces/update/:spaceId', authenticationEnsurer, (req, res, next) =>
   });
 });
 
-router.post('/spaces/update/:spaceId', authenticationEnsurer, (req, res, next) => {
+router.post('/spaces/update/:spaceId', adminEnsurer, (req, res, next) => {
   const updatedAt = new Date();
   const param = {
     spaceName: req.body.spaceName.slice(0, 255),
@@ -114,7 +114,7 @@ router.post('/spaces/update/:spaceId', authenticationEnsurer, (req, res, next) =
   });
 });
 
-router.get('/spaces/delete/:spaceId', authenticationEnsurer, (req, res, next) => {
+router.get('/spaces/delete/:spaceId', adminEnsurer, (req, res, next) => {
   Space.destroy({
     where: {
       spaceId: req.params.spaceId,
@@ -124,13 +124,13 @@ router.get('/spaces/delete/:spaceId', authenticationEnsurer, (req, res, next) =>
   });
 });
 
-router.get('/userspace/create', authenticationEnsurer, (req, res, next) => {
+router.get('/userspace/create', adminEnsurer, (req, res, next) => {
   res.render('admin/userspacecreate', {
     loginUser: req.user
   });
 });
 
-router.post('/userspace/create', authenticationEnsurer, (req, res, next) => {
+router.post('/userspace/create', adminEnsurer, (req, res, next) => {
   UserSpace.create({
     userId: req.body.userId,
     spaceId: req.body.spaceId
