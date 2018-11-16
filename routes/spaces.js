@@ -73,10 +73,7 @@ router.post('/userspace/update', authenticationEnsurer, (req, res, next) => {
         spaceId: req.body.spaceId
       }
     }).then(() => {
-      const resFunc = function() {
-        res.json({action: 'remove'})
-      };
-      setTimeout(resFunc, 1000);
+      res.json({action: 'remove'})
     });
   }
 });
