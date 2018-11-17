@@ -15,7 +15,7 @@ if (!process.env.HEROKU_URL) {
       app_name: process.env.FACEBOOK_APP_SECRET
     },
     google: {
-      gs_id: process.env.GOOGLE_GA_ID
+      ga_id: process.env.GOOGLE_GA_ID
     },
     heroku: {
       url: process.env.HEROKU_URL
