@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
+const configVars = require('./config-vars');
 const User = require('../models/user');
 const multer = require('multer');
 
@@ -18,6 +19,7 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
   }).then((user) => {
     res.render('mypage', {
       title: title,
+      configVars: configVars,
       loginUser: user,
       user: user
     });
@@ -33,6 +35,7 @@ router.get('/edit', authenticationEnsurer, (req, res, next) => {
   }).then((user) => {
     res.render('mypage/edit', {
       title: title,
+      configVars: configVars,
       loginUser: user,
       user: user
     });

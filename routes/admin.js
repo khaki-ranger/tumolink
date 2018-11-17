@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const adminEnsurer = require('./admin-ensurer');
 const loginUser = require('./login-user');
+const configVars = require('./config-vars');
 const uuid = require('node-uuid');
 const User = require('../models/user');
 const Space = require('../models/space');
@@ -11,6 +12,7 @@ const UserSpace = require('../models/userspace');
 router.get('/', adminEnsurer, (req, res, next) => {
   loginUser(req.user, (result) => {
     res.render('admin/index', {
+      configVars: configVars,
       loginUser: result
     });
   });
@@ -21,6 +23,7 @@ router.get('/users/list', adminEnsurer, (req, res, next) => {
     User.findAll({
       }).then((users) => {
       res.render('admin/userlist', {
+        configVars: configVars,
         loginUser: result,
         users: users
       });
@@ -35,6 +38,7 @@ router.get('/users/update/:userId', adminEnsurer, (req, res, next) => {
     }
   }).then((user) => {
     res.render('admin/userupdate', {
+      configVars: configVars,
       loginUser: user,
       user: user
     });
@@ -47,6 +51,7 @@ router.get('/spaces/list', adminEnsurer, (req, res, next) => {
         order: [['"updatedAt"', 'DESC']]
       }).then((spaces) => {
       res.render('admin/spacelist', {
+        configVars: configVars,
         loginUser: result,
         spaces: spaces
       });
@@ -57,6 +62,7 @@ router.get('/spaces/list', adminEnsurer, (req, res, next) => {
 router.get('/spaces/create', adminEnsurer, (req, res, next) => {
   loginUser(req.user, (result) => {
     res.render('admin/spacecreate', {
+      configVars: configVars,
       loginUser: result
     });
   });
@@ -86,6 +92,7 @@ router.get('/spaces/update/:spaceId', adminEnsurer, (req, res, next) => {
       }
     }).then((space) => {
       res.render('admin/spaceupdate', {
+        configVars: configVars,
         loginUser: result,
         space: space
       });
@@ -126,6 +133,7 @@ router.get('/spaces/delete/:spaceId', adminEnsurer, (req, res, next) => {
 
 router.get('/userspace/create', adminEnsurer, (req, res, next) => {
   res.render('admin/userspacecreate', {
+    configVars: configVars,
     loginUser: req.user
   });
 });

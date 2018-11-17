@@ -3,11 +3,12 @@ const express = require('express');
 const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
 const loginUser = require('./login-user');
+const configVars = require('./config-vars');
 const Space = require('../models/space');
 const UserSpace = require('../models/userspace');
 
 router.get('/', authenticationEnsurer, (req, res, next) => {
-  const title = 'マイスペースを追加 | ツモリンク';
+  const title = 'マイスペースを編集 | ツモリンク';
   loginUser(req.user, (result) => {
     Space.findAll({
         order: [['"updatedAt"', 'ASC']]
@@ -38,6 +39,7 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
         });
         res.render('spaces', {
           title: title,
+          configVars: configVars,
           loginUser: result,
           spaces: spaceArray
         });

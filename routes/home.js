@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
 const loginUser = require('./login-user');
+const configVars = require('./config-vars');
 const Space = require('../models/space');
 const User = require('../models/user');
 const Availability = require('../models/availability');
@@ -119,6 +120,7 @@ router.get('/', authenticationEnsurer, function(req, res, next) {
         res.render('home', {
           title: title,
           loginUser: result,
+          configVars: configVars,
           spaces: userspaces,
           hours : hours,
           minutes: minutes
