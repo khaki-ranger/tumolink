@@ -838,3 +838,21 @@ textarea.comp-ui {
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
+/* footer */
+footer {
+  background-color: black;
+  color: white;
+  padding: 2rem 0;
+}
+footer .fb-plugin {
+  text-align: right;
+}
+footer .copyright {
+  text-align: center;
+  line-height: 28px;
+}
+footer .copyright a i:before {
+  padding-right: .25rem;
+}
+
+
