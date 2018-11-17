@@ -11,14 +11,14 @@ if (!process.env.HEROKU_URL) {
       name: process.env.ADMIN_NAME
     },
     facebook: {
-      id: process.env.FACEBOOK_APP_ID,
-      name: process.env.FACEBOOK_APP_SECRET
+      app_id: process.env.FACEBOOK_APP_ID,
+      app_name: process.env.FACEBOOK_APP_SECRET
     },
     google: {
-      id: process.env.GOOGLE_GA_ID
+      gs_id: process.env.GOOGLE_GA_ID
     },
     heroku: {
-      id: process.env.HEROKU_URL
+      url: process.env.HEROKU_URL
     },
     vuejs: {
       file: process.env.VUEJS_FILE
