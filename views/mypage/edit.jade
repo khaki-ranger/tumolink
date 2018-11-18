@@ -8,9 +8,6 @@ block content
           label.comp-ui ユーザーネーム
           p #{user.username}
         .form-elem
-          label.comp-ui(id="nickname") ニックネーム
-            input.comp-ui(type="text", name="nickname", value="#{user.nickname}", id="nickname")
-        .form-elem
           label.comp-ui アイコン画像
             if user.thumbnailPath
               p.thumb
@@ -18,5 +15,7 @@ block content
             else
               p.thumb
                 img.responsive-img(src="#{user.photoUrl}")
-            input.comp-ui(type="file", name="thumbnail", id="thumbnail")
+        .form-elem
+          label.comp-ui(id="nickname") ニックネーム
+            input.comp-ui(type="text", name="nickname", value="#{user.nickname}", id="nickname")
         button.comp-ui(type="submit") 更新
