@@ -32,4 +32,19 @@ block content
         div(class="fb-like" data-href="#{configVars.heroku.url}" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true")
 
 block script
-  script(src="/javascripts/development.js")
+  script.
+    'use strict';
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        spaces: []
+      },
+      mounted() {
+        fetch('/spaces/list')
+          .then(response => response.json())
+          .then((data) => {
+            this.spaces = data;
+          })
+      }
+    }); 
