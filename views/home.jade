@@ -4,18 +4,18 @@ block content
   if loginUser
     .container
       h3.comp-head-middle
-        span マイスペース
+        span スペース一覧
       - var hasSpace = spaces.length > 0
       if hasSpace
         ul.space-list
           each space, index in spaces
-            li(class="#{space.space.spaceId}") 
+            li(class="#{space.spaceId}") 
               .information 
                 .photo
-                  img.responsive-img(src="#{space.space.imgPath}")
-                .name #{space.space.spaceName}
-                if space.space.livelynkUrl
-                  a.livelynk(href="#{space.space.livelynkUrl}" target="_black") Livelynk
+                  img.responsive-img(src="#{space.imgPath}")
+                .name #{space.spaceName}
+                if space.livelynkUrl
+                  a.livelynk(href="#{space.livelynkUrl}" target="_black") Livelynk
                     i.fas.fa-external-link-alt
               .data
                 .availabilities
@@ -61,12 +61,3 @@ block content
                   button.tumoli-button.comp-ui(type="submit", name="action", value="tumoli") ツモリ
                   if space.availabilityUserFlag
                     button.tumoli-button.bel-button.comp-ui(type="submit", name="action", value="del") 取り消し
-      else
-        .popup-message 
-          .flame
-            .balloon
-              span
-                |マイスペースを
-                br
-                |登録してください 
-      a.comp-ui.comp-btn-navigate(href="/spaces/") マイスペースを編集

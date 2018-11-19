@@ -7,23 +7,13 @@ const configVars = require('./config-vars');
 const Space = require('../models/space');
 const User = require('../models/user');
 const Availability = require('../models/availability');
-const UserSpace = require('../models/userspace');
 
 router.get('/', authenticationEnsurer, function(req, res, next) {
   const title = 'ホーム | ツモリンク';
   loginUser(req.user, (result) => {
-    UserSpace.findAll({
-      include: [
-        {
-          model: Space,
-          attributes: ['spaceId', 'spaceName', 'imgPath', 'livelynkUrl']
-        }
-      ],
-      where: {
-        userId: req.user.id
-      },
-      order: [['"updatedAt"', 'ASC']]
-    }).then((userspaces) => {
+    Space.findAll({
+      order: [['"spaceName"', 'ASC']]
+    }).then((spaces) => {
       Availability.findAll({
         include: [
           {
@@ -45,7 +35,7 @@ router.get('/', authenticationEnsurer, function(req, res, next) {
           hours: now.getHours(),
           minutes: now.getMinutes()
         }
-        userspaces.forEach((s) => {
+        spaces.forEach((s) => {
           const spaceId = s.spaceId;
           const availabilityArray = [];
           let availabilityUserFlag = false;
@@ -121,7 +111,7 @@ router.get('/', authenticationEnsurer, function(req, res, next) {
           title: title,
           loginUser: result,
           configVars: configVars,
-          spaces: userspaces,
+          spaces: spaces,
           hours : hours,
           minutes: minutes
         });
