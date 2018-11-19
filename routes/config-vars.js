@@ -12,7 +12,7 @@ if (!process.env.HEROKU_URL) {
     },
     facebook: {
       app_id: process.env.FACEBOOK_APP_ID,
-      app_name: process.env.FACEBOOK_APP_SECRET
+      app_secret: process.env.FACEBOOK_APP_SECRET
     },
     twitter: {
       consumer_key: process.env.TWITTER_CONSUMER_ID,

@@ -33,8 +33,8 @@ User.sync({
     });
 });
 
-var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || '283457335747265';
-var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || 'b5fed3e32295230e9f35a17d7b6d8d8e'
+var FACEBOOK_APP_ID = configVars.facebook.app_id;
+var FACEBOOK_APP_SECRET = configVars.facebook.app_secret;
 var TWITTER_CONSUMER_KEY = configVars.twitter.consumer_key;
 var TWITTER_CONSUMER_SECRET = configVars.twitter.consumer_secret;
 
