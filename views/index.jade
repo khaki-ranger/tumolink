@@ -1,35 +1,35 @@
 extends layout
 
 block content
-  .opening(style="background-image: url(/images/common/bg_index.jpg);")
-    .catch
-      img.responsive-img(src="/images/common/txt_index.svg")
-  .container
-    h3.comp-head-middle
-      span スペース一覧
-    #app
+  #app
+    .opening(style="background-image: url(/images/common/bg_index.jpg);")
+      .catch
+        img.responsive-img(src="/images/common/txt_index.svg")
+    .container
+      h3.comp-head-middle
+        span スペース一覧
       ul.comp-space-list.clearfix
         li(v-for="space in spaces", v-bind:key="space.spaceId")
           .photo
             img.responsive-img(v-bind:src="space.imgPath")
           .name {{space.spaceName}}
-    h3.comp-head-middle
-      span ツモリンクとは
-    .description
-      人との出会いや交流のために「場」を利用する人が、「〇〇時間〇〇分後に行く
-      span ツモリ
-      」と発信したり、これから誰が行く
-      span ツモリ
-      なのかをチェックすることで、その「場」に行く
-      span キッカケ
-      をつくります。
-  footer
-    .container.clearfix
-      .copyright.fl-left
-        a(href="https://www.livelynk.jp/", target="_blank")
-          i(class='fas fa-copyright') Livelynk
-      .fb-plugin.fl-right
-        div(class="fb-like" data-href="#{configVars.heroku.url}" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true")
+      h3.comp-head-middle
+        span ツモリンクとは
+      .description
+        人との出会いや交流のために「場」を利用する人が、「〇〇時間〇〇分後に行く
+        span ツモリ
+        」と発信したり、これから誰が行く
+        span ツモリ
+        なのかをチェックすることで、その「場」に行く
+        span キッカケ
+        をつくります。
+    footer
+      .container.clearfix
+        .copyright.fl-left
+          a(href="https://www.livelynk.jp/", target="_blank")
+            i(class='fas fa-copyright') Livelynk
+        .fb-plugin.fl-right
+          div(class="fb-like" data-href="#{configVars.heroku.url}" data-layout="button_count" data-action="like" data-size="large" data-show-faces="true" data-share="true")
 
 block script
   script.
