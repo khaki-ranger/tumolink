@@ -116,15 +116,23 @@ body {
 .overlay .modal .panel {
   padding: 1em;
 }
+.overlay .modal .fb-login,
+.overlay .modal .twitter-login {
+  color: white;
+  position: relative;
+  margin-bottom: 1rem;
+}
 .overlay .modal .fb-login {
   background-color: #4267b2;
   border: 1px solid #29487d;
-  color: white;
-  position: relative;
 }
-.overlay .modal .fb-login:before {
+.overlay .modal .twitter-login {
+  background-color: #1da1f2;
+  border: 1px solid #1da1f2;
+}
+.overlay .modal .fb-login:before,
+.overlay .modal .twitter-login:before {
   font-family: "Font Awesome 5 Brands";
-  content: '\f39e';
   font-size: 1.25rem;
   position: absolute;
   left: .75rem;
@@ -132,6 +140,12 @@ body {
   top: 0;
   bottom: 0;
   margin: auto;
+}
+.overlay .modal .fb-login:before {
+  content: '\f39e';
+}
+.overlay .modal .twitter-login:before {
+  content: '\f099';
 }
 .overlay .modal .close {
   position: absolute;

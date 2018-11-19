@@ -7,7 +7,9 @@ var helmet = require('helmet');
 var session = require('express-session');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var TwitterStrategy = require('passport-twitter').Strategy;
 
+var configVars = require('./routes/config-vars');
 var User = require('./models/user');
 var Space = require('./models/space');
 var UserSpace = require('./models/userspace');
@@ -33,6 +35,8 @@ User.sync({
 
 var FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID || '283457335747265';
 var FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET || 'b5fed3e32295230e9f35a17d7b6d8d8e'
+var TWITTER_CONSUMER_KEY = configVars.twitter.consumer_key;
+var TWITTER_CONSUMER_SECRET = configVars.twitter.consumer_secret;
 
 passport.serializeUser(function (user, done) {
   done(null, user);
@@ -49,6 +53,24 @@ passport.use(new FacebookStrategy({
   profileFields: ['id', 'displayName', 'photos', 'email']
 },
   function (accessToken, refreshToken, profile, done) {
+    process.nextTick(function () {
+      User.upsert({
+        userId: profile.id,
+        username: profile.displayName,
+        photoUrl: profile.photos[0].value
+      }).then(() => {
+        done(null, profile);
+      });
+    });
+  }
+));
+
+passport.use(new TwitterStrategy({
+  consumerKey: TWITTER_CONSUMER_KEY,
+  consumerSecret: TWITTER_CONSUMER_SECRET,
+  callbackURL: process.env.HEROKU_URL ? process.env.HEROKU_URL + 'auth/twitter/callback' : 'http://localhost:8000/auth/twitter/callback'
+},
+  function(token, tokenSecret, profile, done) {
     process.nextTick(function () {
       User.upsert({
         userId: profile.id,
@@ -101,13 +123,18 @@ app.use('/availabilities', availabilitiesRouter);
 app.use('/privacy', privacyRouter);
 app.use('/mypage', mypageRouter);
 
-app.get('/auth/facebook',
-  passport.authenticate('facebook'),
-  function (req, res) {
-});
+app.get('/auth/facebook', passport.authenticate('facebook'));
 
 app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/' }),
+  function (req, res) {
+    res.redirect('/home');
+});
+
+app.get('/auth/twitter', passport.authenticate('twitter'));
+
+app.get('/auth/twitter/callback',
+  passport.authenticate('twitter', { failureRedirect: '/' }),
   function (req, res) {
     res.redirect('/home');
 });
