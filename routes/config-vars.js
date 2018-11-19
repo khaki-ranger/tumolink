@@ -14,6 +14,10 @@ if (!process.env.HEROKU_URL) {
       app_id: process.env.FACEBOOK_APP_ID,
       app_name: process.env.FACEBOOK_APP_SECRET
     },
+    twitter: {
+      consumer_key: process.env.TWITTER_CONSUMER_ID,
+      consumer_secret: process.env.TWITTER_CONSUMER_SECRET
+    }
     google: {
       ga_id: process.env.GOOGLE_GA_ID
     },
