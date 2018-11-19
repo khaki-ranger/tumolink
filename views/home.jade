@@ -1,72 +1,37 @@
 extends layout
 
 block content
-  if loginUser
+  #app
     .container
       h3.comp-head-middle
         span マイスペース
-      - var hasSpace = spaces.length > 0
-      if hasSpace
-        ul.space-list
-          each space, index in spaces
-            li(class="#{space.space.spaceId}") 
-              .information 
-                .photo
-                  img.responsive-img(src="#{space.space.imgPath}")
-                .name #{space.space.spaceName}
-                if space.space.livelynkUrl
-                  a.livelynk(href="#{space.space.livelynkUrl}" target="_black") Livelynk
-                    i.fas.fa-external-link-alt
-              .data
-                .availabilities
-                  .head 今日のツモリスト
-                    span #{space.availabilities.length} 人
-                  ul.body
-                    each availability in space.availabilities
-                      li.availability(class="#{availability.branchPoint}")
-                        .photo
-                          if availability.thumbnailPath
-                            img.profile-img(src="#{availability.thumbnailPath}")
-                          else
-                            img.profile-img(src="#{availability.photoUrl}")
-                        if availability.nickname
-                          .name #{availability.nickname}
-                        else
-                          .name #{availability.username}
-                        .arriving #{availability.arrivingAt} #{availability.leavingAt}
-                        if availability.branchPoint
-                          span.now Now
-                  i.fas.fa-chevron-down.btn-more
-              .action
-                form(method="post" action="/availabilities")
-                  input(type="hidden" name="spaceId" value="#{space.spaceId}")
-                  input(type="hidden" name="availabilityUserFlag" value="#{space.availabilityUserFlag}")
-                  .plans
-                    .value.hour
-                      select.comp-ui(name="hour")
-                        each value in hours
-                          option(value="#{value}") #{value}
-                    .unit.hour 時間
-                    .value.minute
-                      select.comp-ui(name="minute")
-                        each value in minutes
-                          option(value="#{value}") #{value}
-                    .unit.minute 分後
-                  if space.availabilityUserFlag
-                    .radio-block
-                      input(type="radio", name="direction", value="arriving", id="direction_arriving_#{index}", checked="checked")
-                      label(for="direction_arriving_#{index}") 行く
-                      input(type="radio", name="direction", value="leaving", id="direction_leaving_#{index}")
-                      label(for="direction_leaving_#{index}") 帰る
-                  button.tumoli-button.comp-ui(type="submit", name="action", value="tumoli") ツモリ
-                  if space.availabilityUserFlag
-                    button.tumoli-button.bel-button.comp-ui(type="submit", name="action", value="del") 取り消し
-      else
-        .popup-message 
-          .flame
-            .balloon
-              span
-                |マイスペースを
-                br
-                |登録してください 
-      a.comp-ui.comp-btn-navigate(href="/spaces/") マイスペースを編集
+      ul.space-list
+        li(v-for="space in spaces", v-bind:key="space.spaceId")
+          .information 
+            .photo
+              img.responsive-img(v-bind:src="space.space.imgPath")
+            .name {{space.space.spaceName}}
+          .data
+            .availabilities
+              .head 今日のツモリスト
+                span  人
+              ul.body
+          .action
+
+block script
+  script.
+    'use strict';
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        spaces: []
+      },
+      mounted() {
+        fetch('/home/availabilities')
+          .then(response => response.json())
+          .then((data) => {
+            this.spaces = data;
+          })
+      }
+    }); 
