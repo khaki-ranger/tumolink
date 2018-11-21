@@ -14,8 +14,17 @@ block content
           .data
             .availabilities
               .head 今日のツモリスト
-                span  人
+                span {{space.availabilities.length}} 人
               ul.body
+                li.availability(v-for="availability in space.availabilities", v-bind:key="availability.userId", v-bind:class="availability.branchPoint")
+                  .photo
+                    img.profile-img(v-if="availability.thumbnailPath", v-bind:src="availability.thumbnailPath")
+                    img.profile-img(v-else, v-bind:src="availability.photoUrl")
+                  .name(v-if="availability.nickname") {{availability.nickname}}
+                  .name(v-else) {{availability.username}}
+                  .arriving {{availability.arrivingAt}} {{availability.leavingAt}}
+                  span.now(v-if="availability.branchPoint") Now
+              i.fas.fa-chevron-down.btn-more
           .action
 
 block script
