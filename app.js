@@ -84,6 +84,7 @@ passport.use(new TwitterStrategy({
 ));
 
 var indexRouter = require('./routes/index');
+var developmentRouter = require('./routes/development');
 var homeRouter = require('./routes/home');
 var adminRouter = require('./routes/admin');
 var logoutRouter = require('./routes/logout');
@@ -115,6 +116,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', indexRouter);
+app.use('/development', developmentRouter);
 app.use('/home', homeRouter);
 app.use('/admin', adminRouter);
 app.use('/logout', logoutRouter);

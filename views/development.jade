@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  #app
+    .container
+      h3.comp-head-middle
+        span マイスペース
+      ul.space-list
+        li(v-for="space in spaces", v-bind:key="space.spaceId")
+          .information 
+            .photo
+              img.responsive-img(v-bind:src="space.space.imgPath")
+            .name {{space.space.spaceName}}
+          .data
+            .availabilities
+              .head 今日のツモリスト
+                span  人
+              ul.body
+          .action
+
+block script
+  script.
+    'use strict';
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        spaces: []
+      },
+      mounted() {
+        fetch('/development/availabilities')
+          .then(response => response.json())
+          .then((data) => {
+            this.spaces = data;
+          })
+      }
+    });
