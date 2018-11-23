@@ -25,18 +25,9 @@ router.get('/', authenticationEnsurer, function(req, res, next) {
 });
 
 router.get('/availabilities', authenticationEnsurer, function(req, res, next) {
-  UserSpace.findAll({
-    include: [
-      {
-        model: Space,
-        attributes: ['spaceId', 'spaceName', 'imgPath', 'livelynkUrl']
-      }
-    ],
-    where: {
-      userId: req.user.id
-    },
-    order: [['"updatedAt"', 'ASC']]
-  }).then((userspaces) => {
+  Space.findAll({
+    order: [['"spaceName"', 'ASC']]
+  }).then((spaces) => {
     Availability.findAll({
       include: [
         {
@@ -58,7 +49,7 @@ router.get('/availabilities', authenticationEnsurer, function(req, res, next) {
         hours: now.getHours(),
         minutes: now.getMinutes()
       }
-      userspaces.forEach((s) => {
+      spaces.forEach((s) => {
         const spaceId = s.spaceId;
         const availabilityArray = [];
         let availabilityUserFlag = false;
@@ -128,7 +119,7 @@ router.get('/availabilities', authenticationEnsurer, function(req, res, next) {
         s.dataValues.availabilities = availabilityArray;
         s.dataValues.availabilityUserFlag = availabilityUserFlag; 
       });
-      res.json(userspaces);
+      res.json(spaces);
     });
   });
 });

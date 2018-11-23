@@ -3,14 +3,15 @@ extends layout
 block content
   #app
     .container
-      h3.comp-head-middle
-        span マイスペース
+      label(v-for="space in spaces")
+        input(type="checkbox", v-model="selectedSpaces", v-bind:value="space.spaceId", v-bind:key="space.spaceId")
+        |{{space.spaceName}}
       ul.space-list
-        li(v-for="(space, index) in spaces", v-bind:key="space.spaceId")
+        li(v-for="(space, index) in selected", v-bind:key="space.spaceId")
           .information 
             .photo
-              img.responsive-img(v-bind:src="space.space.imgPath")
-            .name {{space.space.spaceName}}
+              img.responsive-img(v-bind:src="space.imgPath")
+            .name {{space.spaceName}}
           .data
             .availabilities
               .head 今日のツモリスト
@@ -56,7 +57,8 @@ block script
     var app = new Vue({
       el: '#app',
       data: {
-        spaces: []
+        spaces: [],
+        selectedSpaces: []
       },
       mounted() {
         fetch('/development/availabilities')
@@ -64,5 +66,12 @@ block script
           .then((data) => {
             this.spaces = data;
           })
+      },
+      computed: {
+        selected: function() {
+          return this.spaces.filter(function(el) {
+            return this.selectedSpaces.indexOf(el.spaceId) >= 0
+          }, this)
+        }
       }
     });
