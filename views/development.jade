@@ -3,8 +3,8 @@ extends layout
 block content
   #app
     .container
-      label(v-for="space in spaces")
-        input(type="checkbox", v-model="selectedSpaces", v-bind:value="space.spaceId", v-bind:key="space.spaceId")
+      label(v-for="space in spaces", v-bind:key="space.spaceId")
+        input(type="checkbox", v-model="selectedSpaces", v-bind:value="space.spaceId")
         |{{space.spaceName}}
       ul.space-list
         li(v-for="(space, index) in selected", v-bind:key="space.spaceId")
@@ -65,6 +65,9 @@ block script
           .then(response => response.json())
           .then((data) => {
             this.spaces = data;
+            for (var space of data) {
+              this.selectedSpaces.push(space.spaceId);
+            }
           })
       },
       computed: {
