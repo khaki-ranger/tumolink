@@ -3,9 +3,11 @@ extends layout
 block content
   #app
     .container
-      label(v-for="space in spaces", v-bind:key="space.spaceId")
-        input(type="checkbox", v-model="selectedSpaces", v-bind:value="space.spaceId")
-        |{{space.spaceName}}
+      .select-space
+        .check-ui(v-for="(space, index) in spaces", v-bind:key="space.spaceId")
+          input(type="checkbox", v-model="selectedSpaces", v-bind:value="space.spaceId", v-bind:id="['select-space-input-' + index]")
+          label(v-bind:for="['select-space-input-' + index]")
+            {{space.spaceName}}
       ul.space-list
         li(v-for="(space, index) in selected", v-bind:key="space.spaceId")
           .information 
