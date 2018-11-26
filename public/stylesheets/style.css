@@ -135,7 +135,7 @@ body {
   font-family: "Font Awesome 5 Brands";
   font-size: 1.25rem;
   position: absolute;
-  left: .75rem;
+  left: 12px;
   height: 1.25rem;
   top: 0;
   bottom: 0;
@@ -143,6 +143,7 @@ body {
 }
 .overlay .modal .fb-login:before {
   content: '\f39e';
+  left: 16px;
 }
 .overlay .modal .twitter-login:before {
   content: '\f099';
@@ -924,4 +925,31 @@ footer .copyright a i:before {
 }
 .select-space input[type=checkbox]:checked + label:before {
   opacity: 1;
+}
+/* search-box */
+.search-box {
+  margin: 1rem 0;
+  background: #FFCCBC;
+  height: 2rem;
+  border-radius: 2rem;
+  padding: .5rem;
+}
+.search-btn {
+  float: left;
+  width: 2rem;
+  height: 2rem;
+  color: #F4511E;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-txt {
+  float: left;
+  width: 80%;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 16px;
+  line-height: 2rem;
+  padding: 0 6px;
 }

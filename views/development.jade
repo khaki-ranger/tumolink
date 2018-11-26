@@ -3,6 +3,10 @@ extends layout
 block content
   #app
     .container
+      .search-box.clearfix
+        a.search-btn(href="#")
+          i.fas.fa-search.fa-lg
+        input.search-txt(type="text", name="", placeholder="Type to search")
       .select-space
         .check-ui(v-for="(space, index) in spaces", v-bind:key="space.spaceId")
           input(type="checkbox", v-model="selectedSpaces", v-bind:value="space.spaceId", v-bind:id="['select-space-input-' + index]")
