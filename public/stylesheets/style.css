@@ -879,9 +879,10 @@ footer .copyright a i:before {
   box-sizing: border-box;
   position: relative;
   display: block;
-  margin: 0 20px 8px 0;
-  padding: 12px 12px 12px 42px;
-  border-radius: 8px;
+  margin-bottom: .5rem;
+  padding: .5rem;
+  padding-left: 3rem;
+  border-radius: 6px;
   background-color: #f6f7f8;
   vertical-align: middle;
   cursor: pointer;
@@ -929,7 +930,7 @@ footer .copyright a i:before {
 /* search-box */
 .search-box {
   margin: 1rem 0;
-  background: #FFCCBC;
+  background: white;
   height: 2rem;
   border-radius: 2rem;
   padding: .5rem;
