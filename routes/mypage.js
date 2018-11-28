@@ -17,7 +17,7 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
       userId: req.user.id
     }
   }).then((user) => {
-    res.render('mypage', {
+    res.render('mypage/mypage', {
       title: title,
       configVars: configVars,
       loginUser: user,

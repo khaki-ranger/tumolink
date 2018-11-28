@@ -954,3 +954,15 @@ footer .copyright a i:before {
   line-height: 2rem;
   padding: 0 6px;
 }
+/* mypage */
+.mypage .information {
+  text-align: center;
+  padding: 3rem 0 2rem 0;
+}
+.mypage .information .photo img {
+  width: 94px;
+  height: 94px;
+  border-radius: 94px;
+  border: solid 3px white;
+  margin-bottom: .5rem;
+}

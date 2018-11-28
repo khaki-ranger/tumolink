@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+  .mypage
+    .information
+      .photo
+        if user.thumbnailPath
+          img(src="#{user.thumbnailPath}")
+        else
+          img(src="#{user.photoUrl}")
+      if user.nickname
+        .name #{user.nickname}
+      else
+        .name #{user.username}
+    .container
+      h3.comp-head-middle
+        span ツモ履歴
