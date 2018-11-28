@@ -966,3 +966,26 @@ footer .copyright a i:before {
   border: solid 3px white;
   margin-bottom: .5rem;
 }
+.mypage .record {
+  margin-bottom: 1rem;
+}
+.mypage .record>thead>tr>th,
+.mypage .record>tbody>tr>td {
+  border-top: solid 1px #FBE9E7;
+  border-left: solid 1px #FBE9E7;
+  padding: .5rem;
+}
+.mypage .record>thead>tr>th {
+  background-color: #FFAB91;
+}
+.mypage .record>tbody>tr:nth-of-type(even)>td {
+  background-color: #FFCCBC;
+}
+.mypage .record>tbody>tr:last-of-type>td {
+  border-bottom: solid 1px #FBE9E7;
+}
+.mypage .record>thead>tr>th:last-of-type,
+.mypage .record>tbody>tr>td:last-of-type {
+  border-right: solid 1px #FBE9E7;
+}
+

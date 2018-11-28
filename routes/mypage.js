@@ -2,8 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
+const loginUser = require('./login-user');
 const configVars = require('./config-vars');
 const User = require('../models/user');
+const Availability = require('../models/availability');
 const multer = require('multer');
 
 const thumbnailPath = '/images/users/thumbnail/';
@@ -12,32 +14,30 @@ const uploader = multer({ dest: dest }).single('thumbnail');
 
 router.get('/', authenticationEnsurer, (req, res, next) => {
   const title = 'マイページ | ツモリンク';
-  User.findOne({
-    where: {
-      userId: req.user.id
-    }
-  }).then((user) => {
-    res.render('mypage/mypage', {
-      title: title,
-      configVars: configVars,
-      loginUser: user,
-      user: user
+  loginUser(req.user, (result) => {
+    Availability.findAll({
+      where: {
+        userId: result.userId
+      },
+      order: [['"createdAt"', 'ASC']]
+    }).then((availabilities) => {
+      res.render('mypage/mypage', {
+        title: title,
+        configVars: configVars,
+        loginUser: result,
+        availabilities: availabilities
+      });
     });
   });
 });
 
 router.get('/edit', authenticationEnsurer, (req, res, next) => {
   const title = 'ユーザー情報編集 | ツモリンク';
-  User.findOne({
-    where: {
-      userId: req.user.id
-    }
-  }).then((user) => {
+  loginUser(req.user, (result) => {
     res.render('mypage/edit', {
       title: title,
       configVars: configVars,
-      loginUser: user,
-      user: user
+      loginUser: result
     });
   });
 });

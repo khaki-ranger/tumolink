@@ -4,14 +4,30 @@ block content
   .mypage
     .information
       .photo
-        if user.thumbnailPath
-          img(src="#{user.thumbnailPath}")
+        if loginUser.thumbnailPath
+          img(src="#{loginUser.thumbnailPath}")
         else
-          img(src="#{user.photoUrl}")
-      if user.nickname
-        .name #{user.nickname}
+          img(src="#{loginUser.photoUrl}")
+      if loginUser.nickname
+        .name #{loginUser.nickname}
       else
-        .name #{user.username}
+        .name #{loginUser.username}
     .container
       h3.comp-head-middle
         span ツモ履歴
+      table.record
+        thead
+          tr
+            th 日時
+            th スペース
+            th 行く
+            th 帰る
+            th 更新・取り消し
+        tbody
+          each availability in availabilities
+            tr
+              td #{availability.createdAt}
+              td
+              td
+              td
+              td
