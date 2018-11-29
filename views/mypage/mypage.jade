@@ -22,12 +22,21 @@ block content
             th スペース
             th 行く
             th 帰る
-            th 更新・取り消し
         tbody
           each availability in availabilities
-            tr
-              td #{availability.createdAt}
-              td #{availability.space.spaceName}
-              td
-              td
-              td
+            if availability.space
+              tr
+                td 
+                  |#{availability.formattedCreatedAtArray[0]}
+                  br
+                  |#{availability.formattedCreatedAtArray[1]}
+                td #{availability.space.spaceName}
+                td
+                  |#{availability.formattedArrivingAtArray[0]}
+                  br
+                  |#{availability.formattedArrivingAtArray[1]}
+                td
+                  if availability.formattedLeavingAtArray
+                    |#{availability.formattedLeavingAtArray[0]}
+                    br
+                    |#{availability.formattedLeavingAtArray[1]}

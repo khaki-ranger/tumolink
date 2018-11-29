@@ -235,6 +235,9 @@ header .login .pulldown-menu a {
 header .login .pulldown-menu p {
   border-bottom: solid 1px #FFCCBC;
 }
+header .login .pulldown-menu .logout {
+  border-top: solid 1px #FFCCBC;
+}
 header .profile-img {
   vertical-align: middle;
 } 

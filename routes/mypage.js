@@ -8,6 +8,7 @@ const Space = require('../models/space');
 const User = require('../models/user');
 const Availability = require('../models/availability');
 const multer = require('multer');
+const moment = require('moment-timezone');
 
 const thumbnailPath = '/images/users/thumbnail/';
 const dest = './public' + thumbnailPath;
@@ -26,8 +27,23 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
       where: {
         userId: result.userId
       },
-      order: [['"createdAt"', 'ASC']]
+      order: [['"createdAt"', 'DESC']]
     }).then((availabilities) => {
+      const tz = 'Asia/Tokyo';
+      const format = 'YYYY/MM/DD HH:mm';
+      const separator = /\s+/;
+      availabilities.forEach((availability) => {
+        if (availability.space) {
+          const formattedCreatedAtStr = moment(availability.createdAt).tz(tz).format(format);
+          const formattedArrivingAtStr = moment(availability.arrivingAt).tz(tz).format(format);
+          availability.formattedCreatedAtArray = formattedCreatedAtStr.split(separator);
+          availability.formattedArrivingAtArray = formattedArrivingAtStr.split(separator);
+          if (availability.leavingAt) {
+            const formattedLeavingAtStr = moment(availability.leavingAt).tz(tz).format(format);
+            availability.formattedLeavingAtArray = formattedLeavingAtStr.split(separator);
+          }
+        }
+      });
       res.render('mypage/mypage', {
         title: title,
         configVars: configVars,
