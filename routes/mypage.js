@@ -4,6 +4,7 @@ const router = express.Router();
 const authenticationEnsurer = require('./authentication-ensurer');
 const loginUser = require('./login-user');
 const configVars = require('./config-vars');
+const Space = require('../models/space');
 const User = require('../models/user');
 const Availability = require('../models/availability');
 const multer = require('multer');
@@ -16,6 +17,12 @@ router.get('/', authenticationEnsurer, (req, res, next) => {
   const title = 'マイページ | ツモリンク';
   loginUser(req.user, (result) => {
     Availability.findAll({
+      include: [
+        {
+          model: Space,
+          attributes: ['spaceId', 'spaceName']
+        }
+      ],
       where: {
         userId: result.userId
       },

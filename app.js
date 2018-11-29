@@ -26,10 +26,8 @@ User.sync({
       UserSpace.belongsTo(Space, {foreignKey: 'spaceId' });
       UserSpace.sync();
       Availability.belongsTo(User, {foreignKey: 'userId' });
-      Availability.sync({
-        force: false,
-        alter:true
-      });
+      Availability.belongsTo(Space, {foreignKey: 'spaceId' });
+      Availability.sync();
     });
 });
 
