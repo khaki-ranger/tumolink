@@ -32,9 +32,10 @@ block content
                   |#{availability.formattedCreatedAtArray[1]}
                 td #{availability.space.spaceName}
                 td
-                  |#{availability.formattedArrivingAtArray[0]}
-                  br
-                  |#{availability.formattedArrivingAtArray[1]}
+                  if availability.formattedArrivingAtArray
+                    |#{availability.formattedArrivingAtArray[0]}
+                    br
+                    |#{availability.formattedArrivingAtArray[1]}
                 td
                   if availability.formattedLeavingAtArray
                     |#{availability.formattedLeavingAtArray[0]}
