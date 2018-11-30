@@ -36,7 +36,7 @@ function postSlack(args) {
         const slackMessage = {
           text: message,
           channel: space.slackChannel,
-          username: username,
+          username: 'ツモリンク',
           icon_url: args.profileImg
         };
         slack.notify(slackMessage, function(error, result){
