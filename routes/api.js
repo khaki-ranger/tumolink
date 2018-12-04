@@ -5,9 +5,8 @@ const configVars = require('./config-vars');
 const User = require('../models/user');
 const Availability = require('../models/availability');
 
-const spaceId = 'dc93c143-0ad4-43e6-a6b0-33b771ac99a5';
-
-router.get('/googleHome', function(req, res, next) {
+router.post('/googleHome', function(req, res, next) {
+  const spaceId = req.body.spaceId;
   const availabilityArray = [];
   Availability.findAll({
     include: [
@@ -18,7 +17,8 @@ router.get('/googleHome', function(req, res, next) {
     ],
     where: {
       spaceId: spaceId,
-      visibility: true
+      visibility: true,
+      postedGoogleHome: false
     },
     order: [['"arrivingAt"', 'ASC']]
   }).then((availabilities) => {
@@ -32,22 +32,20 @@ router.get('/googleHome', function(req, res, next) {
       minutes: now.getMinutes()
     }
     availabilities.forEach((a) => {
-      if(a.postedGoogleHome === false) {
-        const arrivingAt = a.arrivingAt;
-        if (arrivingAt) {
-          const arrivingAtObj = {
-            year: arrivingAt.getFullYear(),
-            month: arrivingAt.getMonth(),
-            date: arrivingAt.getDate(),
-            hours: arrivingAt.getHours(),
-            minutes: arrivingAt.getMinutes()
-          }
-          if(nowObj.year === arrivingAtObj.year && nowObj.month === arrivingAtObj.month && nowObj.date === arrivingAtObj.date) {
-            const name = a.user.nickname ? a.user.nickname : a.user.username;
-            const time = arrivingAtObj.hours + '時' + arrivingAtObj.minutes + '分頃に、';
-            const availatilityLine = name + 'さんが、' + time;
-            availabilityArray.push(availatilityLine);
-          }
+      const arrivingAt = a.arrivingAt;
+      if (arrivingAt) {
+        const arrivingAtObj = {
+          year: arrivingAt.getFullYear(),
+          month: arrivingAt.getMonth(),
+          date: arrivingAt.getDate(),
+          hours: arrivingAt.getHours(),
+          minutes: arrivingAt.getMinutes()
+        }
+        if(nowObj.year === arrivingAtObj.year && nowObj.month === arrivingAtObj.month && nowObj.date === arrivingAtObj.date) {
+          const name = a.user.nickname ? a.user.nickname : a.user.username;
+          const time = arrivingAtObj.hours + '時' + arrivingAtObj.minutes + '分頃に、';
+          const availatilityLine = name + 'さんが、' + time;
+          availabilityArray.push(availatilityLine);
         }
       }
     });
