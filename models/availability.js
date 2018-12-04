@@ -28,6 +28,10 @@ const Availability = loader.database.define('availabilities', {
   visibility: {
     type: Sequelize.BOOLEAN,
     allowNull: false
+  },
+  postedGoogleHome: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false
   }
 }, {
   freezeTableName: true,

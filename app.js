@@ -90,6 +90,7 @@ var spacesRouter = require('./routes/spaces');
 var availabilitiesRouter = require('./routes/availabilities');
 var privacyRouter = require('./routes/privacy');
 var mypageRouter = require('./routes/mypage');
+var apiRouter = require('./routes/api');
 
 var app = express();
 app.use(helmet());
@@ -122,6 +123,7 @@ app.use('/spaces', spacesRouter);
 app.use('/availabilities', availabilitiesRouter);
 app.use('/privacy', privacyRouter);
 app.use('/mypage', mypageRouter);
+app.use('/api', apiRouter);
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 

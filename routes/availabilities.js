@@ -103,7 +103,8 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
           userId: req.user.id,
           arrivingAt: dateObj.arrivingAt,
           leavingAt: dateObj.leavingAt,
-          visibility: true
+          visibility: true,
+          postedGoogleHome: false
         }).then(() => {
           const params = {
             spaceId: req.body.spaceId,
@@ -141,7 +142,8 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
           spaceId: req.body.spaceId,
           userId: req.user.id,
           arrivingAt: arrivingAt,
-          visibility: true
+          visibility: true,
+          postedGoogleHome: false
         }).then((availability) => {
           const params = {
             spaceId: req.body.spaceId,
