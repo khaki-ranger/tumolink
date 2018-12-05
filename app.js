@@ -14,6 +14,7 @@ var User = require('./models/user');
 var Space = require('./models/space');
 var UserSpace = require('./models/userspace');
 var Availability = require('./models/availability');
+var Googlehome = require('./models/googlehome');
 User.sync({
     force: false,
     alter:true
@@ -28,6 +29,9 @@ User.sync({
       Availability.belongsTo(User, {foreignKey: 'userId' });
       Availability.belongsTo(Space, {foreignKey: 'spaceId' });
       Availability.sync();
+      Googlehome.belongsTo(User, {foreignKey: 'userId' });
+      Googlehome.belongsTo(Space, {foreignKey: 'spaceId' });
+      Googlehome.sync();
     });
 });
 

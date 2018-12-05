@@ -2,8 +2,8 @@
 const loader = require('./sequelize-loader');
 const Sequelize = loader.Sequelize;
 
-const Availability = loader.database.define('availabilities', {
-  availabilityId: {
+const Googlehome = loader.database.define('googlehome', {
+  id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true,
@@ -17,15 +17,11 @@ const Availability = loader.database.define('availabilities', {
     type: Sequelize.BIGINT,
     allowNull: false
   },
-  arrivingAt: {
-    type: Sequelize.DATE,
-    allowNull: true
+  text: {
+    type: Sequelize.STRING,
+    allowNull: false
   },
-  leavingAt: {
-    type: Sequelize.DATE,
-    allowNull: true
-  },
-  visibility: {
+  posted: {
     type: Sequelize.BOOLEAN,
     allowNull: false
   }
@@ -34,5 +30,5 @@ const Availability = loader.database.define('availabilities', {
   timestamps: true
 });
 
-module.exports = Availability;
+module.exports = Googlehome;
     

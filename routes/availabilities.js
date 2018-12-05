@@ -6,7 +6,29 @@ const uuid = require('node-uuid');
 const Availability = require('../models/availability');
 const User = require('../models/user');
 const Space = require('../models/space');
+const Googlehome = require('../models/googlehome');
 const Slack = require('node-slackr');
+
+function postGoogleHome(args) {
+  let text = '';
+  if (args.action === 'del') {
+    text = '気が変わったから、行くのやめる';
+  } else {
+    const prefix = args.direction === 'arriving' || args.leavingAtPrev ? 'やっぱり': '';
+    const time = args.direction === 'leaving' ? args.leavingAt : args.arrivingAt;
+    const minutes = time.getMinutes(); 
+    const direction = args.direction === 'leaving' ? '帰る' : '来る';
+    text = prefix + time.getHours() + '時' + minutes + '分頃に、' + direction + 'つもり';
+  }
+  Googlehome.create({
+    spaceId: args.spaceId,
+    userId: args.userId,
+    text: text,
+    posted: false
+  }).then((user) => {
+    console.log('Posted to Googlehome');
+  });
+}
 
 function postSlack(args) {
   User.findOne({
@@ -103,8 +125,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
           userId: req.user.id,
           arrivingAt: dateObj.arrivingAt,
           leavingAt: dateObj.leavingAt,
-          visibility: true,
-          postedGoogleHome: false
+          visibility: true
         }).then(() => {
           const params = {
             spaceId: req.body.spaceId,
@@ -118,6 +139,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
           };
           res.redirect('/home');
           postSlack(params);
+          postGoogleHome(params);
         });
       });
     });
@@ -142,8 +164,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
           spaceId: req.body.spaceId,
           userId: req.user.id,
           arrivingAt: arrivingAt,
-          visibility: true,
-          postedGoogleHome: false
+          visibility: true
         }).then((availability) => {
           const params = {
             spaceId: req.body.spaceId,
@@ -156,6 +177,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
           };
           res.redirect('/home');
           postSlack(params);
+          postGoogleHome(params);
         });
       } else {
         const params = {
@@ -169,6 +191,7 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
         };
         res.redirect('/home');
         postSlack(params);
+        postGoogleHome(params);
       }
     });
   }
