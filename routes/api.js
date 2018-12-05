@@ -50,12 +50,27 @@ router.post('/googleHome', function(req, res, next) {
       }
     });
     const responseObj = {
+      newArrival: false,
       text: undefined
     }
     if (availabilityArray.length > 0) {
+      responseObj.newArrival = true;
       responseObj.text = 'ツモリンクです！';
       responseObj.text += availabilityArray.join('そして、')
       responseObj.text += '来るつもりみたいですよ。';
+      const param = {
+        postedGoogleHome: true
+      };
+      const filter = {
+        where: {
+          postedGoogleHome: false,
+          spaceId: spaceId
+        }
+      };
+      Availability.update(param, filter).then(() => {
+        console.log('posted message: ' + responseObj.text);
+        console.log('availability was updated.');
+      });
     }
     res.json(responseObj);
   });
