@@ -12,12 +12,12 @@ const Slack = require('node-slackr');
 function postGoogleHome(args) {
   let text = '';
   if (args.action === 'del') {
-    text = 'さんは、気が変わったから、来るのやめる';
+    text = 'さんは、気が変わったから、くるのやめる';
   } else {
     const prefix = args.direction === 'arriving' || args.leavingAtPrev ? 'さんは、やっぱり': 'さんが、';
     const time = args.direction === 'leaving' ? args.leavingAt : args.arrivingAt;
     const minutes = time.getMinutes(); 
-    const direction = args.direction === 'leaving' ? '帰る' : '来る';
+    const direction = args.direction === 'leaving' ? '帰る' : 'くる';
     text = prefix + time.getHours() + '時' + minutes + '分頃に、' + direction + 'つもり';
   }
   Googlehome.create({
