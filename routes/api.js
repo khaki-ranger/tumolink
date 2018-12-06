@@ -23,7 +23,7 @@ router.post('/googleHome', function(req, res, next) {
   }).then((availabilities) => {
     availabilities.forEach((a) => {
       const name = a.user.nickname ? a.user.nickname : a.user.username;
-      const availatilityLine = name + 'さんが、' + a.text;
+      const availatilityLine = name + a.text;
       availabilityArray.push(availatilityLine);
     });
     const responseObj = {

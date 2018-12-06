@@ -12,9 +12,9 @@ const Slack = require('node-slackr');
 function postGoogleHome(args) {
   let text = '';
   if (args.action === 'del') {
-    text = '気が変わったから、行くのやめる';
+    text = 'さんは、気が変わったから、来るのやめる';
   } else {
-    const prefix = args.direction === 'arriving' || args.leavingAtPrev ? 'やっぱり': '';
+    const prefix = args.direction === 'arriving' || args.leavingAtPrev ? 'さんは、やっぱり': 'さんが、';
     const time = args.direction === 'leaving' ? args.leavingAt : args.arrivingAt;
     const minutes = time.getMinutes(); 
     const direction = args.direction === 'leaving' ? '帰る' : '来る';
