@@ -86,6 +86,8 @@ function setTime(args) {
 router.post('/', authenticationEnsurer, (req, res, next) => {
   const action = req.body.action;
   const direction = req.body.direction;
+  const googlehome = req.body.googlehome;
+  console.log(googlehome);
   if (action !== 'del' && direction) {
     const filter = {
       where: {
@@ -139,7 +141,9 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
           };
           res.redirect('/home');
           postSlack(params);
-          postGoogleHome(params);
+          if (googlehome === 'on') {
+            postGoogleHome(params);
+          }
         });
       });
     });
@@ -177,7 +181,9 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
           };
           res.redirect('/home');
           postSlack(params);
-          postGoogleHome(params);
+          if (googlehome === 'on') {
+            postGoogleHome(params);
+          }
         });
       } else {
         const params = {
@@ -191,7 +197,9 @@ router.post('/', authenticationEnsurer, (req, res, next) => {
         };
         res.redirect('/home');
         postSlack(params);
-        postGoogleHome(params);
+        if (googlehome === 'on') {
+          postGoogleHome(params);
+        }
       }
     });
   }

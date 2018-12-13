@@ -404,9 +404,13 @@ header .login .pulldown-menu {
   width: 100%;
   margin-bottom: 1rem;
 }
+.action .label-text {
+  margin-bottom: .25rem;
+}
 .radio-block input[type="radio"],
 .radio-block label {
   display: table-cell;
+  width: 50%;
 }
 .radio-block input[type="radio"] {
   display: none;
@@ -553,6 +557,9 @@ textarea.comp-ui {
 }
 .space-list>li .data .availabilities .btn-more.visible {
   display: block;
+}
+.space-list>li .action .label-text {
+  margin-bottom: .25rem;
 }
 .space-list>li .action .tumoli-button,
 .space-list>li .action .remove-button {
