@@ -559,7 +559,7 @@ textarea.comp-ui {
   display: block;
 }
 .space-list>li .action .label-text {
-  margin-bottom: .25rem;
+  margin-bottom: .5rem;
 }
 .space-list>li .action .tumoli-button,
 .space-list>li .action .remove-button {
