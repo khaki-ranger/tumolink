@@ -405,7 +405,12 @@ header .login .pulldown-menu {
   margin-bottom: 1rem;
 }
 .action .label-text {
-  margin-bottom: .25rem;
+  background-color: #FBE9E7;
+  padding: .5rem 0;
+  border-radius: 3px 3px 0 0;
+  border-left: solid 1px #FFCCBC;
+  border-right: solid 1px #FFCCBC;
+  border-top: solid 1px #FFCCBC;
 }
 .radio-block input[type="radio"],
 .radio-block label {
@@ -420,11 +425,11 @@ header .login .pulldown-menu {
   padding: .5rem 0;
 }
 .radio-block label:first-of-type {
-  border-radius: 3px 0 0 3px / 3px 0 0 3px;
+  border-radius: 0 0 0 3px;
   border-right: none;
 }
 .radio-block label:last-of-type {
-  border-radius: 0 3px 3px 0 / 0 3px 3px 0;
+  border-radius: 0 0 3px 0;
   border-left: none;
 }
 .radio-block input[type="radio"]:checked + label {
@@ -557,9 +562,6 @@ textarea.comp-ui {
 }
 .space-list>li .data .availabilities .btn-more.visible {
   display: block;
-}
-.space-list>li .action .label-text {
-  margin-bottom: .5rem;
 }
 .space-list>li .action .tumoli-button,
 .space-list>li .action .remove-button {
