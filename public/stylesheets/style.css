@@ -499,7 +499,8 @@ a.comp-ui,
 button.comp-ui,
 input.comp-ui,
 select.comp-ui,
-textarea.comp-ui {
+textarea.comp-ui,
+.action .label-text {
   font-size: 16px;
 }
 }
@@ -509,7 +510,8 @@ a.comp-ui,
 button.comp-ui,
 input.comp-ui,
 select.comp-ui,
-textarea.comp-ui {
+textarea.comp-ui,
+.action .label-text {
   font-size: .9rem;
 }
 }
