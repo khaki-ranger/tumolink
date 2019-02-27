@@ -3,7 +3,16 @@ const express = require('express');
 const router = express.Router();
 const configVars = require('./config-vars');
 const User = require('../models/user');
+const Space = require('../models/space');
 const Googlehome = require('../models/googlehome');
+
+router.get('/iosclient', (req, res, next) => {
+  Space.findAll({
+      order: [['"updatedAt"', 'ASC']]
+  }).then((spaces) => {
+    res.json(spaces);
+  });
+});
 
 router.post('/googleHome', function(req, res, next) {
   const spaceId = req.body.spaceId;
