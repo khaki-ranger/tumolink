@@ -1,5 +1,6 @@
 node_modules/
-public/images/users/thumbnail/
+public/images/users/thumbnail/*
+!.gitkeep
 settings.js
 *.swp
 *.swo
