@@ -1,4 +1,4 @@
-/* reset */
+span  reset */
 img {
   vertical-align:bottom;
 }
@@ -437,8 +437,15 @@ header .login .pulldown-menu {
   background-color: #F4511E;
   color: #ffffff;
 }
+input[type="file"].comp-ui {
+  margin-bottom: .5rem;
+}
 label.comp-ui {
   font-weight: bold;
+}
+label.comp-ui span {
+  font-weight: normal;
+  padding-left: .5rem;
 }
 label>input[type="text"].comp-ui,
 label>select.comp-ui,

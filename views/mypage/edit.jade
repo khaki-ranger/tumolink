@@ -6,9 +6,11 @@ block content
       .form-spaces
         .form-elem
           label.comp-ui ユーザーネーム
+            span 変更できません
           p #{loginUser.username}
         .form-elem
           label.comp-ui アイコン画像
+            span ファイルをアップロードすると表示される画像が変更されます
             input.comp-ui(type="file", name="thumbnail", id="thumbnail")
             if loginUser.thumbnailPath
               p.thumb
@@ -18,5 +20,6 @@ block content
                 img.responsive-img(src="#{loginUser.photoUrl}")
         .form-elem
           label.comp-ui(id="nickname") ニックネーム
+            span アプリ上に表示される名前になります
             input.comp-ui(type="text", name="nickname", value="#{loginUser.nickname}", id="nickname")
         button.comp-ui(type="submit") 更新
