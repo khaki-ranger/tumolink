@@ -9,6 +9,7 @@ block content
           p #{loginUser.username}
         .form-elem
           label.comp-ui アイコン画像
+            input.comp-ui(type="file", name="thumbnail", id="thumbnail")
             if loginUser.thumbnailPath
               p.thumb
                 img.responsive-img(src="#{loginUser.thumbnailPath}")
