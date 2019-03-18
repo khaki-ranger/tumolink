@@ -9,10 +9,7 @@ const Availability = require('../models/availability');
 const Googlehome = require('../models/googlehome');
 
 router.post('/iosclient', (req, res, next) => {
-  console.log('Debud: ');
-  console.log(req.body);
   const userid = req.body.userid;
-  console.log('Debud: ');
   console.log(userid);
   UserSpace.findAll({
     include: [
