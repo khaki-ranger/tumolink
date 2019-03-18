@@ -10,12 +10,11 @@ const Googlehome = require('../models/googlehome');
 
 router.post('/iosclient', (req, res, next) => {
   const userid = req.body.userid;
-  console.log(userid);
   UserSpace.findAll({
     include: [
       {
         model: Space,
-        attributes: ['spaceName', 'impPath']
+        attributes: ['spaceName', 'imgPath']
       }
     ],
     where: {
@@ -45,14 +44,14 @@ router.post('/iosclient', (req, res, next) => {
         minutes: now.getMinutes()
       }
       const spaceArray = [];
-      spaces.forEach((s) => {
+      userspaces.forEach((s) => {
         const spaceId = s.spaceId;
         const availabilityArray = [];
         let rightNowFlag = false;
         let branchPoint = '';
         const space = {
-          name: s.spaceName,
-          imgPath: s.imgPath,
+          name: s.space.spaceName,
+          imgPath: s.space.imgPath,
           availabilities: undefined
         }
         availabilities.forEach((a) => {
