@@ -10,7 +10,30 @@ const Googlehome = require('../models/googlehome');
 
 router.post('/iosclient', (req, res, next) => {
   const userid = req.body.userid;
-  console.log(userid);
+  // リクエストからueridが取得できたか
+  if (userid) {
+    User.findOne({
+      where: {
+        userId: userid
+      }
+    }).then((user) => {
+      // 取得したuseridがUserの中に存在するか
+      if (!user) {
+        // DBにuserが存在しなかった
+        res.json('Userテーブルの中に該当のユーザーが存在しない');
+      } else {
+        res.json(user);
+      }
+    });
+  } else {
+    // リクエストからuseridが取得できなかった
+    res.json('リクエストからuseridが取得できなかった');
+  }
+
+
+
+
+  /*
   UserSpace.findAll({
     include: [
       {
@@ -121,110 +144,7 @@ router.post('/iosclient', (req, res, next) => {
       res.json(spaceArray);
     });
   });
-});
-
-router.get('/iosclient', (req, res, next) => {
-  Space.findAll({
-    order: [['"updatedAt"', 'ASC']]
-  }).then((spaces) => {
-    Availability.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ['userId', 'username', 'nickname', 'photoUrl', 'thumbnailPath']
-        }
-      ],
-      where: {
-        visibility: true
-      },
-      order: [['"arrivingAt"', 'ASC']]
-    }).then((availabilities) => {
-      let now = new Date();
-      now.setTime(now.getTime() + 1000*60*60*9);
-      const nowObj = {
-        year: now.getFullYear(),
-        month: now.getMonth(),
-        date: now.getDate(),
-        hours: now.getHours(),
-        minutes: now.getMinutes()
-      }
-      const spaceArray = [];
-      spaces.forEach((s) => {
-        const spaceId = s.spaceId;
-        const availabilityArray = [];
-        let rightNowFlag = false;
-        let branchPoint = '';
-        const space = {
-          name: s.spaceName,
-          imgPath: s.imgPath,
-          availabilities: undefined
-        }
-        availabilities.forEach((a) => {
-          if(spaceId === a.spaceId) {
-            let arrivingAt = a.arrivingAt;
-            const arrivingAtObj = {
-              year: arrivingAt.getFullYear(),
-              month: arrivingAt.getMonth(),
-              date: arrivingAt.getDate(),
-              hours: arrivingAt.getHours(),
-              minutes: arrivingAt.getMinutes()
-            }
-            if(nowObj.year === arrivingAtObj.year && nowObj.month === arrivingAtObj.month && nowObj.date === arrivingAtObj.date) {
-              let rightNow = false;
-              let userStatus = undefined;
-              const arrivingAtMinutes = ('0' + arrivingAtObj.minutes).slice(-2); 
-              const arrivingAtText = arrivingAtObj.hours + ':' + arrivingAtMinutes + ' -';
-              let diffMinutes = arrivingAtObj.minutes - nowObj.minutes;
-              const diffHours = arrivingAtObj.hours - nowObj.hours;
-              diffMinutes += diffHours * 60;
-              if (diffMinutes > 0) {
-                rightNow = true;
-              } else {
-                userStatus = '未確認';
-              }
-              if (rightNow !== rightNowFlag) {
-                branchPoint = 'afterBegin';
-                rightNowFlag = true;
-              } else {
-                branchPoint = '';
-              }
-              const leavingAt = a.leavingAt;
-              let leavingAtText = undefined;
-              if (leavingAt) {
-                const leavingAtObj = {
-                  hours: leavingAt.getHours(),
-                  minutes: leavingAt.getMinutes()
-                }
-                const leavingAtMinutes = ('0' + leavingAtObj.minutes).slice(-2); 
-                leavingAtText = leavingAtObj.hours + ':' + leavingAtMinutes;
-              }
-              const availabilityObj = {
-                userId: a.userId,
-                username: a.user.username,
-                nickname: a.user.nickname,
-                photoUrl: a.user.photoUrl,
-                thumbnailPath: a.user.thumbnailPath,
-                arrivingAt: arrivingAtText,
-                leavingAt: leavingAtText,
-                updatedAt: a.updatedAt,
-                userStatus: userStatus,
-                branchPoint: branchPoint
-              }
-              availabilityArray.push(availabilityObj);
-            }
-          }
-        });
-        if (availabilityArray.length > 0 && rightNowFlag === false) {
-          availabilityArray[availabilityArray.length - 1].branchPoint = 'beforeEnd';
-        }
-        if (availabilityArray.length > 0) {
-          space.availabilities = availabilityArray
-        }
-        spaceArray.push(space);
-      });
-      res.json(spaceArray);
-    });
-  });
+  */
 });
 
 router.post('/googleHome', function(req, res, next) {
